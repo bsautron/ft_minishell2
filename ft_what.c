@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 18:01:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 12:12:49 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/04 21:14:43 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ static int	ft_exit(char *after)
 			i++;
 		}
 		free(tab);
-		return (-1);
+		return (1);
 	}
 	free(*tab);
 	free(tab);
 	return (0);
 }
+
+/*
+ * bulting need fork();
+ */
 
 static int	ft_builtins(char *cmd, char ***env, char **path, int rt)
 {
@@ -50,20 +54,18 @@ static int	ft_builtins(char *cmd, char ***env, char **path, int rt)
 
 	ret = rt;
 	the_cmd = ft_getcmd(cmd);
+	(void)path;
 	if (ft_onlyesp(cmd))
 		return (rt);
 	after = ft_strdup(cmd + ft_strlen(the_cmd));
 	if (ft_strequ(the_cmd, "exit"))
 		ret = ft_exit(after);
 	else if (ft_strequ(the_cmd, "env"))
-		ret = ft_env(env, after, path, rt);
+		ret = ft_exec("env", cmd, *env);
 	else if (ft_strequ(the_cmd, "cd"))
 		ret = ft_cd(env, after);
 	else if (ft_strequ(the_cmd, "pwd"))
-	{
-		ft_putendl(ft_pwd());
-		ret = 0;
-	}
+		ret = ft_exec("pwd", cmd, *env);
 	else if (ft_strequ(the_cmd, "export"))
 		ret = ft_setenv(env, after);
 	else if (ft_strequ(the_cmd, "unset"))
@@ -82,7 +84,7 @@ static int	ft_fuckyou(char *cmd, char ***env)
 	{
 		ft_putstr_fd("ft_sh1: command not found: ", 2);
 		ft_putendl_fd(ft_getcmd(cmd), 2);
-		return (-1);
+		return (1);
 	}
 }
 
@@ -97,7 +99,7 @@ int			ft_what(char *cmd, char ***env, char **path, int rt)
 	if (cmd)
 	{
 		if ((ret = ft_builtins(cmd, env, path, rt)) == -1)
-			return (-1);
+			return (1);
 		else if (!ft_onlyesp(cmd) && ret == 1)
 		{
 			while (path[i] && !ft_cmd_is_in_path(ft_getcmd(cmd), path[i]))

@@ -2,12 +2,12 @@ CC = gcc
 SRC = main.c \
 	  ft_prompt.c \
 	  ft_stop.c \
-	  ft_disable_sig.c \
 	  ft_getpath.c \
 	  ft_cmd.c \
 	  ft_cd.c \
 	  ft_onlyesp.c \
 	  ft_pwd.c \
+	  ft_first_redir.c \
 	  ft_get_id_var.c \
 	  ft_setenv.c \
 	  ft_unsetenv.c \
@@ -15,6 +15,7 @@ SRC = main.c \
 	  ft_getcmd.c \
 	  ft_strsplit_white_space.c \
 	  ft_strsplit2.c \
+	  ft_strsplit3.c \
 	  ft_exec.c \
 	  ft_strtrim_new.c \
 	  ft_getdir.c \
@@ -29,6 +30,10 @@ SRC = main.c \
 	  ft_nclear.c \
 	  ft_make_history.c \
 	  ft_join_or_del.c \
+	  ft_runpipe.c \
+	  ft_runsup.c \
+	  ft_runinf.c \
+	  ft_rundoublesup.c \
 	  ft_env.c
 OBJ = $(SRC:.c=.o)
 NAME = ft_minishell2

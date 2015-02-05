@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_cd.c                                      :+:      :+:    :+:   */
+/*   ft_first_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/14 06:27:53 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/03 21:18:35 by bsautron         ###   ########.fr       */
+/*   Created: 2015/02/03 09:01:12 by bsautron          #+#    #+#             */
+/*   Updated: 2015/02/04 22:24:04 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include "ft_minishell.h" 
 
-int		ft_error_cd(char **env, char **tab, char *path)
+char ft_first_redir(char *cmd)
 {
+	int     i;
 
-	(void)env;
-	if (ft_onlyesp(path))
-		return (0);
-	if (ft_nb_env(tab) > 1)
+	i = 0;
+	while (cmd && cmd[i])
 	{
-		if (ft_nb_env(tab) > 2)
-		{
-			ft_putendl_fd("cd: too many arguments", 2);
-			return (-1);
-		}
-		else if (!ft_strequ(ft_strstr(ft_pwd(), tab[0]),
-					tab[0]))
-		{
-			ft_putstr_fd("cd: string not in pwd: ", 2);
-			ft_putendl_fd(tab[0], 2);
-			return (-1);
-		}
+		if (cmd[i] == '|')
+			return ('|');
+		if (cmd[i] == '>' && cmd[i + 1] == '>')
+			return ('.');
+		if (cmd[i] == '<' && cmd[i + 1] == '<')
+			return (',');
+		if (cmd[i] == '>')
+			return ('>');
+		if (cmd[i] == '<')
+			return ('<');
+		i++;
 	}
 	return (0);
 }

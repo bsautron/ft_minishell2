@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 02:25:46 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 13:58:30 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/05 15:10:27 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,13 @@ static void	ft_prompt2(char **env, int ret, int id_usr)
 	dirname = ft_get_dirname();
 	if (ret == 0)
 	{
-		ft_putchar(-30);
-		ft_putchar(-98);
-		ft_putchar(-100);
-		ft_putchar(' ');
+		FLECHE;
 		ft_putstr("\033[1;30;47m");
 	}
 	else
 	{
 		ft_putstr("\x1b[31m");
-		ft_putchar(-30);
-		ft_putchar(-98);
-		ft_putchar(-100);
-		ft_putchar(' ');
+		FLECHE;
 		ft_putstr("\033[1;31;47m");
 	}
 	if (id_usr != -1 && ft_strequ(dirname, &env[id_usr][5]))
@@ -87,6 +81,20 @@ static char	*ft_increm2(char c, NIQUE, int *i, int nb)
 	return (cmd);
 }
 
+static void	ft_mouv_lr(char c, int *pos)
+{
+	if (c == 'D')
+	{
+		ft_putstr("\033[1D");
+		(*pos)--;
+	}
+	if (c == 'C')
+	{
+		ft_putstr("\033[1C");
+		(*pos)++;
+	}
+}
+
 static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved)
 {
 	int			nb;
@@ -94,9 +102,11 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved)
 	char		cac;
 	int			i;
 	char		**history;
+	int			pos;
 
 	nb = 0;
 	i = 0;
+	pos = 0;
 	history = ft_make_history(&nb, &i, path_h);
 	while (read(0, &cac, 1) != 0 && cac != '\n')
 	{
@@ -104,14 +114,27 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved)
 		{
 			read(0, c, 1);
 			read(0, c, 1);
-			ft_increm(&i, nb, *c);
-			ft_nclear(ft_strlen(cmd));
-			cmd = ft_increm2(*c, history, cmd_saved, cmd, &i, nb);
+			if (*c == 'A' || *c == 'B')
+			{
+				ft_increm(&i, nb, *c);
+				ft_nclear(ft_strlen(cmd));
+				cmd = ft_increm2(*c, history, cmd_saved, cmd, &i, nb);
+			}
+			else if (*c == 'D' || *c == 'C')
+				ft_mouv_lr(*c, &pos);
 		}
 		else
 		{
-			cmd = ft_join_or_del(cmd, c, cac);
+			cmd = ft_join_or_del(cmd, c, cac, &pos);
 			cmd_saved = ft_strdup(cmd);
+		}
+		ft_nclear(ft_strlen(cmd) - 1);
+		ft_putstr(cmd);
+		i = 0;
+		while (i < (int)ft_strlen(cmd) - pos)
+		{
+			ft_putstr("\033[1D");
+			i++;
 		}
 	}
 	i = 0;

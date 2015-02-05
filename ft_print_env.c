@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_cd.c                                      :+:      :+:    :+:   */
+/*   ft_print_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/14 06:27:53 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/03 21:18:35 by bsautron         ###   ########.fr       */
+/*   Created: 2015/02/03 08:39:18 by bsautron          #+#    #+#             */
+/*   Updated: 2015/02/03 08:40:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-int		ft_error_cd(char **env, char **tab, char *path)
+void ft_print_env(char **env)
 {
+	int     i;
 
-	(void)env;
-	if (ft_onlyesp(path))
-		return (0);
-	if (ft_nb_env(tab) > 1)
+	i = 0;
+	while (env[i])
 	{
-		if (ft_nb_env(tab) > 2)
-		{
-			ft_putendl_fd("cd: too many arguments", 2);
-			return (-1);
-		}
-		else if (!ft_strequ(ft_strstr(ft_pwd(), tab[0]),
-					tab[0]))
-		{
-			ft_putstr_fd("cd: string not in pwd: ", 2);
-			ft_putendl_fd(tab[0], 2);
-			return (-1);
-		}
+		ft_putendl(env[i]);
+		i++;
 	}
-	return (0);
 }

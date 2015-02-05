@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 03:21:58 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 12:28:10 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/05 11:27:49 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			main(int argc, char **argv, char **env)
 	ft_tcg(0);
 	if (ft_nb_env(env))
 	{
-		//ft_setenv(&env, "OLDPWD= ");
+		ft_setenv(&env, "OLDPWD= ");
 		ft_cmd(env);
 	}
 	else

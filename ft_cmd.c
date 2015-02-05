@@ -6,20 +6,52 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 04:20:38 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 12:26:16 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/04 18:31:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-static void	ft_launcher(char **tab_cmd, int *ret, char ***env, char **path)
+/*static void	ft_lexeur(char *cmd)
 {
 	int		i;
 
 	i = 0;
-	while (tab_cmd[i])
+	while (cmd[i])
 	{
-		*ret = ft_what(tab_cmd[i], env, path, *ret);
+		
+		i++;
+	}
+}*/
+
+static void	ft_launcher(char **tab_cmd, int *ret, char ***env, char **path)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	**tab_and;
+	char	**tab_or;
+
+	i = 0;
+	while (tab_cmd[i] && !ft_onlyesp(tab_cmd[i]))
+	{
+
+		j = 0;
+		*ret = 0;
+		tab_and = ft_strsplit_str(tab_cmd[i], "&&");
+		while (tab_and[j] && *ret == 0)
+		{
+			k = 0;
+			*ret = 1;
+			tab_or = ft_strsplit_str(tab_and[j], "||");
+			while (tab_or[k] && *ret != 0)
+			{
+				*ret = ft_what(tab_or[k], env, path, *ret);
+				k++;
+			}
+			j++;
+		}
+		// faudra free
 		i++;
 	}
 }

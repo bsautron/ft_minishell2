@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 17:26:05 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 13:21:54 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/04 22:35:55 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char			*ft_strstr(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t n);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
+char			*ft_rstrchr(const char *str, char c);
 char			*ft_strnew(size_t size);
 void			ft_strdel(char **as);
 void			ft_strclr(char *s);

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 04:51:47 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 13:57:20 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/03 21:18:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int			ft_cd(char ***env, char *path)
 	ret = 0;
 	ft_bzero(&buf, sizeof(buf));
 	tab = ft_strsplit_whitespace(path);
-	tab[1] = NULL;
 	if (!(*tab))
 	{
 		free(tab);

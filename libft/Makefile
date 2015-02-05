@@ -33,6 +33,7 @@ SRC = ft_memset.c \
 	  ft_strlcat.c \
 	  ft_strchr.c \
 	  ft_strrchr.c \
+	  ft_rstrchr.c \
 	  ft_strstr.c \
 	  ft_strnstr.c \
 	  ft_strnew.c \
