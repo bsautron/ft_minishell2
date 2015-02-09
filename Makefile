@@ -11,6 +11,7 @@ SRC = main.c \
 	  ft_pwd.c \
 	  ft_first_redir.c \
 	  ft_isbultin.c \
+	  ft_isinpath.c \
 	  ft_get_id_var.c \
 	  ft_setenv.c \
 	  ft_unsetenv.c \

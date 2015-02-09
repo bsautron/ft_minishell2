@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 02:25:46 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 05:47:44 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:47:38 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static char	*ft_increm2(char c, NIQUE, int *i, int nb)
 
 static void	ft_print_cmd(char *cmd, char **env)
 {
-	if (!ft_strequ(ft_getabsolute_path(cmd, env, 0), cmd))
+	if (ft_isinpath(ft_getcmd(cmd), env))
 		ft_putstr("\033[32m");
 	else if (ft_isbultin(ft_getcmd(cmd)))
 		ft_putstr("\033[33m");
@@ -114,7 +114,6 @@ static void	ft_print_cmd(char *cmd, char **env)
 static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 {
 	int			nb;
-	char		c[2];
 	char		cac[3];
 	int			i;
 	int			j;
@@ -122,12 +121,13 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 	int			pos;
 
 	nb = 0;
-	i = 0;
 	pos = 0;
 	ft_bzero(cac, sizeof(char));
 	history = ft_make_history(&nb, &i, path_h);
-	while (read(0, cac, 3) > 0 && cac[0] != '\n')
+	while (cac[0] != '\n')
 	{
+		i = 0;
+		read(0, cac, 3);
 		if (cac[0] == '\033' && (cac[2] == 'A' || cac[2] == 'B'))
 		{
 			ft_increm(&i, nb, cac[2]);
@@ -140,7 +140,7 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 		else
 		{
 			//ft_putstr(cac);
-			cmd = ft_join_or_del(cmd, c, *cac, &pos);
+			cmd = ft_join_or_del(cmd, cac, &pos);
 			if (ft_strlen(cmd) > 0)
 				ft_nclear(ft_strlen(cmd) - 1);
 			cmd_saved = ft_strdup(cmd);
@@ -165,6 +165,7 @@ char		*ft_prompt(char **env, int ret)
 	char			*path_h;
 
 	ft_tcg(0);
+	path_h = ft_strnew(1);
 	if (env && ft_get_id_var(env, "HOME") != -1)
 		path_h = ft_strjoin(&env[ft_get_id_var(env, "HOME")][5],
 				"/.ft_minishell_history");
@@ -176,6 +177,5 @@ char		*ft_prompt(char **env, int ret)
 	write(fd, cmd, ft_strlen(cmd));
 	close(fd);
 	ft_tcg(1);
-	ft_putchar('\n');
 	return (cmd);
 }

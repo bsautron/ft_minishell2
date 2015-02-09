@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stop.c                                          :+:      :+:    :+:   */
+/*   ft_isinpath.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/26 23:53:26 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:05:48 by bsautron         ###   ########.fr       */
+/*   Created: 2015/02/09 06:10:48 by bsautron          #+#    #+#             */
+/*   Updated: 2015/02/09 06:16:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-int		g_stop;
-
-void	ft_stop(int sig)
+int		ft_isinpath(char *cmd, char **env)
 {
-	g_stop = 0;
-	if (sig == 1)
-		g_stop = 1;
-	/*
-	ft_putchar('\n');
-	ft_putstr("\x1b[31m");
-	ft_putchar(-30);
-	ft_putchar(-98);
-	ft_putchar(-100);
-	ft_putchar(' ');
-	ft_putstr("\033[1;31;47m");
-	ft_putstr(ft_get_dirname());
-	ft_putstr("\033[0;37;40m ");*/
+	int		i;
+	char	**path;
+
+	path = ft_getpath(env);
+	i = 0;
+	while (path[i] && !ft_cmd_is_in_path(cmd, path[i]))
+		i++;
+	if (!path[i])
+		return (0);
+	return (1);
 }

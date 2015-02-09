@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 06:22:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/28 12:40:57 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:20:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			ft_setenv(char ***env, char *xport)
 	char	*deb;
 	char	*fin;
 
-	xport = ft_strtrim(xport);
+	//xport = ft_strtrim(xport);
 	while (xport && *xport)
 	{
 		while (*xport <= ' ')
@@ -69,10 +69,8 @@ int			ft_setenv(char ***env, char *xport)
 			free(fin);
 		}
 		else
-		{
 			*env = ft_realloc_env(*env,
 					ft_strndup(xport, ft_strlen_esp(xport)));
-		}
 		xport += ft_strlen_esp(xport);
 	}
 	return (0);

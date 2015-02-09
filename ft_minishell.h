@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 03:22:51 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:01:21 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:38:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ int		ft_what(char *cmd, char ***env, int rt);
 char	*ft_get_dirname(void);
 void	ft_nclear(size_t n);
 char	**ft_make_history(int *nb_hist, int *dat_i, char *path_h);
-char	*ft_join_or_del(char *cmd, char *c, char cac, int *pos);
+char	*ft_join_or_del(char *cmd, char *cac, int *pos);
 int		ft_isbultin(char *cmd);
+int		ft_isinpath(char *cmd, char **env);
 void	ft_tcg(char f);
 
 char	ft_first_redir(char *cmd);

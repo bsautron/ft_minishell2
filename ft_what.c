@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 18:01:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 05:59:51 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:22:18 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_exit(char *after)
 	return (0);
 }
 
-static int	ft_builtins(char *cmd, char ***env,  int rt)
+static int	ft_builtins(char *cmd, char ***env, int rt)
 {
 	int		ret;
 	char	*after;
