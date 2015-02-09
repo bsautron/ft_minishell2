@@ -75,7 +75,6 @@ int			ft_exec(char *cmd, char **env)
 		//	dprintf(2, "go to -> %s\n", cmd);
 			execve(ft_getcmd(cmd), ft_strsplit_whitespace(cmd), env);
 		}
-		wait(NULL);
 		exit(0);
 	}
 	if (ft_error(child, cmd, WTERMSIG(status)) == 1)

@@ -34,7 +34,6 @@ void	ft_runinf(char *cmd, char **env)
 
 	path = ft_getpath(env);
 	filename = ft_strtrim(ft_getfilename(ft_strchr(cmd, '<') + 1));
-	dprintf(1, "%s\n", filename);
 	befor = ft_strtrim(ft_rstrchr(cmd, '<'));
 	i = 0;
 	while (path[i] && !ft_cmd_is_in_path(ft_getcmd(befor), path[i]))
