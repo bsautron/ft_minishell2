@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 04:18:51 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/27 03:07:08 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:01:06 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_nique(char **tab, int i)
 	return (0);
 }
 
-int			ft_env(char ***env, char *after, char **path, int rt)
+int			ft_env(char ***env, char *after, int rt)
 {
 	int		i;
 	char	**tab;
@@ -58,7 +58,7 @@ int			ft_env(char ***env, char *after, char **path, int rt)
 			i++;
 		}
 		if (tab[i])
-			return (ft_what(ft_strstr(after, tab[i]), &nl, path, rt));
+			return (ft_what(ft_strstr(after, tab[i]), &nl, rt));
 	}
 	if (ft_nb_env(tab) < 2)
 		ft_print_env(*env);

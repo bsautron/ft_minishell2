@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 03:22:51 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 04:30:11 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:01:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_getpath_pwd(char *path);
 char	*ft_getcmd(char *cmd);
 char	*ft_get_prev_dir(char *path);
 int		ft_get_id_var(char **env, char *var);
-int		ft_env(char ***env, char *after, char **path, int rt);
+int		ft_env(char ***env, char *after, int rt);
 int		ft_cmd(char **env);
 int		ft_cd(char ***env, char *path);
 char	ft_onlyesp(char *str);
@@ -58,7 +58,7 @@ int		ft_nbargv(char *str);
 int		ft_error_cd(char **env, char **tab, char *path);
 int		ft_not_dir(char **tab, char *d_path);
 char	*ft_strtrim_new(char const *s);
-int		ft_what(char *cmd, char ***env, char **path, int rt);
+int		ft_what(char *cmd, char ***env, int rt);
 char	*ft_get_dirname(void);
 void	ft_nclear(size_t n);
 char	**ft_make_history(int *nb_hist, int *dat_i, char *path_h);

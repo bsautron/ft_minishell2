@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 22:12:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/04 23:55:37 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:01:55 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_runsup(char *cmd, char **env, char flag)
 		if (ft_strequ(ft_getcmd(befor), "pwd"))
 			ft_putendl(ft_pwd());
 		else if (ft_strequ(ft_getcmd(befor), "env"))
-			ft_env(&env, ft_strdup(befor + ft_strlen(befor)), ft_getpath(env), 0);
+			ft_env(&env, ft_strdup(befor + ft_strlen(befor)), 0);
 		else if (flag == 0)
 			execve(ft_getcmd(befor), ft_strsplit_whitespace(befor), env);
 	}

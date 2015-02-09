@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 18:01:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 04:23:12 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 05:59:51 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static int	ft_exit(char *after)
 		ft_putendl_fd("exit: too many arguments", 2);
 		i = 0;
 		while (tab[i])
-		{
-			free(tab[i]);
-			i++;
-		}
+			free(tab[i++]);
 		free(tab);
 		return (1);
 	}
@@ -42,11 +39,7 @@ static int	ft_exit(char *after)
 	return (0);
 }
 
-/*
- * bulting need fork();
- */
-
-static int	ft_builtins(char *cmd, char ***env, char **path, int rt)
+static int	ft_builtins(char *cmd, char ***env,  int rt)
 {
 	int		ret;
 	char	*after;
@@ -54,7 +47,6 @@ static int	ft_builtins(char *cmd, char ***env, char **path, int rt)
 
 	ret = rt;
 	the_cmd = ft_getcmd(cmd);
-	(void)path;
 	if (ft_onlyesp(cmd))
 		return (rt);
 	after = ft_strdup(cmd + ft_strlen(the_cmd));
@@ -76,8 +68,7 @@ static int	ft_builtins(char *cmd, char ***env, char **path, int rt)
 	return (ret);
 }
 
-
-int			ft_what(char *cmd, char ***env, char **path, int rt)
+int			ft_what(char *cmd, char ***env, int rt)
 {
 	int		ret;
 
@@ -85,7 +76,7 @@ int			ft_what(char *cmd, char ***env, char **path, int rt)
 	cmd = ft_strtrim_new(cmd);
 	if (cmd)
 	{
-		if ((ret = ft_builtins(cmd, env, path, rt)) == -1)
+		if ((ret = ft_builtins(cmd, env, rt)) == -1)
 			return (1);
 		else if (!ft_onlyesp(cmd) && ret == 1)
 		{

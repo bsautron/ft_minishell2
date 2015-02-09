@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 04:20:38 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 05:46:48 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 05:58:09 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 	}
 }*/
 
-static void	ft_launcher(char **tab_cmd, int *ret, char ***env, char **path)
+static void	ft_launcher(char **tab_cmd, int *ret, char ***env)
 {
 	int		i;
 	int		j;
@@ -45,7 +45,7 @@ static void	ft_launcher(char **tab_cmd, int *ret, char ***env, char **path)
 			tab_or = ft_strsplit_str(tab_and[j], "||");
 			while (tab_or[k] && *ret != 0)
 			{
-				*ret = ft_what(tab_or[k], env, path, *ret);
+				*ret = ft_what(tab_or[k], env, *ret);
 				k++;
 			}
 			j++;
@@ -59,29 +59,14 @@ int			ft_cmd(char **env)
 {
 	char	*cmd;
 	int		ret;
-	char	**path;
 	char	**tab_cmd;
 
 	ret = 0;
-	path = NULL;
 	while (1)
 	{
-		if (path)
-		{
-			free(path);
-		}
-		path = ft_getpath(env);
-		if (path == NULL)
-		{
-			path = (char **)malloc(sizeof(char *) * 2);
-			path[0] = ft_strdup("");
-			path[1] = NULL;
-		}
 		cmd = ft_prompt(env, ret);
 		tab_cmd = ft_strsplit(cmd, ';');
-		ft_launcher(tab_cmd, &ret, &env, path);
-		free(path);
-		path = NULL;
+		ft_launcher(tab_cmd, &ret, &env);
 		free(tab_cmd);
 		//free(cmd);
 	}

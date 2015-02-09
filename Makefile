@@ -7,6 +7,7 @@ SRC = main.c \
 	  ft_cmd.c \
 	  ft_cd.c \
 	  ft_onlyesp.c \
+	  ft_tcg.c \
 	  ft_pwd.c \
 	  ft_first_redir.c \
 	  ft_isbultin.c \

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 22:15:54 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/04 22:16:21 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:02:31 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_rundoublesup(char *cmd, char **env)
 		if (ft_strequ(ft_getcmd(befor), "pwd"))
 			ft_putendl(ft_pwd());
 		else if (ft_strequ(ft_getcmd(befor), "env"))
-			ft_env(&env, ft_strdup(befor + ft_strlen(befor)), ft_getpath(env), 0);
+			ft_env(&env, ft_strdup(befor + ft_strlen(befor)), 0);
 		else
 			execve(ft_getcmd(befor), ft_strsplit_whitespace(befor), env);
 	}

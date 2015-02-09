@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/03 02:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/08 05:57:58 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 06:01:43 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			ft_exec(char *cmd, char **env)
 		else if (ft_strequ(ft_getcmd(cmd), "pwd"))
 			ft_putendl(ft_pwd());
 		else if (ft_strequ(ft_getcmd(cmd), "env"))
-			ft_env(&env, ft_strdup(cmd + ft_strlen(cmd)), ft_getpath(env), 0);
+			ft_env(&env, ft_strdup(cmd + ft_strlen(cmd)), 0);
 		else
 		{
 
