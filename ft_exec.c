@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/03 02:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/04 23:56:28 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/08 05:57:58 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ static int	ft_error(pid_t child, char *cmd, int sig)
 
 }
 
-int			ft_exec(char *bin, char *cmd, char **env)
+/*
+ * fair un fonction qui verrifie la commande a partir du fork, enfin pas avant
+ */
+
+int			ft_exec(char *cmd, char **env)
 {
 	pid_t		child;
 	int			status;
@@ -43,24 +47,35 @@ int			ft_exec(char *bin, char *cmd, char **env)
 	if (!IS_CHILD(child))
 	{
 		CATCH_SIG;
-		wait(&status);
+//		wait(&status);
+		waitpid(child, &status, 0);
 	}
 	else
 	{
+		//dprintf(2, "cmd = %s\n", cmd);
 		if (ft_first_redir(cmd) == '|')
+		{
 			ft_runpipe(cmd, env);
+			//dprintf(2, "%s\n", "end");
+		}
 		else if (ft_first_redir(cmd) == '>')
 			ft_runsup(cmd, env, 0);
 		else if (ft_first_redir(cmd) == '<')
 			ft_runinf(cmd, env);
 		else if (ft_first_redir(cmd) == '.')
 			ft_rundoublesup(cmd, env);
-		else if (ft_strequ(bin, "pwd"))
+		else if (ft_strequ(ft_getcmd(cmd), "pwd"))
 			ft_putendl(ft_pwd());
-		else if (ft_strequ(bin, "env"))
+		else if (ft_strequ(ft_getcmd(cmd), "env"))
 			ft_env(&env, ft_strdup(cmd + ft_strlen(cmd)), ft_getpath(env), 0);
 		else
-			execve(bin, ft_strsplit_whitespace(cmd), env);
+		{
+
+			cmd = ft_getabsolute_path(cmd, env, 1);
+		//	dprintf(2, "go to -> %s\n", cmd);
+			execve(ft_getcmd(cmd), ft_strsplit_whitespace(cmd), env);
+		}
+		wait(NULL);
 		exit(0);
 	}
 	if (ft_error(child, cmd, WTERMSIG(status)) == 1)

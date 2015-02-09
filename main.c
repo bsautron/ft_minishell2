@@ -6,11 +6,18 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 03:21:58 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/05 11:27:49 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/07 09:14:20 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
+#include <term.h>
+
+int		ft_outc(int c)
+{
+	ft_putchar(c);
+	return (0);
+}
 
 static void	ft_heisenberg(void)
 {
@@ -32,7 +39,7 @@ static void	ft_heisenberg(void)
 	ft_putendl("                               `^**^`");
 }
 
-static void	ft_tcg(char f)
+void	ft_tcg(char f)
 {
 	static int				fd;
 	static struct termios	term_attributes;
@@ -41,9 +48,10 @@ static void	ft_tcg(char f)
 	if (f == 0)
 	{
 		tcgetattr(fd, &term_attributes);
-		term_attributes.c_lflag = term_attributes.c_lflag & ~ICANON;
+		term_attributes.c_lflag &= ~(ICANON);
 		term_attributes.c_lflag = term_attributes.c_lflag
 			& ~(ECHOK | ECHO | ECHONL | ECHOE | IEXTEN);
+		term_attributes.c_lflag &= ~(ECHO);
 		term_attributes.c_cc[VMIN] = 1;
 		term_attributes.c_cc[VTIME] = 0;
 		tcsetattr(fd, TCSADRAIN, &term_attributes);
@@ -59,16 +67,26 @@ static void	ft_tcg(char f)
 int			main(int argc, char **argv, char **env)
 {
 	char			**saint_env;
+	//char			buf[3];
+	char		*res;
 
 	(void)argc;
 	(void)argv;
 	ft_heisenberg();
 	signal(SIGINT, ft_stop);
-	ft_tcg(0);
 	if (ft_nb_env(env))
 	{
 		ft_setenv(&env, "OLDPWD= ");
 		ft_cmd(env);
+		char	*area = (char *)malloc(sizeof(char) * (9000));
+		res = tgetstr("cl", &area);
+		tputs(res, 1, ft_outc);
+		ft_putstr("sdf");
+		/*while (1)
+		{
+			read(0, buf, 3);
+			ft_putstr(buf);
+		}*/
 	}
 	else
 	{

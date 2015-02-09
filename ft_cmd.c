@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 04:20:38 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/04 18:31:48 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/08 06:01:23 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	ft_launcher(char **tab_cmd, int *ret, char ***env, char **path)
 	i = 0;
 	while (tab_cmd[i] && !ft_onlyesp(tab_cmd[i]))
 	{
-
 		j = 0;
 		*ret = 0;
 		tab_and = ft_strsplit_str(tab_cmd[i], "&&");
@@ -78,13 +77,13 @@ int			ft_cmd(char **env)
 			path[0] = ft_strdup("");
 			path[1] = NULL;
 		}
-		dprintf(1, "%s", "");
 		cmd = ft_prompt(env, ret);
 		tab_cmd = ft_strsplit(cmd, ';');
 		ft_launcher(tab_cmd, &ret, &env, path);
 		free(path);
 		path = NULL;
 		free(tab_cmd);
+		free(cmd);
 	}
 	return (0);
 }

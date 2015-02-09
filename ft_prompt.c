@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 02:25:46 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/05 15:10:27 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 04:30:55 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ static char	*ft_increm2(char c, NIQUE, int *i, int nb)
 		if (c == 'A')
 		{
 			while (*i > 0
-				&& (!ft_strnequ(cmd_saved, history[*i], ft_strlen(cmd_saved))
-				|| ft_onlyesp(history[*i]) || ft_strequ(cmd, history[*i])))
+					&& (!ft_strnequ(cmd_saved, history[*i], ft_strlen(cmd_saved))
+						|| ft_onlyesp(history[*i]) || ft_strequ(cmd, history[*i])))
 				(*i)--;
 		}
 		else
 		{
 			while (*i < nb
-				&& (!ft_strnequ(cmd_saved, history[*i], ft_strlen(cmd_saved))
-				|| ft_onlyesp(history[*i]) || ft_strequ(cmd, history[*i])))
+					&& (!ft_strnequ(cmd_saved, history[*i], ft_strlen(cmd_saved))
+						|| ft_onlyesp(history[*i]) || ft_strequ(cmd, history[*i])))
 				(*i)++;
 		}
 		if (history[*i] && ft_strnequ(cmd_saved, history[*i],
@@ -77,71 +77,85 @@ static char	*ft_increm2(char c, NIQUE, int *i, int nb)
 		else
 			cmd = ft_strdup(cmd_saved);
 	}
-	ft_putstr(cmd);
 	return (cmd);
 }
+/*
+   static void	ft_mouv_lr(char c, int *pos)
+   {
+   if (c == 'D')
+   {
+   ft_putstr("\033[1D");
+   (*pos)--;
+   }
+   if (c == 'C')
+   {
+   ft_putstr("\033[1C");
+   (*pos)++;
+   }
+   }
+   */
 
-static void	ft_mouv_lr(char c, int *pos)
+static void	ft_print_cmd(char *cmd, char **env)
 {
-	if (c == 'D')
-	{
-		ft_putstr("\033[1D");
-		(*pos)--;
-	}
-	if (c == 'C')
-	{
-		ft_putstr("\033[1C");
-		(*pos)++;
-	}
+	if (!ft_strequ(ft_getabsolute_path(cmd, env, 0), cmd))
+		ft_putstr("\033[32m");
+	else if (ft_isbultin(ft_getcmd(cmd)))
+		ft_putstr("\033[33m");
+	else
+		ft_putstr("\033[31m");
+	ft_putstr(ft_getcmd(cmd));
+	ft_putstr("\033[0m");
+	ft_putstr(cmd + ft_strlen(ft_getcmd(cmd)));
 }
 
-static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved)
+static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 {
 	int			nb;
 	char		c[2];
-	char		cac;
+	char		cac[3];
 	int			i;
+	int			j;
 	char		**history;
 	int			pos;
 
 	nb = 0;
 	i = 0;
 	pos = 0;
+	ft_bzero(cac, sizeof(char));
 	history = ft_make_history(&nb, &i, path_h);
-	while (read(0, &cac, 1) != 0 && cac != '\n')
+	while (cac[0] != '\n')
 	{
-		if (cac == '\033')
+		read(0, cac, 3);
+		if (cac[0] == '\033')
 		{
-			read(0, c, 1);
-			read(0, c, 1);
-			if (*c == 'A' || *c == 'B')
+			if (cac[2] == 'A' || cac[2] == 'B')
 			{
-				ft_increm(&i, nb, *c);
+				ft_increm(&i, nb, cac[2]);
 				ft_nclear(ft_strlen(cmd));
-				cmd = ft_increm2(*c, history, cmd_saved, cmd, &i, nb);
+				cmd = ft_increm2(cac[2], history, cmd_saved, cmd, &i, nb);
+				pos = ft_strlen(cmd);
+
 			}
-			else if (*c == 'D' || *c == 'C')
-				ft_mouv_lr(*c, &pos);
+			else if (cac[2] == 'D' || cac[2] == 'C')
+			{
+				ft_putstr(cac);
+				//ft_mouv_lr(*c, &pos);
+			}
 		}
 		else
 		{
-			cmd = ft_join_or_del(cmd, c, cac, &pos);
+			//ft_putstr(cac);
+			cmd = ft_join_or_del(cmd, c, *cac, &pos);
+			ft_nclear(ft_strlen(cmd) - 1);
 			cmd_saved = ft_strdup(cmd);
 		}
-		ft_nclear(ft_strlen(cmd) - 1);
-		ft_putstr(cmd);
-		i = 0;
-		while (i < (int)ft_strlen(cmd) - pos)
-		{
-			ft_putstr("\033[1D");
-			i++;
-		}
+		ft_print_cmd(cmd, env);
 	}
-	i = 0;
-	while (history[i])
+	j = 0;
+	while (history[j])
 	{
-		free(history[i]);
-		i++;
+		free(history[j]);
+		j++;
 	}
 	free(history);
 	return (cmd);
@@ -154,18 +168,18 @@ char		*ft_prompt(char **env, int ret)
 	int				fd;
 	char			*path_h;
 
+	ft_tcg(0);
 	if (env && ft_get_id_var(env, "HOME") != -1)
 		path_h = ft_strjoin(&env[ft_get_id_var(env, "HOME")][5],
 				"/.ft_minishell_history");
 	id_usr = ft_get_id_var(env, "USER");
-	ft_putstr("\033[2K\r");
 	ft_prompt2(env, ret, id_usr);
-	cmd = ft_gnlr(path_h, "", "");
-	ft_putchar('\n');
+	ft_strnew(1);
+	cmd = ft_gnlr(path_h, "", "", env);
 	fd = open(path_h, O_WRONLY | O_APPEND);
 	free(path_h);
 	write(fd, cmd, ft_strlen(cmd));
-	write(fd, "\n", 1);
 	close(fd);
+	ft_tcg(1);
 	return (cmd);
 }

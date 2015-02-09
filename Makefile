@@ -3,11 +3,13 @@ SRC = main.c \
 	  ft_prompt.c \
 	  ft_stop.c \
 	  ft_getpath.c \
+	  ft_getabsolute_path.c \
 	  ft_cmd.c \
 	  ft_cd.c \
 	  ft_onlyesp.c \
 	  ft_pwd.c \
 	  ft_first_redir.c \
+	  ft_isbultin.c \
 	  ft_get_id_var.c \
 	  ft_setenv.c \
 	  ft_unsetenv.c \
@@ -45,7 +47,7 @@ all: $(NAME)
 $(NAME):
 	@make -C libft/
 	@$(CC) $(FLAGS) -I libft/includes/ -c $(SRC)
-	@$(CC) -o $(NAME) $(OBJ) $(LIB) -g
+	@$(CC) -o $(NAME) $(OBJ) $(LIB) -g -lncurses 
 	@echo "Dat Shell -> Made"
 
 clean:
