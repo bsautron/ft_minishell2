@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 04:20:38 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/08 06:01:23 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 05:46:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			ft_cmd(char **env)
 		free(path);
 		path = NULL;
 		free(tab_cmd);
-		free(cmd);
+		//free(cmd);
 	}
 	return (0);
 }

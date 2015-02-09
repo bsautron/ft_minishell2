@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/17 00:43:45 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/08 06:06:12 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 05:36:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ char		*ft_join_or_del(char *cmd, char *c, char cac, int *pos)
 	else
 	{
 		cmd = ft_delone(cmd);
-		ft_nclear(1);
+		if (ft_strlen(cmd))
+			ft_nclear(1);
 		//ft_putstr(cmd);
 		(*pos)--;
 	}

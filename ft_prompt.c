@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 02:25:46 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 04:30:55 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/09 05:47:44 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,12 @@ static void	ft_print_cmd(char *cmd, char **env)
 		ft_putstr("\033[33m");
 	else
 		ft_putstr("\033[31m");
-	ft_putstr(ft_getcmd(cmd));
-	ft_putstr("\033[0m");
-	ft_putstr(cmd + ft_strlen(ft_getcmd(cmd)));
+	if (ft_strlen(cmd))
+	{
+		ft_putstr(ft_getcmd(cmd));
+		ft_putstr("\033[0m");
+		ft_putstr(cmd + ft_strlen(ft_getcmd(cmd)));
+	}
 }
 
 static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
@@ -123,30 +126,23 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 	pos = 0;
 	ft_bzero(cac, sizeof(char));
 	history = ft_make_history(&nb, &i, path_h);
-	while (cac[0] != '\n')
+	while (read(0, cac, 3) > 0 && cac[0] != '\n')
 	{
-		read(0, cac, 3);
-		if (cac[0] == '\033')
+		if (cac[0] == '\033' && (cac[2] == 'A' || cac[2] == 'B'))
 		{
-			if (cac[2] == 'A' || cac[2] == 'B')
-			{
-				ft_increm(&i, nb, cac[2]);
-				ft_nclear(ft_strlen(cmd));
-				cmd = ft_increm2(cac[2], history, cmd_saved, cmd, &i, nb);
-				pos = ft_strlen(cmd);
-
-			}
-			else if (cac[2] == 'D' || cac[2] == 'C')
-			{
-				ft_putstr(cac);
-				//ft_mouv_lr(*c, &pos);
-			}
+			ft_increm(&i, nb, cac[2]);
+			ft_nclear(ft_strlen(cmd));
+			cmd = ft_increm2(cac[2], history, cmd_saved, cmd, &i, nb);
+			pos = ft_strlen(cmd);
 		}
+		else if (cac[0] == '\033' && (cac[2] == 'D' || cac[2] == 'C'))
+			ft_putstr(cac);
 		else
 		{
 			//ft_putstr(cac);
 			cmd = ft_join_or_del(cmd, c, *cac, &pos);
-			ft_nclear(ft_strlen(cmd) - 1);
+			if (ft_strlen(cmd) > 0)
+				ft_nclear(ft_strlen(cmd) - 1);
 			cmd_saved = ft_strdup(cmd);
 		}
 		ft_print_cmd(cmd, env);
@@ -174,12 +170,12 @@ char		*ft_prompt(char **env, int ret)
 				"/.ft_minishell_history");
 	id_usr = ft_get_id_var(env, "USER");
 	ft_prompt2(env, ret, id_usr);
-	ft_strnew(1);
 	cmd = ft_gnlr(path_h, "", "", env);
 	fd = open(path_h, O_WRONLY | O_APPEND);
 	free(path_h);
 	write(fd, cmd, ft_strlen(cmd));
 	close(fd);
 	ft_tcg(1);
+	ft_putchar('\n');
 	return (cmd);
 }
