@@ -97,7 +97,7 @@ static char	*ft_increm2(char c, NIQUE, int *i, int nb)
 
 static void	ft_print_cmd(char *cmd, char **env)
 {
-	if (ft_isinpath(ft_getcmd(cmd), env))
+	if (ft_isinpath(ft_getcmd(cmd), env) && !ft_isbultin(ft_getcmd(cmd)))
 		ft_putstr("\033[32m");
 	else if (ft_isbultin(ft_getcmd(cmd)))
 		ft_putstr("\033[33m");
@@ -122,11 +122,11 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 
 	nb = 0;
 	pos = 0;
+	i = 0;
 	ft_bzero(cac, sizeof(char));
 	history = ft_make_history(&nb, &i, path_h);
 	while (cac[0] != '\n')
 	{
-		i = 0;
 		read(0, cac, 3);
 		if (cac[0] == '\033' && (cac[2] == 'A' || cac[2] == 'B'))
 		{

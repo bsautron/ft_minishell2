@@ -107,6 +107,7 @@ char				**ft_strsplit_whitespace(char const *s)
 	int				i;
 
 	i = 0;
+	tab = NULL;
 	if (s)
 	{
 		words = nb_word(s);

@@ -50,7 +50,7 @@ $(NAME):
 	@make -C libft/
 	@$(CC) $(FLAGS) -I libft/includes/ -c $(SRC)
 	@$(CC) -o $(NAME) $(OBJ) $(LIB) -g -lncurses 
-	@echo "Dat Shell -> Made"
+	@echo -e "Dat Shell -> Made"
 
 clean:
 	@rm -f $(OBJ)

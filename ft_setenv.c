@@ -53,7 +53,7 @@ int			ft_setenv(char ***env, char *xport)
 	char	*deb;
 	char	*fin;
 
-	//xport = ft_strtrim(xport);
+	xport = ft_strtrim(xport);
 	while (xport && *xport)
 	{
 		while (*xport <= ' ')
