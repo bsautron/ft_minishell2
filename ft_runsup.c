@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 22:12:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/10 02:11:24 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/10 02:41:27 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_runsup(char *cmd, char **env, char flag)
 	else
 	{
 		dup2(fd, 1);
-		//close(fd);
 		if (ft_first_redir(ft_strchr(cmd, '>') + 1) == '|')
 			ft_runpipe(ft_strchr(cmd, '>') + 1, env);
 		else if (ft_first_redir(ft_strchr(cmd, '>') + 1) == '>')
@@ -56,7 +55,7 @@ void	ft_runsup(char *cmd, char **env, char flag)
 			ft_runinf(ft_strchr(cmd, '>') + 1, env);
 		else if (ft_first_redir(ft_strchr(cmd, '>') + 1) == '.')
 			ft_rundoublesup(ft_strchr(cmd, '>') + 1, env);
-		if (ft_strequ(ft_getcmd(befor), "pwd"))
+		else if (ft_strequ(ft_getcmd(befor), "pwd"))
 			ft_putendl(ft_pwd());
 		else if (ft_strequ(ft_getcmd(befor), "env"))
 			ft_env(&env, ft_strdup(befor + ft_strlen(befor)), 0);

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/03 02:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/10 02:05:45 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/10 02:27:26 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			ft_exec(char *cmd, char **env)
 		{
 			if (ft_getabsolute_path(cmd, env, 1) == NULL)
 				exit(1);
-			cmd = ft_getabsolute_path(cmd, env, 1);
+			cmd = ft_getabsolute_path(cmd, env, 0);
 			execve(ft_getcmd(cmd), ft_strsplit_whitespace(cmd), env);
 		}
 		exit(0);
