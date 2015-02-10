@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/03 02:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:01:43 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/10 02:05:45 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,12 @@ int			ft_exec(char *cmd, char **env)
 	if (!IS_CHILD(child))
 	{
 		CATCH_SIG;
-//		wait(&status);
 		waitpid(child, &status, 0);
 	}
 	else
 	{
-		//dprintf(2, "cmd = %s\n", cmd);
 		if (ft_first_redir(cmd) == '|')
-		{
 			ft_runpipe(cmd, env);
-			//dprintf(2, "%s\n", "end");
-		}
 		else if (ft_first_redir(cmd) == '>')
 			ft_runsup(cmd, env, 0);
 		else if (ft_first_redir(cmd) == '<')
@@ -70,9 +65,9 @@ int			ft_exec(char *cmd, char **env)
 			ft_env(&env, ft_strdup(cmd + ft_strlen(cmd)), 0);
 		else
 		{
-
+			if (ft_getabsolute_path(cmd, env, 1) == NULL)
+				exit(1);
 			cmd = ft_getabsolute_path(cmd, env, 1);
-		//	dprintf(2, "go to -> %s\n", cmd);
 			execve(ft_getcmd(cmd), ft_strsplit_whitespace(cmd), env);
 		}
 		exit(0);

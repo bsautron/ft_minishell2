@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/07 17:17:42 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 04:32:11 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/10 02:04:42 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_getabsolute_path(char *cmd, char **env, char say_error)
 			}
 			if (say_error)
 				ft_fuckyou(cmd);
-			return (cmd);
+			return (NULL);
 		}
 		else
 		{

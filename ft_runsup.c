@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 22:12:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:01:55 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/10 02:11:24 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_runsup(char *cmd, char **env, char flag)
 	int		i;
 
 	i = 0;
+	//                            			     cest pas que '>' ici  ft_getfilname dans ft_runinf.c
 	filename = ft_strtrim(ft_rstrchr(ft_strchr(cmd, '>') + 1, '>'));
 	if (flag == 0)
 	{
