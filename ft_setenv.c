@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 06:22:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:20:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/11 08:29:17 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int			ft_setenv(char ***env, char *xport)
 	char	*deb;
 	char	*fin;
 
-	xport = ft_strtrim(xport);
+	if (ft_strlen(xport) > 0)
+		xport = ft_strtrim(xport);
 	while (xport && *xport)
 	{
 		while (*xport <= ' ')

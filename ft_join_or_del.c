@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/17 00:43:45 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:41:25 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/11 07:37:35 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,16 @@ char		*ft_join_or_del(char *cmd, char *cac, int *pos)
 	{
 		befor = ft_strjoin(befor, c);
 		cmd = ft_strjoin(befor, after);
-		//ft_nclear(ft_strlen(cmd) - 1);
-		//ft_putstr(cmd);
 		(*pos)++;
 	}
 	else
 	{
 		cmd = ft_delone(cmd);
-		if (ft_strlen(cmd))
+		if (ft_strlen(cmd) > 0)
+		{
 			ft_nclear(1);
-		//ft_putstr(cmd);
-		(*pos)--;
+			(*pos)--;
+		}
 	}
 	return (cmd);
 }

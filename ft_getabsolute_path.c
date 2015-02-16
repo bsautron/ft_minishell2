@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/07 17:17:42 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/10 02:04:42 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/11 07:35:45 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ char	*ft_getabsolute_path(char *cmd, char **env, char say_error)
 		{
 			//free path
 			if (access(ft_getcmd(cmd), X_OK) == 0)
-				return (ft_strjoin("/bin/bash ", cmd));
-			else if (access(ft_getcmd(cmd), F_OK) == 0)
 			{
-				if (say_error)
-					ft_saydenied(cmd);
 				return (cmd);
 			}
-			if (say_error)
-				ft_fuckyou(cmd);
+			else if (say_error)
+				ft_saydenied(cmd);
+			else if (say_error && ft_fuckyou(cmd))
+				return (NULL);
 			return (NULL);
 		}
 		else

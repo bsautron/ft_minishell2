@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/25 07:58:27 by bsautron          #+#    #+#             */
-/*   Updated: 2015/01/27 03:12:27 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/11 08:33:38 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			ft_unsetenv(char ***env, char *del)
 		ft_putendl("unset: not enought arguments");
 		return (0);
 	}
+	dprintf(1, "%s\n", "avant");
 	del = ft_strtrim_new(del);
 	while (del && *del)
 	{
@@ -70,6 +71,7 @@ int			ft_unsetenv(char ***env, char *del)
 		while ((*env)[id] && !ft_strnequ((*env)[id],
 					ft_strjoin(ft_getcmd(del), "="), ft_strlen_esp(del) + 1))
 			id++;
+	dprintf(1, "%s\n", "apres");
 		if (id < nb_env)
 			*env = ft_realloc_env(*env, id);
 		del += ft_strlen_esp(del);

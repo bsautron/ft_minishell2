@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 02:25:46 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/09 06:47:38 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/11 07:55:40 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ static void	ft_print_cmd(char *cmd, char **env)
 {
 	if (ft_isinpath(ft_getcmd(cmd), env) && !ft_isbultin(ft_getcmd(cmd)))
 		ft_putstr("\033[32m");
+	else if (access(ft_getcmd(cmd), X_OK) == 0)
+		ft_putstr("\033[32m");
 	else if (ft_isbultin(ft_getcmd(cmd)))
 		ft_putstr("\033[33m");
 	else
@@ -135,11 +137,12 @@ static char	*ft_gnlr(char *path_h, char *cmd, char *cmd_saved, char **env)
 			cmd = ft_increm2(cac[2], history, cmd_saved, cmd, &i, nb);
 			pos = ft_strlen(cmd);
 		}
-		else if (cac[0] == '\033' && (cac[2] == 'D' || cac[2] == 'C'))
-			ft_putstr(cac);
+		//else if (cac[0] == '\033' && (cac[2] == 'D' || cac[2] == 'C'))
+		//	ft_putstr(cac);
 		else
 		{
-			//ft_putstr(cac);
+			if (cac[0] == '\t')
+				cac[0] = ' ';
 			cmd = ft_join_or_del(cmd, cac, &pos);
 			if (ft_strlen(cmd) > 0)
 				ft_nclear(ft_strlen(cmd) - 1);
