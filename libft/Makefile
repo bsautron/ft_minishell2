@@ -86,12 +86,13 @@ NAME = libft.a
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) -c $(SRC) $(CFLAGS) -I ./includes/
-	@echo "\033[33;34m===> Creation des .o et"
+$(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
-	@echo "===> Creation de la libft"
 	@ranlib $(NAME)
+
+%.o: %.c
+	@echo "\033[36m   $^"
+	@$(CC) $(FLAGS) -I ./includes/ -c $^
 
 clean:
 	@rm -f $(OBJ)

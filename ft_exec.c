@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/03 02:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/16 01:47:21 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/11 07:21:30 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_exec(char *cmd, char **env)
 	if (!IS_CHILD(child))
 	{
 		CATCH_SIG;
-		wait(&status);
+		waitpid(child, &status, 0);
 	}
 	else
 	{

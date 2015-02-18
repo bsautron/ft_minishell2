@@ -46,16 +46,22 @@ LIB = -L./libft -lft
 
 all: $(NAME)
 
-$(NAME):
-	@make -C libft/
-	@$(CC) $(FLAGS) -I libft/includes/ -c $(SRC)
-	@$(CC) -o $(NAME) $(OBJ) $(LIB) -g -lncurses 
-	@echo -e "Dat Shell -> Made"
+$(NAME): $(OBJ)
+	@echo "\033[37m"
+	make -C libft/
+	@echo "\033[32m"
+	$(CC) -o $@ $^ $(LIB) -g -lncurses 
+	@echo "Dat Shell -> Made"
+	@echo "\033[37m"
+
+%.o: %.c
+	@echo "\033[35m   $^"
+	@$(CC) $(FLAGS) -I libft/includes/ -c $^
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
