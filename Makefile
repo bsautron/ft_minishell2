@@ -44,15 +44,17 @@ NAME = ft_minishell2
 FLAGS = -Wall -Wextra -Werror -g3
 LIB = -L./libft -lft
 
-all: $(NAME)
+all: lft $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "\033[37m"
-	make -C libft/
 	@echo "\033[32m"
-	$(CC) -o $@ $^ $(LIB) -g -lncurses 
+	@$(CC) -o $@ $^ $(LIB) -g -lncurses 
 	@echo "Dat Shell -> Made"
 	@echo "\033[37m"
+
+lft:
+	make -C libft/
 
 %.o: %.c
 	@echo "\033[35m   $^"
