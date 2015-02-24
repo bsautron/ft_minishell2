@@ -1,64 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
+#    Updated: 2015/02/24 18:30:39 by bsautron         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
+NAME = ft_minishell2
 SRC = main.c \
 	  ft_prompt.c \
-	  ft_stop.c \
-	  ft_getpath.c \
-	  ft_getabsolute_path.c \
-	  ft_cmd.c \
-	  ft_cd.c \
-	  ft_onlyesp.c \
-	  ft_tcg.c \
-	  ft_pwd.c \
-	  ft_first_redir.c \
-	  ft_isbultin.c \
-	  ft_isinpath.c \
-	  ft_get_id_var.c \
-	  ft_setenv.c \
-	  ft_unsetenv.c \
-	  ft_cmd_is_in_path.c \
-	  ft_getcmd.c \
-	  ft_strsplit_white_space.c \
-	  ft_strsplit2.c \
-	  ft_strsplit3.c \
-	  ft_exec.c \
-	  ft_strtrim_new.c \
-	  ft_getdir.c \
-	  ft_getpath_pwd.c \
-	  ft_nb_env.c \
-	  ft_nbargv.c \
-	  ft_get_prev_dir.c \
-	  ft_error_cd.c \
-	  ft_not_dir.c \
-	  ft_what.c \
-	  ft_get_dirname.c \
-	  ft_nclear.c \
-	  ft_make_history.c \
-	  ft_join_or_del.c \
-	  ft_runpipe.c \
-	  ft_runsup.c \
-	  ft_runinf.c \
-	  ft_rundoublesup.c \
-	  ft_env.c
+	  ft_outc.c \
+	  ft_make_instruction.c \
+	  ft_signal_handler.c \
+	  ft_tcg.c
 OBJ = $(SRC:.c=.o)
-NAME = ft_minishell2
-FLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wextra -Wall -Werror
 LIB = -L./libft -lft
+LIBL = -L./libl -ll
 
-all: lft $(NAME)
+all: libs $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[37m"
-	@echo "\033[32m"
-	@$(CC) -o $@ $^ $(LIB) -g -lncurses 
-	@echo "Dat Shell -> Made"
+	@echo "\033[31m"
+	@$(CC) -o $@ $^ $(LIB) $(LIBL) -lncurses
 	@echo "\033[37m"
 
-lft:
+libs:
 	make -C libft/
+	make -C libl/
 
 %.o: %.c
-	@echo "\033[35m   $^"
-	@$(CC) $(FLAGS) -I libft/includes/ -c $^
+	@echo "\033[33m   $^"
+	@$(CC) -I includes/ -c $^ 
 
 clean:
 	rm -f $(OBJ)
