@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 20:21:55 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/24 20:28:43 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ void	ft_prompt(t_lstl *env)
 		}
 		else if (buf[0] == 8 || buf[0] == 127)
 		{
-			ft_make_instruction("le", NULL);
-			ft_make_instruction("dc", NULL);
-			ft_lstl_delone_by_id(&cmd, pos);
+			if (pos < ft_lstl_len(cmd))
+			{
+				ft_make_instruction("le", NULL);
+				ft_make_instruction("dc", NULL);
+				ft_lstl_delone_by_id(&cmd, pos);
+			}
 		}
 		else if (buf[0] != '\033')
 		{

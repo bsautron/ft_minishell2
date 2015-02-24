@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 16:02:41 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 20:17:18 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/24 20:26:28 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	ft_tcg(char f)
 		tcgetattr(0, &term);
 		term.c_lflag |= ~(ICANON);
 		term.c_lflag |= ~(ECHO);
-		tcsetattr(0, 0, &term);
+		tcsetattr(0, TCSADRAIN, &term);
 	}
 }
