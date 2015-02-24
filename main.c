@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 18:23:20 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/24 22:21:00 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				main(int argc, char **argv, char **env)
 		lenv = ft_get_var_env(env);
 		ft_prompt(lenv);
 	}
+	ft_tcg(1);
 	(void)argc;
 	(void)argv;
 	return (0);

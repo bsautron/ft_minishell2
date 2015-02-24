@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 20:28:43 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/24 23:58:42 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_prompt(t_lstl *env)
 				ft_lstl_delone_by_id(&cmd, pos);
 			}
 		}
+		//else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~')
+
 		else if (buf[0] != '\033')
 		{
 			ft_putchar(buf[0]);
