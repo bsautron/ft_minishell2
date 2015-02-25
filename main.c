@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 08:30:47 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 09:07:07 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ int				main(int argc, char **argv, char **env)
 		{
 			cmd = ft_prompt(lenv);
 			dprintf(1, "\n%s\n", cmd);
+			free(cmd);
 		}
+		ft_lstl_free(&lenv);
 	}
 	ft_tcg(1);
-	free(cmd);
 	(void)argc;
 	(void)argv;
 	return (0);

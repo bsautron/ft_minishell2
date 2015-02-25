@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:16:06 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 20:09:04 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 08:41:04 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	ft_lstl_insert(t_lstl **begin, char *str, size_t pos);
 void	ft_lstl_delone(t_lstl **begin, char *str, int (*f)(char const *, char const *));
 void	ft_lstl_delone_by_id(t_lstl **begin, size_t id);
 void	ft_lstl_print(t_lstl *list);
+void	ft_lstl_free(t_lstl **begin);
 
 #endif

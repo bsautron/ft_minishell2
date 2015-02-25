@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 08:36:37 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 09:08:23 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_prompt(t_lstl *env)
 {
 	char	buf[4];
 	t_lstl	*cmd;
+	t_lstl	*tmp;
 	size_t	pos;
 	char	*the_cmd;
 	int		i;
@@ -105,13 +106,14 @@ char	*ft_prompt(t_lstl *env)
 	}
 	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(cmd) + 1));
 	i = 0;
-	while (cmd)
+	tmp = cmd;
+	while (tmp)
 	{
-		the_cmd[i] = cmd->str[0];
-		cmd = cmd->next;
+		the_cmd[i] = tmp->str[0];
+		tmp = tmp->next;
 		i++;
 	}
-	//FREE LA LISTE
+	ft_lstl_free(&cmd);
 	the_cmd[i] = '\0';
 	the_cmd = ft_reverse(the_cmd);
 	return (the_cmd);
