@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 02:03:21 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 02:06:46 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_prompt(t_lstl *env)
 		read(0, &buf, 4);
 		if (buf[0] == '\n')
 			break ;
-		if (buf[0] == '\033' && buf[2] == 'D') //droite
+		if (buf[0] == '\033' && buf[2] == 'D') //gauche
 		{
 			if (pos < ft_lstl_len(cmd))
 			{
@@ -39,7 +39,7 @@ void	ft_prompt(t_lstl *env)
 				ft_make_instruction("im", NULL);
 			}
 		}
-		else if (buf[0] == '\033' && buf[2] == 'C') //gauche
+		else if (buf[0] == '\033' && buf[2] == 'C') //droite
 		{
 			if (pos != 0)
 			{
