@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 11:22:52 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 13:26:35 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,23 @@ static void		ft_attrape_moi_si_tu_peux(void)
 
 int				main(int argc, char **argv, char **env)
 {
-	t_lstl	*lenv;
+	t_env	tenv;
 	char	*cmd;
 
+	ft_bzero(&tenv, sizeof(t_env));
 	ft_attrape_moi_si_tu_peux();
 	if (env[0])
 	{
-		lenv = ft_get_var_env(env);
+		tenv.list_env = ft_get_var_env(env);
 		while (1)
 		{
-			cmd = ft_prompt(lenv);
-			cmd = ft_parser(cmd, lenv);
+			cmd = ft_prompt(&tenv);
+			cmd = ft_parser(cmd, &tenv);
 			ft_putstr("\ncmd = ");
 			ft_putendl(cmd);
 			free(cmd);
 		}
-		ft_lstl_free(&lenv);
+		ft_lstl_free(&tenv.list_env);
 	}
 
 	ft_tcg(1);

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/25 11:06:49 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 12:33:39 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 13:22:33 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*get_name_var(char *str)
 	return (ft_strsub(str, 0, i));
 }
 
-char	*ft_parser(char *cmd, t_lstl *env)
+char	*ft_parser(char *cmd, t_env *env)
 {
 	char	*var;
 	char	*var_eq;

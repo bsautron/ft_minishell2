@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 11:21:36 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 13:21:07 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,20 @@
 # include <termios.h>
 # include <term.h>
 
+typedef struct		s_env
+{
+	t_lstl			*list_env;
+	int				ret;
+}					t_env;
+
+
 void	ft_tcg(char f);
-char	*ft_get_env(char *var, t_lstl *env);
-char	*ft_parser(char *cmd, t_lstl *env);
+char	*ft_get_env(char *var, t_env *env);
+char	*ft_parser(char *cmd, t_env *env);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
 int		ft_outc(int c);
 void	ft_make_instruction(char *id, char *area);
-char	*ft_prompt(t_lstl *env);
+char	*ft_prompt(t_env *env);
 void	ft_signal_handler(int sig);
 
 #endif

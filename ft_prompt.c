@@ -6,13 +6,13 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 09:45:43 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 13:20:17 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-char	*ft_prompt(t_lstl *env)
+char	*ft_prompt(t_env *env)
 {
 	char	buf[4];
 	t_lstl	*cmd;
