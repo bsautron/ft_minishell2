@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 02:09:15 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 03:27:33 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ft_prompt(t_lstl *env)
 		{
 			if (pos < ft_lstl_len(cmd))
 			{
-				ft_make_instruction("le", NULL);
-				ft_make_instruction("dc", NULL);
+					ft_make_instruction("le", NULL);
+					ft_make_instruction("dc", NULL);
 				ft_lstl_delone_by_id(&cmd, pos);
 			}
 		}
@@ -80,7 +80,7 @@ void	ft_prompt(t_lstl *env)
 			pos = ft_lstl_len(cmd);
 			ft_make_instruction("im", NULL);
 		}
-		else if (buf[0] != '\033') // une lettre printable
+		else if (buf[0] != '\033' && buf[1] == 0 && buf[2] == 0 && buf[4] == 0) // une lettre printable
 		{
 			ft_putchar(buf[0]);
 			ft_lstl_insert(&cmd, buf, pos);
