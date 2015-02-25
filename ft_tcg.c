@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 16:02:41 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 00:48:00 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 02:36:37 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	ft_tcg(char f)
 
 	if (f == 0)
 	{
-	if ((name_term = getenv("TERM")) == NULL)
-		exit(1);
-	if (tgetent(NULL, name_term) == -1)
-		exit(1);
-	if (tcgetattr(0, &term) == -1)
-		exit(1);
-	term.c_lflag &= ~(ICANON | ECHO);
-	term.c_cc[VMIN] = 1;
-	term.c_cc[VTIME] = 0;
-	if (tcsetattr(0, TCSADRAIN, &term))
-		exit(1);
+		if ((name_term = getenv("TERM")) == NULL)
+			exit(1);
+		if (tgetent(NULL, name_term) == -1)
+			exit(1);
+		if (tcgetattr(0, &term) == -1)
+			exit(1);
+		term.c_lflag &= ~(ICANON | ECHO);
+		term.c_cc[VMIN] = 1;
+		term.c_cc[VTIME] = 0;
+		if (tcsetattr(0, TCSADRAIN, &term))
+			exit(1);
 	}
 	else
 	{

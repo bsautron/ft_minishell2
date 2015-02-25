@@ -6,12 +6,11 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 18:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 02:00:29 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 02:26:54 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
-#include <term.h>
 
 void	ft_make_instruction(char *id, char *area)
 {
