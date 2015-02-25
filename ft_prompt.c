@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 13:20:17 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 14:29:57 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_prompt(t_env *env)
 
 	ft_putstr("\033[33mDatPrompt>\033[0m ");
 	cmd = NULL;
-	ft_tcg(0);
+	ft_tcg(env);
 	pos = 0;
 	while (1)
 	{
@@ -35,7 +35,7 @@ char	*ft_prompt(t_env *env)
 		{
 			if (ft_lstl_len(cmd) == 0)
 			{
-				ft_tcg(1);
+				ft_reset_term();
 				exit(0);
 			}
 			else

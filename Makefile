@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/02/25 11:11:25 by bsautron         ###   ########.fr        #
+#    Updated: 2015/02/25 14:31:52 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ SRC = main.c \
 	  ft_prompt.c \
 	  ft_outc.c \
 	  ft_make_instruction.c \
+	  ft_reset_term.c \
+	  ft_setenv.c \
+	  ft_pwd.c \
 	  ft_replace.c \
 	  ft_get_env.c \
 	  ft_parser.c \

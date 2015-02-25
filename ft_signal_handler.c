@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 18:02:39 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 22:16:47 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 14:29:29 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_tcg(1);
+		ft_reset_term();
 		ft_putendl("ctrl + c: on verra");
 		exit(1);
 	}

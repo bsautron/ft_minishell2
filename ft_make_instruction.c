@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 18:25:48 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 08:20:17 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 14:30:39 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_make_instruction(char *id, char *area)
 
 	if ((res = tgetstr(id, &area)) == NULL)
 	{
-		ft_tcg(1);
+		ft_reset_term();
 		ft_putstr_fd(id, 2);
 		ft_putendl_fd(": tgetstr Failed", 2);
 		exit(1);

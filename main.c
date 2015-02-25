@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 13:26:35 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 14:59:55 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,27 @@ int				main(int argc, char **argv, char **env)
 {
 	t_env	tenv;
 	char	*cmd;
+	char	*home;
 
 	ft_bzero(&tenv, sizeof(t_env));
 	ft_attrape_moi_si_tu_peux();
-	if (env[0])
+	tenv.list_env = ft_get_var_env(env);
+	if ((home = ft_get_env("HOME=", &tenv)) != NULL)
+		tenv.path_h = ft_strjoin(home, HISTORY_FILE);
+	else
+		tenv.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
+	ft_setenv(&tenv, "POPOPOPOPO=y-------------------------");
+	while (1)
 	{
-		tenv.list_env = ft_get_var_env(env);
-		while (1)
-		{
-			cmd = ft_prompt(&tenv);
-			cmd = ft_parser(cmd, &tenv);
-			ft_putstr("\ncmd = ");
-			ft_putendl(cmd);
-			free(cmd);
-		}
-		ft_lstl_free(&tenv.list_env);
+		cmd = ft_prompt(&tenv);
+		cmd = ft_parser(cmd, &tenv);
+		ft_putchar('\n');
+		if (ft_strequ(cmd, "env"))
+			ft_lstl_print(tenv.list_env);
+		free(cmd);
 	}
-
-	ft_tcg(1);
+	ft_lstl_free(&tenv.list_env);
+	ft_reset_term();
 	(void)argc;
 	(void)argv;
 	return (0);
