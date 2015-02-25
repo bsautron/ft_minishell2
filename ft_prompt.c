@@ -6,13 +6,13 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 03:27:33 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 08:36:37 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-void	ft_prompt(t_lstl *env)
+char	*ft_prompt(t_lstl *env)
 {
 	char	buf[4];
 	t_lstl	*cmd;
@@ -20,7 +20,7 @@ void	ft_prompt(t_lstl *env)
 	char	*the_cmd;
 	int		i;
 
-	ft_putstr("DatPrompt> ");
+	ft_putstr("\033[33mDatPrompt>\033[0m ");
 	cmd = NULL;
 	ft_tcg(0);
 	pos = 0;
@@ -30,6 +30,23 @@ void	ft_prompt(t_lstl *env)
 		read(0, &buf, 4);
 		if (buf[0] == '\n')
 			break ;
+		if (buf[0] == 4 && buf[1] == 0)
+		{
+			if (ft_lstl_len(cmd) == 0)
+			{
+				ft_tcg(1);
+				exit(0);
+			}
+			else
+			{
+				ft_make_instruction("dc", NULL);
+				if (pos)
+				{
+					pos--;
+					ft_lstl_delone_by_id(&cmd, pos);
+				}
+			}
+		}
 		if (buf[0] == '\033' && buf[2] == 'D') //gauche
 		{
 			if (pos < ft_lstl_len(cmd))
@@ -53,8 +70,8 @@ void	ft_prompt(t_lstl *env)
 		{
 			if (pos < ft_lstl_len(cmd))
 			{
-					ft_make_instruction("le", NULL);
-					ft_make_instruction("dc", NULL);
+				ft_make_instruction("le", NULL);
+				ft_make_instruction("dc", NULL);
 				ft_lstl_delone_by_id(&cmd, pos);
 			}
 		}
@@ -80,12 +97,11 @@ void	ft_prompt(t_lstl *env)
 			pos = ft_lstl_len(cmd);
 			ft_make_instruction("im", NULL);
 		}
-		else if (buf[0] != '\033' && buf[1] == 0 && buf[2] == 0 && buf[4] == 0) // une lettre printable
+		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[4] == 0) // une lettre printable
 		{
 			ft_putchar(buf[0]);
 			ft_lstl_insert(&cmd, buf, pos);
 		}
-
 	}
 	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(cmd) + 1));
 	i = 0;
@@ -95,8 +111,8 @@ void	ft_prompt(t_lstl *env)
 		cmd = cmd->next;
 		i++;
 	}
+	//FREE LA LISTE
 	the_cmd[i] = '\0';
-	ft_putstr("\ncmd = ");
 	the_cmd = ft_reverse(the_cmd);
-	ft_putendl(the_cmd);
+	return (the_cmd);
 }
