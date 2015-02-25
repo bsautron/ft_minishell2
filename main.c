@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 15:33:00 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 20:06:31 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ int				main(int argc, char **argv, char **env)
 	{
 		cmd = ft_prompt(&tenv);
 		cmd = ft_parser(cmd, &tenv);
+		ft_putstr("\ncmd = ");
+		ft_putstr(cmd);
 		ft_putchar('\n');
 		if (ft_strequ(cmd, "env"))
 			ft_lstl_print(tenv.list_env);
-		ft_lstld_print(tenv.history);
 		free(cmd);
 	}
 	ft_lstl_free(&tenv.list_env);

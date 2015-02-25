@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 15:28:25 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 19:41:18 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 typedef struct		s_env
 {
 	t_lstl			*list_env;
-	char			*path_h;
+	t_lstl			*cmd;
 	t_lstld			*history;
+	size_t			h_pos;
+	char			*path_h;
 	int				ret;
 }					t_env;
 

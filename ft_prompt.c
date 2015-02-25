@@ -6,34 +6,69 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 15:26:58 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 20:24:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-char	*ft_prompt(t_env *env)
+static t_lstl	*ft_str_to_lstl(char *str)
+{
+	t_lstl	*ret;
+	char	b[2];
+	int		i;
+
+	ret = NULL;
+	b[1] = 0;
+	i = 0;
+	while (str[i])
+	{
+		b[0] = str[i];
+		ft_lstl_add(&ret, b);
+		i++;
+	}
+	return (ret);
+}
+
+static t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id)
+{
+	size_t		i;
+
+	i = 0;
+	while (list && i++ < id)
+		list = list->next;
+	return (list);
+}
+
+static void		ft_home(t_env *env, size_t *pos)
+{
+	while ((*pos)++ < ft_lstl_len(env->cmd))
+		ft_make_instruction("le", NULL);
+	*pos = ft_lstl_len(env->cmd);
+	ft_make_instruction("im", NULL);
+}
+
+char			*ft_prompt(t_env *env)
 {
 	char	buf[4];
-	t_lstl	*cmd;
+	char	*the_cmd;
 	t_lstl	*tmp;
 	size_t	pos;
-	char	*the_cmd;
 	int		i;
 
 	ft_putstr("\033[33mDatPrompt>\033[0m ");
-	cmd = NULL;
 	ft_tcg(env);
 	pos = 0;
+	env->cmd = NULL;
 	while (1)
 	{
 		ft_bzero(&buf, sizeof(char *));
 		read(0, &buf, 4);
 		if (buf[0] == '\n')
 			break ;
-		if (buf[0] == 4 && buf[1] == 0)
+		if (buf[0] == 4 && buf[1] == 0) // delete
 		{
-			if (ft_lstl_len(cmd) == 0)
+			if (ft_lstl_len(env->cmd) == 0)
 			{
 				ft_reset_term();
 				exit(0);
@@ -44,13 +79,23 @@ char	*ft_prompt(t_env *env)
 				if (pos)
 				{
 					pos--;
-					ft_lstl_delone_by_id(&cmd, pos);
+					ft_lstl_delone_by_id(&env->cmd, pos);
 				}
 			}
 		}
-		if (buf[0] == '\033' && buf[2] == 'D') //gauche
+		else if (buf[0] == '\033' && buf[2] == 'A') //haut
 		{
-			if (pos < ft_lstl_len(cmd))
+			ft_home(env, &pos);
+			ft_make_instruction("ei", NULL);
+			ft_make_instruction("cd", NULL);
+			ft_putstr(ft_get_link_by_id(env->history, env->h_pos)->str);
+			env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos)->str);
+			pos = 0;
+			env->h_pos++;
+		}
+		else if (buf[0] == '\033' && buf[2] == 'D') //gauche
+		{
+			if (pos < ft_lstl_len(env->cmd))
 			{
 				pos++;
 				ft_make_instruction("le", NULL);
@@ -69,11 +114,11 @@ char	*ft_prompt(t_env *env)
 		}
 		else if (buf[0] == 8 || buf[0] == 127) //touche effacer
 		{
-			if (pos < ft_lstl_len(cmd))
+			if (pos < ft_lstl_len(env->cmd))
 			{
 				ft_make_instruction("le", NULL);
 				ft_make_instruction("dc", NULL);
-				ft_lstl_delone_by_id(&cmd, pos);
+				ft_lstl_delone_by_id(&env->cmd, pos);
 			}
 		}
 		else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~') // touche delete
@@ -82,7 +127,7 @@ char	*ft_prompt(t_env *env)
 			if (pos)
 			{
 				pos--;
-				ft_lstl_delone_by_id(&cmd, pos);
+				ft_lstl_delone_by_id(&env->cmd, pos);
 			}
 		}
 		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 70) // touche end
@@ -92,28 +137,23 @@ char	*ft_prompt(t_env *env)
 			pos = 0;
 		}
 		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 72) // touche Home
-		{
-			while (pos++ < ft_lstl_len(cmd))
-				ft_make_instruction("le", NULL);
-			pos = ft_lstl_len(cmd);
-			ft_make_instruction("im", NULL);
-		}
+			ft_home(env, &pos);
 		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[4] == 0) // une lettre printable
 		{
 			ft_putchar(buf[0]);
-			ft_lstl_insert(&cmd, buf, pos);
+			ft_lstl_insert(&env->cmd, buf, pos);
 		}
 	}
-	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(cmd) + 1));
+	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(env->cmd) + 1));
 	i = 0;
-	tmp = cmd;
+	tmp = env->cmd;
 	while (tmp)
 	{
 		the_cmd[i] = tmp->str[0];
 		tmp = tmp->next;
 		i++;
 	}
-	ft_lstl_free(&cmd);
+	ft_lstl_free(&env->cmd);
 	the_cmd[i] = '\0';
 	the_cmd = ft_reverse(the_cmd);
 	ft_lstld_add(&env->history, the_cmd);
