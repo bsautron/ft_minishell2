@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 14:37:34 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 15:07:16 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct		s_env
 {
 	t_lstl			*list_env;
 	char			*path_h;
+	t_lstld			*history;
 	int				ret;
 }					t_env;
-
 
 void	ft_tcg(t_env *env);
 void	ft_reset_term(void);
