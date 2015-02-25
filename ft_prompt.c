@@ -6,13 +6,11 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 01:12:17 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 01:37:33 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
-
-
 
 void	ft_prompt(t_lstl *env)
 {
@@ -32,7 +30,7 @@ void	ft_prompt(t_lstl *env)
 		read(0, &buf, 4);
 		if (buf[0] == '\n')
 			break ;
-		if (buf[0] == '\033' && buf[2] == 'D')
+		if (buf[0] == '\033' && buf[2] == 'D') //droite
 		{
 			if (pos < ft_lstl_len(cmd))
 			{
@@ -41,7 +39,7 @@ void	ft_prompt(t_lstl *env)
 				ft_make_instruction("im", NULL);
 			}
 		}
-		else if (buf[0] == '\033' && buf[2] == 'C')
+		else if (buf[0] == '\033' && buf[2] == 'C') //gauche
 		{
 			if (pos != 0)
 			{
@@ -51,7 +49,7 @@ void	ft_prompt(t_lstl *env)
 			if (pos == 0)
 				ft_make_instruction("ei", NULL);
 		}
-		else if (buf[0] == 8 || buf[0] == 127)
+		else if (buf[0] == 8 || buf[0] == 127) //touche effacer
 		{
 			if (pos < ft_lstl_len(cmd))
 			{
@@ -60,17 +58,34 @@ void	ft_prompt(t_lstl *env)
 				ft_lstl_delone_by_id(&cmd, pos);
 			}
 		}
-		else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~')
+		else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~') // touche delete
 		{
 			ft_make_instruction("dc", NULL);
-			pos--;
-			ft_lstl_delone_by_id(&cmd, pos);
+			if (pos)
+			{
+				pos--;
+				ft_lstl_delone_by_id(&cmd, pos);
+			}
 		}
-		else if (buf[0] != '\033')
+		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 70) // touche end
+		{
+			while (pos--)
+				ft_make_instruction("nd", NULL);
+			pos = 0;
+		}
+		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 72) // touche Home
+		{
+			while (pos++ < ft_lstl_len(cmd))
+				ft_make_instruction("le", NULL);
+			pos = ft_lstl_len(cmd);
+			ft_make_instruction("im", NULL);
+		}
+		else if (buf[0] != '\033') // une lettre printable
 		{
 			ft_putchar(buf[0]);
 			ft_lstl_insert(&cmd, buf, pos);
 		}
+
 	}
 	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(cmd) + 1));
 	i = 0;
