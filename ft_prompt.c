@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 20:24:48 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 20:27:10 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,16 @@ char			*ft_prompt(t_env *env)
 		}
 		else if (buf[0] == '\033' && buf[2] == 'A') //haut
 		{
-			ft_home(env, &pos);
-			ft_make_instruction("ei", NULL);
-			ft_make_instruction("cd", NULL);
-			ft_putstr(ft_get_link_by_id(env->history, env->h_pos)->str);
-			env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos)->str);
-			pos = 0;
-			env->h_pos++;
+			if (env->h_pos < ft_lstld_len(env->history))
+			{
+				ft_home(env, &pos);
+				ft_make_instruction("ei", NULL);
+				ft_make_instruction("cd", NULL);
+				ft_putstr(ft_get_link_by_id(env->history, env->h_pos)->str);
+				env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos)->str);
+				pos = 0;
+				env->h_pos++;
+			}
 		}
 		else if (buf[0] == '\033' && buf[2] == 'D') //gauche
 		{
