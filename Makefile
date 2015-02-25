@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/02/25 14:31:52 by bsautron         ###   ########.fr        #
+#    Updated: 2015/02/25 15:28:52 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,17 +28,19 @@ OBJ = $(SRC:.c=.o)
 CFLAGS = -Wextra -Wall -Werror
 LIB = -L./libft -lft
 LIBL = -L./libl -ll
+LIBLD = -L./libld -lld
 
 all: libs $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "\033[31m"
-	@$(CC) -o $@ $^ $(LIB) $(LIBL) -lncurses
+	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) -lncurses
 	@echo "\033[37m"
 
 libs:
 	make -C libft/
 	make -C libl/
+	make -C libld/
 
 %.o: %.c
 	@echo "\033[33m   $^"

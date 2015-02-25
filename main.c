@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 15:04:09 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 15:33:00 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int				main(int argc, char **argv, char **env)
 		tenv.path_h = ft_strjoin(home, HISTORY_FILE);
 	else
 		tenv.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
+
 	while (1)
 	{
 		cmd = ft_prompt(&tenv);
@@ -50,6 +51,7 @@ int				main(int argc, char **argv, char **env)
 		ft_putchar('\n');
 		if (ft_strequ(cmd, "env"))
 			ft_lstl_print(tenv.list_env);
+		ft_lstld_print(tenv.history);
 		free(cmd);
 	}
 	ft_lstl_free(&tenv.list_env);

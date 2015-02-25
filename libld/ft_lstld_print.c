@@ -6,13 +6,13 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 19:22:49 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 19:50:10 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 15:29:20 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libl.h"
+#include "libld.h"
 
-void	ft_lstl_print(t_lstl *list)
+void	ft_lstld_print(t_lstld *list)
 {
 	while (list)
 	{

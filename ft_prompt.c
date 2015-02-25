@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 14:29:57 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 15:26:58 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ char	*ft_prompt(t_env *env)
 	ft_lstl_free(&cmd);
 	the_cmd[i] = '\0';
 	the_cmd = ft_reverse(the_cmd);
+	ft_lstld_add(&env->history, the_cmd);
 	return (the_cmd);
 }

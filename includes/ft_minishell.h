@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 15:07:16 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 15:28:25 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "libl.h"
+# include "libld.h"
 # include <stdio.h>
 # include <termios.h>
 # include <term.h>
@@ -42,4 +43,3 @@ char	*ft_prompt(t_env *env);
 void	ft_signal_handler(int sig);
 
 #endif
-
