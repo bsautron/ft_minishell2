@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 09:07:07 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 10:35:52 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ int				main(int argc, char **argv, char **env)
 	if (env[0])
 	{
 		lenv = ft_get_var_env(env);
+		ft_putendl(ft_get_env("DISPLAY=", lenv));
+		ft_putendl(ft_get_env("PATH=", lenv));
+		ft_putendl(ft_get_env("PWD=", lenv));
+		ft_putendl(ft_get_env("LESS=", lenv));
+		ft_putendl("");
+		ft_putendl(ft_get_env("DISPLAY=", lenv));
+		ft_putendl(ft_get_env("PATH=", lenv));
+		ft_putendl(ft_get_env("PWD=", lenv));
+		ft_putendl(ft_get_env("LESS=", lenv));
 		while (1)
 		{
 			cmd = ft_prompt(lenv);
@@ -47,6 +56,7 @@ int				main(int argc, char **argv, char **env)
 		}
 		ft_lstl_free(&lenv);
 	}
+
 	ft_tcg(1);
 	(void)argc;
 	(void)argv;
