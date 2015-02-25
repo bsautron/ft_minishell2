@@ -6,12 +6,11 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 16:02:41 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 02:36:37 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 02:43:14 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
-#include <term.h>
 
 void	ft_tcg(char f)
 {
