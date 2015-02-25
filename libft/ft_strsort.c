@@ -6,11 +6,11 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/19 04:15:20 by bsautron          #+#    #+#             */
-/*   Updated: 2014/11/19 04:17:01 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 00:47:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	ft_strsort(char *str)
 {

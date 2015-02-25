@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 23:58:42 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/25 01:12:17 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_prompt(t_lstl *env)
 	char	buf[4];
 	t_lstl	*cmd;
 	size_t	pos;
+	char	*the_cmd;
+	int		i;
 
 	ft_putstr("DatPrompt> ");
 	cmd = NULL;
@@ -58,15 +60,28 @@ void	ft_prompt(t_lstl *env)
 				ft_lstl_delone_by_id(&cmd, pos);
 			}
 		}
-		//else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~')
-
+		else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~')
+		{
+			ft_make_instruction("dc", NULL);
+			pos--;
+			ft_lstl_delone_by_id(&cmd, pos);
+		}
 		else if (buf[0] != '\033')
 		{
 			ft_putchar(buf[0]);
 			ft_lstl_insert(&cmd, buf, pos);
 		}
 	}
-	ft_putendl("");
-	ft_lstl_print(cmd);
-	ft_putendl("");
+	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(cmd) + 1));
+	i = 0;
+	while (cmd)
+	{
+		the_cmd[i] = cmd->str[0];
+		cmd = cmd->next;
+		i++;
+	}
+	the_cmd[i] = '\0';
+	ft_putstr("\ncmd = ");
+	the_cmd = ft_reverse(the_cmd);
+	ft_putendl(the_cmd);
 }
