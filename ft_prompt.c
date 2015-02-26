@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/26 03:51:09 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/26 05:25:30 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char			*ft_prompt(t_env *env)
 	char	*the_cmd;
 	t_lstl	*tmp;
 	size_t	pos;
+	int		fd;
 	int		i;
 
 	ft_putstr("\033[33mDatPrompt>\033[0m ");
@@ -208,6 +209,13 @@ char			*ft_prompt(t_env *env)
 	the_cmd[i] = '\0';
 	the_cmd = ft_reverse(the_cmd);
 	if (!ft_onlyesp(the_cmd))
+	{
+		if ((fd = open(env->path_h, O_WRONLY | O_APPEND)) != -1)
+		{
+			ft_putendl_fd(the_cmd, fd);
+			close(fd);
+		}
 		ft_lstld_add(&env->history, the_cmd);
+	}
 	return (the_cmd);
 }

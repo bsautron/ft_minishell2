@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/26 03:46:00 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/26 05:13:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libl.h"
 # include "libld.h"
 # include <stdio.h>
+# include <fcntl.h>
 # include <termios.h>
 # include <term.h>
 
