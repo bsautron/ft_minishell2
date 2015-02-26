@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 20:27:10 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/26 02:14:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ char			*ft_prompt(t_env *env)
 		ft_bzero(&buf, sizeof(char *));
 		read(0, &buf, 4);
 		if (buf[0] == '\n')
+		{
+			env->h_pos = 0;
 			break ;
+		}
 		if (buf[0] == 4 && buf[1] == 0) // delete
 		{
 			if (ft_lstl_len(env->cmd) == 0)
