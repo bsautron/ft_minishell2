@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/26 02:14:21 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/26 03:51:09 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,23 @@ static void		ft_home(t_env *env, size_t *pos)
 		ft_make_instruction("le", NULL);
 	*pos = ft_lstl_len(env->cmd);
 	ft_make_instruction("im", NULL);
+}
+
+static void		ft_print_list_char(t_lstl *cmd)
+{
+	char	*tmp;
+	size_t	i;
+
+	i = 0;
+	tmp = (char *)malloc(sizeof(char) * (ft_lstl_len(cmd) + 1));
+	while (cmd)
+	{
+		tmp[i] = cmd->str[0];
+		i++;
+		cmd = cmd->next;
+	}
+	tmp[i] = '\0';
+	ft_putstr(ft_reverse(tmp));
 }
 
 char			*ft_prompt(t_env *env)
@@ -88,6 +105,10 @@ char			*ft_prompt(t_env *env)
 		}
 		else if (buf[0] == '\033' && buf[2] == 'A') //haut
 		{
+			if (env->h_pos == 0)
+			{
+				env->cmd_saved = env->cmd;
+			}
 			if (env->h_pos < ft_lstld_len(env->history))
 			{
 				ft_home(env, &pos);
@@ -97,6 +118,29 @@ char			*ft_prompt(t_env *env)
 				env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos)->str);
 				pos = 0;
 				env->h_pos++;
+			}
+		}
+		else if (buf[0] == '\033' && buf[2] == 'B') // bas
+		{
+			if (env->h_pos > 1)
+			{
+				env->h_pos--;
+				ft_home(env, &pos);
+				ft_make_instruction("ei", NULL);
+				ft_make_instruction("cd", NULL);
+				ft_putstr(ft_get_link_by_id(env->history, env->h_pos - 1)->str);
+				env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos - 1)->str);
+				pos = 0;
+			}
+			else
+			{
+				env->h_pos = 0;
+				ft_home(env, &pos);
+				env->cmd = env->cmd_saved;
+				ft_make_instruction("ei", NULL);
+				ft_make_instruction("cd", NULL);
+				ft_print_list_char(env->cmd);
+				pos = 0;
 			}
 		}
 		else if (buf[0] == '\033' && buf[2] == 'D') //gauche
@@ -147,6 +191,7 @@ char			*ft_prompt(t_env *env)
 		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[4] == 0) // une lettre printable
 		{
 			ft_putchar(buf[0]);
+			env->h_pos = 0;
 			ft_lstl_insert(&env->cmd, buf, pos);
 		}
 	}
@@ -162,6 +207,7 @@ char			*ft_prompt(t_env *env)
 	ft_lstl_free(&env->cmd);
 	the_cmd[i] = '\0';
 	the_cmd = ft_reverse(the_cmd);
-	ft_lstld_add(&env->history, the_cmd);
+	if (!ft_onlyesp(the_cmd))
+		ft_lstld_add(&env->history, the_cmd);
 	return (the_cmd);
 }

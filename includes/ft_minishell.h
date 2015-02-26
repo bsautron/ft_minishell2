@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 19:41:18 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/02/26 03:46:00 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_env
 {
 	t_lstl			*list_env;
 	t_lstl			*cmd;
+	t_lstl			*cmd_saved;
 	t_lstld			*history;
 	size_t			h_pos;
 	char			*path_h;
@@ -37,6 +38,7 @@ void	ft_reset_term(void);
 void	ft_setenv(t_env *env, char *str);
 char	*ft_pwd(void);
 char	*ft_get_env(char *var, t_env *env);
+int		ft_onlyesp(char *str);
 char	*ft_parser(char *cmd, t_env *env);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
 int		ft_outc(int c);
