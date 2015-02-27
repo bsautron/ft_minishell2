@@ -35,7 +35,7 @@ all: libs $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "\033[31m"
-	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) -lncurses
+	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) -lncurses -g
 	@echo "\033[37m"
 
 libs:

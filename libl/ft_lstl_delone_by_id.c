@@ -16,6 +16,7 @@ void	ft_lstl_delone_by_id(t_lstl **begin, size_t id)
 {
 	size_t	i;
 	t_lstl	*tmp;
+	t_lstl	*free_me;
 
 	tmp = *begin;
 	if (*begin)
@@ -31,7 +32,10 @@ void	ft_lstl_delone_by_id(t_lstl **begin, size_t id)
 			i = 1;
 			while (i++ < id && tmp)
 				tmp = tmp->next;
+			free_me = tmp->next;
 			tmp->next = tmp->next->next;
+			free(free_me->str);
+			free(free_me);
 		}
 	}
 }

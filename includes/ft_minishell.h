@@ -22,6 +22,7 @@
 # include <term.h>
 
 # define HISTORY_FILE	"/.ft_minishell_history"
+# define HISTORY_LIMITS	10000
 
 typedef struct		s_env
 {
@@ -29,7 +30,7 @@ typedef struct		s_env
 	t_lstl			*cmd;
 	t_lstl			*cmd_saved;
 	t_lstld			*history;
-	size_t			h_pos;
+	int				h_pos;
 	char			*path_h;
 	int				ret;
 }					t_env;

@@ -57,9 +57,10 @@ static void		ft_print_list_char(t_lstl *cmd)
 	}
 	tmp[i] = '\0';
 	ft_putstr(ft_reverse(tmp));
+	free(tmp);
 }
 
-static void		ft_ctrl_d(t_env *env, size_t *pos)
+static void		ft_ctrl_d(t_env *env, int *pos)
 {
 	if (ft_lstl_len(env->cmd) == 0)
 	{
@@ -77,7 +78,7 @@ static void		ft_ctrl_d(t_env *env, size_t *pos)
 	}
 }
 
-static void		ft_key_home(t_env *env, size_t *pos)
+static void		ft_key_home(t_env *env, int *pos)
 {
 	while ((*pos)++ < ft_lstl_len(env->cmd))
 		ft_make_instruction("le", NULL);
@@ -85,7 +86,7 @@ static void		ft_key_home(t_env *env, size_t *pos)
 	ft_make_instruction("im", NULL);
 }
 
-static void		ft_key_up(t_env *env, size_t *pos)
+static void		ft_key_up(t_env *env, int *pos)
 {
 	if (env->h_pos == 0)
 		env->cmd_saved = env->cmd;
@@ -101,11 +102,11 @@ static void		ft_key_up(t_env *env, size_t *pos)
 	}
 }
 
-static void		ft_key_down(t_env *env, size_t *pos)
+static void		ft_key_down(t_env *env, int *pos)
 {
-	if (env->h_pos > 1)
+	env->h_pos--;
+	if (env->h_pos > 0)
 	{
-		env->h_pos--;
 		ft_key_home(env, pos);
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
@@ -113,9 +114,8 @@ static void		ft_key_down(t_env *env, size_t *pos)
 		env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos - 1)->str);
 		*pos = 0;
 	}
-	else
+	else if (env->h_pos == 0)
 	{
-		env->h_pos = 0;
 		ft_key_home(env, pos);
 		env->cmd = env->cmd_saved;
 		ft_make_instruction("ei", NULL);
@@ -123,9 +123,11 @@ static void		ft_key_down(t_env *env, size_t *pos)
 		ft_print_list_char(env->cmd);
 		*pos = 0;
 	}
+	else
+		env->h_pos = 0;
 }
 
-static void		ft_key_left(t_env *env, size_t *pos)
+static void		ft_key_left(t_env *env, int *pos)
 {
 	if (*pos < ft_lstl_len(env->cmd))
 	{
@@ -135,7 +137,7 @@ static void		ft_key_left(t_env *env, size_t *pos)
 	}
 }
 
-static void		ft_key_right(t_env *env, size_t *pos)
+static void		ft_key_right(t_env *env, int *pos)
 {
 	env = env;
 	if (*pos != 0)
@@ -147,7 +149,7 @@ static void		ft_key_right(t_env *env, size_t *pos)
 		ft_make_instruction("ei", NULL);
 }
 
-static void		ft_key_back_space(t_env *env, size_t *pos)
+static void		ft_key_back_space(t_env *env, int *pos)
 {
 	if (*pos < ft_lstl_len(env->cmd))
 	{
@@ -157,7 +159,7 @@ static void		ft_key_back_space(t_env *env, size_t *pos)
 	}
 }
 
-static void		ft_key_delete(t_env *env, size_t *pos)
+static void		ft_key_delete(t_env *env, int *pos)
 {
 	ft_make_instruction("dc", NULL);
 	if (*pos)
@@ -167,7 +169,7 @@ static void		ft_key_delete(t_env *env, size_t *pos)
 	}
 }
 
-static void		ft_key_end(t_env *env, size_t *pos)
+static void		ft_key_end(t_env *env, int *pos)
 {
 	env = env;
 	while ((*pos)--)
@@ -177,7 +179,7 @@ static void		ft_key_end(t_env *env, size_t *pos)
 
 
 
-static void		ft_key_printable(t_env *env, char *buf, size_t *pos)
+static void		ft_key_printable(t_env *env, char *buf, int *pos)
 {
 	ft_putchar(buf[0]);
 	env->h_pos = 0;
@@ -189,7 +191,7 @@ char			*ft_prompt(t_env *env)
 	char	buf[4];
 	char	*the_cmd;
 	t_lstl	*tmp;
-	size_t	pos;
+	int		pos;
 	int		fd;
 	int		i;
 
@@ -199,7 +201,7 @@ char			*ft_prompt(t_env *env)
 	env->cmd = NULL;
 	while (1)
 	{
-		ft_bzero(&buf, sizeof(char *));
+		ft_bzero(buf, 4);
 		read(0, &buf, 4);
 		if (buf[0] == '\n')
 		{
@@ -224,7 +226,7 @@ char			*ft_prompt(t_env *env)
 			ft_key_end(env, &pos);
 		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 72) // touche Home
 			ft_key_home(env, &pos);
-		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[4] == 0) // une lettre printable
+		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[3] == 0) // une lettre printable
 			ft_key_printable(env, buf, &pos);
 	}
 	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(env->cmd) + 1));

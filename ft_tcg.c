@@ -17,7 +17,7 @@ void	ft_tcg(t_env *env)
 	char			*name_term;
 	struct termios	term;
 
-	(void)env;
+	env = env;
 	if ((name_term = getenv("TERM")) == NULL)
 		exit(1);
 	//name_term = ft_get_env("TERM");

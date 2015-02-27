@@ -35,10 +35,15 @@ static void		ft_get_history(t_env *env)
 	char	*line;
 	int		fd;
 
+	line = NULL;
 	if ((fd = open(env->path_h, O_CREAT | O_RDONLY, 0600)) != -1)
 	{
 		while (get_next_line(fd, &line) > 0)
+		{
 			ft_lstld_add(&env->history, line);
+			if (line)
+				free(line);
+		}
 		close(fd);
 	}
 }
