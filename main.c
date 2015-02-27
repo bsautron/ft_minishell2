@@ -73,7 +73,6 @@ int				main(int argc, char **argv, char **env)
 			ft_lstl_print(tenv.list_env);
 		free(cmd);
 	}
-	ft_lstl_free(&tenv.list_env);
 	ft_reset_term();
 	(void)argc;
 	(void)argv;

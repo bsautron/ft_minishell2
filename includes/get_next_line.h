@@ -12,11 +12,10 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE			4096
-
-# define FT_SWAP(x, y, z) {z = x; x = y; if (z != x) {free(z);}}
-
 # include "libft.h"
+
+# define BUFF_SIZE			4096
+# define FT_SWAP(x, y, z) {z = x; x = y; if (z != x) {free(z);}}
 
 typedef struct				s_buff
 {

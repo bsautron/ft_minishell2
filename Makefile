@@ -68,7 +68,7 @@ libs:
 
 %.o: %.c $(HEADER)
 	@echo "\033[33m   $<"
-	@$(CC) -o $@ -I includes/ -c $< 
+	@$(CC) -o $@ -I includes/ -c $< -g 
 
 clean:
 	rm -f $(OBJ)

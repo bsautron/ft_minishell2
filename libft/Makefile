@@ -101,10 +101,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
+	@echo "\033[0m"
 
-%.o: %.c
-	@echo "\033[36m   $^"
-	@$(CC) $(FLAGS) -I ../includes/ -c $^
+%.o: %.c ../includes/libft.h ../includes/get_next_line.h
+	@echo "\033[36m   $<"
+	@$(CC) $(FLAGS) -I ../includes/ -c $<
 
 clean:
 	@rm -f $(OBJ)

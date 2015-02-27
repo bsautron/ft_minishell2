@@ -31,9 +31,9 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[37m"
 
-%.o: %.c
-	@echo "\033[31m   $^"
-	@$(CC) $(CFLAGS) -I ../includes/ -c $^
+%.o: %.c ../includes/libl.h ../includes/libft.h
+	@echo "\033[31m   $<"
+	@$(CC) $(CFLAGS) -I ../includes/ -c $<
 
 clean:
 	rm -f $(OBJ)

@@ -25,11 +25,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "\033[37m"
+	@echo "\033[0m"
 
-%.o: %.c
-	@echo "\033[31m   $^"
-	@$(CC) $(CFLAGS) -I ../includes/ -c $^
+%.o: %.c ../includes/libld.h ../includes/libft.h
+	@echo "\033[31m   $<"
+	@$(CC) $(CFLAGS) -I ../includes/ -c $<
 
 clean:
 	rm -f $(OBJ)

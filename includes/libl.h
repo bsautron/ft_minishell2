@@ -15,6 +15,7 @@
 
 # include "libft.h"
 
+
 typedef struct		s_lstl
 {
 	char			*str;
