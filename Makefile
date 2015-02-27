@@ -12,7 +12,6 @@
 
 CC = gcc
 NAME = ft_minishell2
-DIR_KEY = ./key/
 SRC = main.c \
 	  ft_ctrl_d.c \
 	  ft_prompt.c \
@@ -38,6 +37,8 @@ CFLAGS = -Wextra -Wall -Werror
 LIB = -L./libft -lft
 LIBL = -L./libl -ll
 LIBLD = -L./libld -lld
+
+.PHONY: all libs clean fclean re
 
 all: libs $(NAME)
 
