@@ -30,6 +30,24 @@ static t_lstl	*ft_str_to_lstl(char *str)
 	return (ret);
 }
 
+static char		*ft_lstl_to_str(t_lstl *list)
+{
+	int		i;
+	char	*dst;
+
+	i = 0;
+	dst = (char *)malloc(sizeof(char) * (ft_lstl_len(list) + 1));
+	while (list)
+	{
+		dst[i] = list->str[0];
+		list = list->next;
+		i++;
+	}
+	dst[i] = '\0';
+	dst = ft_reverse(dst);
+	return (dst);
+}
+
 static t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id)
 {
 	size_t		i;
@@ -39,8 +57,6 @@ static t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id)
 		list = list->next;
 	return (list);
 }
-
-
 
 static void		ft_print_list_char(t_lstl *cmd)
 {
@@ -177,8 +193,6 @@ static void		ft_key_end(t_env *env, int *pos)
 	*pos = 0;
 }
 
-
-
 static void		ft_key_printable(t_env *env, char *buf, int *pos)
 {
 	ft_putchar(buf[0]);
@@ -229,18 +243,8 @@ char			*ft_prompt(t_env *env)
 		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[3] == 0) // une lettre printable
 			ft_key_printable(env, buf, &pos);
 	}
-	the_cmd = (char *)malloc(sizeof(char) * (ft_lstl_len(env->cmd) + 1));
-	i = 0;
-	tmp = env->cmd;
-	while (tmp)
-	{
-		the_cmd[i] = tmp->str[0];
-		tmp = tmp->next;
-		i++;
-	}
+	the_cmd = ft_lstl_to_str(env->cmd);
 	ft_lstl_free(&env->cmd);
-	the_cmd[i] = '\0';
-	the_cmd = ft_reverse(the_cmd);
 	if (!ft_onlyesp(the_cmd))
 	{
 		if ((fd = open(env->path_h, O_WRONLY | O_APPEND)) != -1)
