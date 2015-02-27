@@ -25,8 +25,8 @@ static char	*get_name_var(char *str)
 char	*ft_parser(char *cmd, t_env *env)
 {
 	char	*var;
-	char	*var_eq;
 	size_t	i;
+	char	*var_eq;
 	char	*var_env;
 
 	i = 0;
@@ -37,9 +37,11 @@ char	*ft_parser(char *cmd, t_env *env)
 			if (i == 0 || (i != 0 && cmd[i - 1] != '\\'))
 			{
 				var = get_name_var(&cmd[i]);
-				if ((var_env = ft_get_env(ft_strjoin(var + 1, "="), env)) == NULL)
+				if (((var_eq = ft_strjoin(var + 1, "=")) != NULL) && (var_env = ft_get_env(var_eq, env)) == NULL)
 					var_env = "";
 				cmd = ft_replace(cmd, var, var_env, (i == 0) ? 0 : i - 1);
+				free(var_eq);
+				free(var);
 			}
 		}
 		i += 1;

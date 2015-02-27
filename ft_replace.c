@@ -36,5 +36,6 @@ char	*ft_replace(char *src, char *str1, char *str2, int pos)
 	while (src[len])
 		begin[i++] = src[len++];
 	str[final_len] = '\0';
+	free(src);
 	return (str);
 }
