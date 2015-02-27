@@ -25,7 +25,21 @@ SRC = main.c \
 	  ft_get_env.c \
 	  ft_parser.c \
 	  ft_signal_handler.c \
-	  ft_tcg.c
+	  ft_get_link_by_id.c \
+	  ft_print_list_char.c \
+	  ft_str_to_lstl.c \
+	  ft_lstl_to_str.c \
+	  ft_tcg.c \
+	  \
+	  ft_key_back_space.c \
+	  ft_key_delete.c \
+	  ft_key_down.c \
+	  ft_key_end.c \
+	  ft_key_home.c \
+	  ft_key_left.c \
+	  ft_key_printable.c \
+	  ft_key_right.c \
+	  ft_key_up.c
 DIR_H = ./includes
 HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libft.h \
@@ -33,10 +47,10 @@ HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libld.h \
 		 $(DIR_H)/get_next_line.h
 OBJ = $(SRC:%.c=%.o)
-CFLAGS = -Wextra -Wall -Werror
-LIB = -L./libft -lft
-LIBL = -L./libl -ll
-LIBLD = -L./libld -lld
+	CFLAGS = -Wextra -Wall -Werror
+	LIB = -L./libft -lft
+	LIBL = -L./libl -ll
+	LIBLD = -L./libld -lld
 
 .PHONY: all libs clean fclean re
 

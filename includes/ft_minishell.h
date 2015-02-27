@@ -47,7 +47,20 @@ int		ft_outc(int c);
 void	ft_make_instruction(char *id, char *area);
 char	*ft_prompt(t_env *env);
 void	ft_signal_handler(int sig);
+t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id);
+void	ft_print_list_char(t_lstl *cmd);
+char	*ft_lstl_to_str(t_lstl *list);
+t_lstl	*ft_str_to_lstl(char *str);
 
 void	ft_ctrl_d(t_env *env, int *pos);
+void	ft_key_back_space(t_env *env, int *pos);
+void	ft_key_delete(t_env *env, int *pos);
+void	ft_key_down(t_env *env, int *pos);
+void	ft_key_end(t_env *env, int *pos);
+void	ft_key_home(t_env *env, int *pos);
+void	ft_key_left(t_env *env, int *pos);
+void	ft_key_printable(t_env *env, char *buf, int *pos);
+void	ft_key_right(t_env *env, int *pos);
+void	ft_key_up(t_env *env, int *pos);
 
 #endif
