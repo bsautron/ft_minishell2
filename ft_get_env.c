@@ -14,7 +14,8 @@
 
 char	*ft_get_env(char *var, t_env *env)
 {
-	while (env->list_env && !ft_strnequ(var, env->list_env->str, ft_strlen(var)))
+	while (env->list_env
+		&& !ft_strnequ(var, env->list_env->str, ft_strlen(var)))
 		env->list_env = env->list_env->next;
 	if (env->list_env)
 		return (ft_strchr(env->list_env->str, '=') + 1);

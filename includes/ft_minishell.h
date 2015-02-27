@@ -35,7 +35,7 @@ typedef struct		s_env
 	int				ret;
 }					t_env;
 
-void	ft_tcg(t_env *env);
+void	ft_set_term(t_env *env);
 void	ft_reset_term(void);
 void	ft_setenv(t_env *env, char *str);
 char	*ft_pwd(void);

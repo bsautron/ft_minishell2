@@ -22,7 +22,7 @@ char			*ft_prompt(t_env *env)
 	int		i;
 
 	ft_putstr("\033[33mDatPrompt>\033[0m ");
-	ft_tcg(env);
+	ft_set_term(env);
 	pos = 0;
 	env->cmd = NULL;
 	while (1)

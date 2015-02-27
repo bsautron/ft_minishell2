@@ -29,7 +29,7 @@ SRC = main.c \
 	  ft_print_list_char.c \
 	  ft_str_to_lstl.c \
 	  ft_lstl_to_str.c \
-	  ft_tcg.c \
+	  ft_set_term.c \
 	  \
 	  ft_key_back_space.c \
 	  ft_key_delete.c \

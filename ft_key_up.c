@@ -10,7 +10,8 @@ void		ft_key_up(t_env *env, int *pos)
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
 		ft_putstr(ft_get_link_by_id(env->history, env->h_pos)->str);
-		env->cmd = ft_str_to_lstl(ft_get_link_by_id(env->history, env->h_pos)->str);
+		env->cmd = ft_str_to_lstl(
+				ft_get_link_by_id(env->history, env->h_pos)->str);
 		*pos = 0;
 		env->h_pos++;
 	}
