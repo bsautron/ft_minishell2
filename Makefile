@@ -12,7 +12,9 @@
 
 CC = gcc
 NAME = ft_minishell2
+DIR_KEY = ./key/
 SRC = main.c \
+	  ft_ctrl_d.c \
 	  ft_prompt.c \
 	  ft_outc.c \
 	  ft_make_instruction.c \
@@ -25,7 +27,13 @@ SRC = main.c \
 	  ft_parser.c \
 	  ft_signal_handler.c \
 	  ft_tcg.c
-OBJ = $(SRC:.c=.o)
+DIR_H = ./includes
+HEADER = $(DIR_H)/ft_minishell.h \
+		 $(DIR_H)/libft.h \
+		 $(DIR_H)/libl.h \
+		 $(DIR_H)/libld.h \
+		 $(DIR_H)/get_next_line.h
+OBJ = $(SRC:%.c=%.o)
 CFLAGS = -Wextra -Wall -Werror
 LIB = -L./libft -lft
 LIBL = -L./libl -ll
@@ -43,9 +51,9 @@ libs:
 	make -C libl/
 	make -C libld/
 
-%.o: %.c
-	@echo "\033[33m   $^"
-	@$(CC) -I includes/ -c $^ 
+%.o: %.c $(HEADER)
+	@echo "\033[33m   $<"
+	@$(CC) -o $@ -I includes/ -c $< 
 
 clean:
 	rm -f $(OBJ)

@@ -48,4 +48,6 @@ void	ft_make_instruction(char *id, char *area);
 char	*ft_prompt(t_env *env);
 void	ft_signal_handler(int sig);
 
+void	ft_ctrl_d(t_env *env, int *pos);
+
 #endif
