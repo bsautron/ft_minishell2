@@ -14,7 +14,7 @@
 
 char			*ft_prompt(t_env *env)
 {
-	char	buf[4];
+	char	buf[7];
 	char	*the_cmd;
 	t_lstl	*tmp;
 	int		pos;
@@ -27,8 +27,8 @@ char			*ft_prompt(t_env *env)
 	env->cmd = NULL;
 	while (1)
 	{
-		ft_bzero(buf, 4);
-		read(0, &buf, 4);
+		ft_bzero(buf, 7);
+		read(0, &buf, 7);
 		if (buf[0] == '\n')
 		{
 			env->h_pos = 0;

@@ -26,6 +26,7 @@
 
 typedef struct		s_env
 {
+	char			*name_term;
 	t_lstl			*list_env;
 	t_lstl			*cmd;
 	t_lstl			*cmd_saved;
