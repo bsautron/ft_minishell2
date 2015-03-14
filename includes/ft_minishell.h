@@ -27,6 +27,9 @@
 # define KEY_RIGHT		"\x1b\x5b\x43\0\0\0\0"
 # define KEY_LEFT		"\x1b\x5b\x44\0\0\0\0"
 # define KEY_BACK_SPACE	"\x7f\0\0\0\0\0\0"
+# define KEY_DELETE		"\x1b\x5b\x33\x7e\0\0\0"
+# define KEY_END		"\x1b\x5b\x46\0\0\0\0"
+# define KEY_HOME		"\x1b\x5b\x48\0\0\0\0"
 
 # define HISTORY_FILE	"/.ft_minishell_history"
 # define HISTORY_LIMITS	10000

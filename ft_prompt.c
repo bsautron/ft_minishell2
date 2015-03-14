@@ -36,24 +36,24 @@ char			*ft_prompt(t_env *env)
 			env->h_pos = 0;
 			break ;
 		}
-		//dprintf(1, "[%x][%x][%x][%x][%x][%x][%x][%x]\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
+		//dprintf(1, "[%x][%x][%x][%x][%x][%x][%x]\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
 		if (ft_strequ(buf, KEY_CTRL_D))
 			ft_ctrl_d(env, &pos);
 		else if (ft_strequ(buf, KEY_UP))
 			ft_key_up(env, &pos);
-		else if (ft_strequ(buf, KEY_DOWN)) // bas
+		else if (ft_strequ(buf, KEY_DOWN))
 			ft_key_down(env, &pos);
-		else if (ft_strequ(buf, KEY_LEFT)) //gauche
+		else if (ft_strequ(buf, KEY_LEFT))
 			ft_key_left(env, &pos);
-		else if (ft_strequ(buf, KEY_RIGHT)) //droite
+		else if (ft_strequ(buf, KEY_RIGHT))
 			ft_key_right(env, &pos);
-		else if (ft_strequ(buf, KEY_BACK_SPACE)) //touche effacer
+		else if (ft_strequ(buf, KEY_BACK_SPACE))
 			ft_key_back_space(env, &pos);
-		else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~') // touche delete
+		else if (ft_strequ(buf, KEY_DELETE)) // touche delete
 			ft_key_delete(env, &pos);
-		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 70) // touche end
+		else if (ft_strequ(buf, KEY_END)) // touche end
 			ft_key_end(env, &pos);
-		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 72) // touche Home
+		else if (ft_strequ(buf, KEY_HOME)) // touche Home
 			ft_key_home(env, &pos);
 		else if (ft_isprint(buf[0])) // une lettre printable
 			ft_key_printable(env, buf, &pos);
