@@ -34,7 +34,16 @@
 # define HISTORY_FILE	"/.ft_minishell_history"
 # define HISTORY_LIMITS	10000
 
-typedef struct		s_env
+typedef struct s_env	t_env;
+typedef struct s_key	t_key;
+
+struct		s_key
+{
+	char	*tab_key[11];
+	void	(*f[11])(t_env *, int *);
+};
+
+struct		s_env
 {
 	char			*name_term;
 	t_lstl			*list_env;
@@ -44,7 +53,7 @@ typedef struct		s_env
 	int				h_pos;
 	char			*path_h;
 	int				ret;
-}					t_env;
+};
 
 void	ft_set_term(t_env *env);
 void	ft_reset_term(void);
