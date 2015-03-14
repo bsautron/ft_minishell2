@@ -63,7 +63,7 @@ void	ft_print_list_char(t_lstl *cmd);
 char	*ft_lstl_to_str(t_lstl *list);
 t_lstl	*ft_str_to_lstl(char *str);
 
-void	ft_ctrl_d(t_env *env, int *pos);
+void	ft_key_ctrl_d(t_env *env, int *pos);
 void	ft_key_back_space(t_env *env, int *pos);
 void	ft_key_delete(t_env *env, int *pos);
 void	ft_key_down(t_env *env, int *pos);

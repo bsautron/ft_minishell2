@@ -60,10 +60,7 @@ int				main(int argc, char **argv, char **env)
 	ft_attrape_moi_si_tu_peux();
 	tenv.list_env = ft_get_var_env(env);
 	if ((home = ft_get_env("HOME=", tenv)) != NULL)
-	{
-		ft_lstl_print(tenv.list_env);
 		tenv.path_h = ft_strjoin(home, HISTORY_FILE);
-	}
 	else
 		tenv.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
 	ft_get_history(&tenv);
