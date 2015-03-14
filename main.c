@@ -15,12 +15,14 @@
 static t_lstl	*ft_get_var_env(char **env)
 {
 	t_lstl	*lenv;
+	int		i;
 
+	i = 0;
 	lenv = NULL;
-	while (*env)
+	while (env[i])
 	{
-		ft_lstl_add_back(&lenv, *env);
-		env++;
+		ft_lstl_add_back(&lenv, env[i]);
+		i++;
 	}
 	return (lenv);
 }
@@ -57,15 +59,18 @@ int				main(int argc, char **argv, char **env)
 	ft_bzero(&tenv, sizeof(t_env));
 	ft_attrape_moi_si_tu_peux();
 	tenv.list_env = ft_get_var_env(env);
-	if ((home = ft_get_env("HOME=", &tenv)) != NULL)
+	if ((home = ft_get_env("HOME=", tenv)) != NULL)
+	{
+		ft_lstl_print(tenv.list_env);
 		tenv.path_h = ft_strjoin(home, HISTORY_FILE);
+	}
 	else
 		tenv.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
 	ft_get_history(&tenv);
 	while (1)
 	{
 		cmd = ft_prompt(&tenv);
-		cmd = ft_parser(cmd, &tenv);
+		//cmd = ft_parser(cmd, &tenv);
 		ft_putstr("\ncmd = ");
 		ft_putstr(cmd);
 		ft_putchar('\n');

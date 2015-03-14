@@ -12,9 +12,11 @@
 
 #include "ft_minishell.h"
 
+
+
 char			*ft_prompt(t_env *env)
 {
-	char	buf[7];
+	char	buf[8];
 	char	*the_cmd;
 	t_lstl	*tmp;
 	int		pos;
@@ -27,24 +29,25 @@ char			*ft_prompt(t_env *env)
 	env->cmd = NULL;
 	while (1)
 	{
-		ft_bzero(buf, 7);
+		ft_bzero(buf, 8);
 		read(0, &buf, 7);
 		if (buf[0] == '\n')
 		{
 			env->h_pos = 0;
 			break ;
 		}
-		if (buf[0] == 4 && buf[1] == 0) // delete
+		//dprintf(1, "[%x][%x][%x][%x][%x][%x][%x][%x]\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
+		if (ft_strequ(buf, KEY_CTRL_D))
 			ft_ctrl_d(env, &pos);
-		else if (buf[0] == '\033' && buf[2] == 'A') //haut
+		else if (ft_strequ(buf, KEY_UP))
 			ft_key_up(env, &pos);
-		else if (buf[0] == '\033' && buf[2] == 'B') // bas
+		else if (ft_strequ(buf, KEY_DOWN)) // bas
 			ft_key_down(env, &pos);
-		else if (buf[0] == '\033' && buf[2] == 'D') //gauche
+		else if (ft_strequ(buf, KEY_LEFT)) //gauche
 			ft_key_left(env, &pos);
-		else if (buf[0] == '\033' && buf[2] == 'C') //droite
+		else if (ft_strequ(buf, KEY_RIGHT)) //droite
 			ft_key_right(env, &pos);
-		else if (buf[0] == 8 || buf[0] == 127) //touche effacer
+		else if (ft_strequ(buf, KEY_BACK_SPACE)) //touche effacer
 			ft_key_back_space(env, &pos);
 		else if (buf[0] == '\033' && buf[2] == '3' && buf[3] == '~') // touche delete
 			ft_key_delete(env, &pos);
@@ -52,7 +55,7 @@ char			*ft_prompt(t_env *env)
 			ft_key_end(env, &pos);
 		else if (buf[0] == '\033' && buf[1] == 91 && buf[2] == 72) // touche Home
 			ft_key_home(env, &pos);
-		else if (ft_isprint(buf[0]) && buf[1] == 0 && buf[2] == 0 && buf[3] == 0) // une lettre printable
+		else if (ft_isprint(buf[0])) // une lettre printable
 			ft_key_printable(env, buf, &pos);
 	}
 	the_cmd = ft_lstl_to_str(env->cmd);

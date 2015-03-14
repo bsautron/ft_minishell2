@@ -21,6 +21,13 @@
 # include <termios.h>
 # include <term.h>
 
+# define KEY_CTRL_D		"\x04\0\0\0\0\0\0"
+# define KEY_UP			"\x1b\x5b\x41\0\0\0\0"
+# define KEY_DOWN		"\x1b\x5b\x42\0\0\0\0"
+# define KEY_RIGHT		"\x1b\x5b\x43\0\0\0\0"
+# define KEY_LEFT		"\x1b\x5b\x44\0\0\0\0"
+# define KEY_BACK_SPACE	"\x7f\0\0\0\0\0\0"
+
 # define HISTORY_FILE	"/.ft_minishell_history"
 # define HISTORY_LIMITS	10000
 
@@ -40,7 +47,7 @@ void	ft_set_term(t_env *env);
 void	ft_reset_term(void);
 void	ft_setenv(t_env *env, char *str);
 char	*ft_pwd(void);
-char	*ft_get_env(char *var, t_env *env);
+char	*ft_get_env(char *var, t_env env);
 int		ft_onlyesp(char *str);
 char	*ft_parser(char *cmd, t_env *env);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
