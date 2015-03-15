@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "libl.h"
 # include "libld.h"
+# include <sys/ioctl.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <termios.h>
@@ -40,7 +41,7 @@ typedef struct s_key	t_key;
 struct		s_key
 {
 	char	*tab_key[11];
-	void	(*f[11])(t_env *, int *);
+	void	(*f[11])(int *);
 };
 
 struct		s_env
@@ -53,34 +54,37 @@ struct		s_env
 	int				h_pos;
 	char			*path_h;
 	int				ret;
+	int				win_col;
 };
 
-void	ft_set_term(t_env *env);
+extern t_env			g_env;
+
+void	ft_set_term(void);
 void	ft_reset_term(void);
 void	ft_setenv(t_env *env, char *str);
 char	*ft_pwd(void);
-char	*ft_get_env(char *var, t_env env);
+char	*ft_get_env(char *var);
 int		ft_onlyesp(char *str);
-char	*ft_parser(char *cmd, t_env *env);
+char	*ft_parser(char *cmd);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
 int		ft_outc(int c);
 void	ft_make_instruction(char *id, char *area);
-char	*ft_prompt(t_env *env);
+char	*ft_prompt(void);
 void	ft_signal_handler(int sig);
 t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id);
 void	ft_print_list_char(t_lstl *cmd);
 char	*ft_lstl_to_str(t_lstl *list);
 t_lstl	*ft_str_to_lstl(char *str);
 
-void	ft_key_ctrl_d(t_env *env, int *pos);
-void	ft_key_back_space(t_env *env, int *pos);
-void	ft_key_delete(t_env *env, int *pos);
-void	ft_key_down(t_env *env, int *pos);
-void	ft_key_end(t_env *env, int *pos);
-void	ft_key_home(t_env *env, int *pos);
-void	ft_key_left(t_env *env, int *pos);
-void	ft_key_printable(t_env *env, char *buf, int *pos);
-void	ft_key_right(t_env *env, int *pos);
-void	ft_key_up(t_env *env, int *pos);
+void	ft_key_printable(char *buf, int *pos);
+void	ft_key_ctrl_d(int *pos);
+void	ft_key_back_space(int *pos);
+void	ft_key_delete(int *pos);
+void	ft_key_down(int *pos);
+void	ft_key_end(int *pos);
+void	ft_key_home(int *pos);
+void	ft_key_left(int *pos);
+void	ft_key_right(int *pos);
+void	ft_key_up(int *pos);
 
 #endif

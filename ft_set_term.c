@@ -1,14 +1,14 @@
 #include "ft_minishell.h"
 
 
-static void	ft_attention_a_toi_mec_ne_me_met_pas_zero_stp(t_env *env, struct termios *term)
+static void	ft_attention_a_toi_mec_ne_me_met_pas_zero_stp(struct termios *term)
 {
-	if ((env->name_term = getenv("TERM")) == NULL)
+	if ((g_env.name_term = getenv("TERM")) == NULL)
 	{
 		ft_putendl_fd("env NULL getenv Failed", 2);
 		exit(1);
 	}
-	if (tgetent(NULL, env->name_term) == -1)
+	if (tgetent(NULL, g_env.name_term) == -1)
 	{
 		ft_putendl_fd("env NULL tgetent Failed", 2);
 		exit(1);
@@ -20,11 +20,11 @@ static void	ft_attention_a_toi_mec_ne_me_met_pas_zero_stp(t_env *env, struct ter
 	}
 }
 
-void		ft_set_term(t_env *env)
+void		ft_set_term(void)
 {
 	struct termios	term;
 
-	ft_attention_a_toi_mec_ne_me_met_pas_zero_stp(env, &term);
+	ft_attention_a_toi_mec_ne_me_met_pas_zero_stp(&term);
 	term.c_lflag &= ~(ICANON);
 	term.c_lflag &= ~(ECHO);
 	term.c_cc[VMIN] = 1;

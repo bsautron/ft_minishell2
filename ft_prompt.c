@@ -36,7 +36,7 @@ static void		ft_init_t_key(t_key *key)
 	key->f[9] = NULL;
 }
 
-char			*ft_prompt(t_env *env)
+char			*ft_prompt(void)
 {
 	char	buf[8];
 	char	*the_cmd;
@@ -48,16 +48,16 @@ char			*ft_prompt(t_env *env)
 
 	ft_putstr("\033[33mDatPrompt>\033[0m ");
 	ft_init_t_key(&key);
-	ft_set_term(env);
+	ft_set_term();
 	pos = 0;
-	env->cmd = NULL;
+	g_env.cmd = NULL;
 	while (1)
 	{
 		ft_bzero(buf, 8);
 		read(0, &buf, 7);
 		if (buf[0] == '\n')
 		{
-			env->h_pos = 0;
+			g_env.h_pos = 0;
 			break ;
 		}
 		i = 0;
@@ -68,20 +68,20 @@ char			*ft_prompt(t_env *env)
 			i++;
 		}
 		if (key.tab_key[i])
-			(key.f[i])(env, &pos);
+			(key.f[i])(&pos);
 		else if (ft_isprint(buf[0]))
-			ft_key_printable(env, buf, &pos);
+			ft_key_printable(buf, &pos);
 	}
-	the_cmd = ft_lstl_to_str(env->cmd);
-	ft_lstl_free(&env->cmd);
+	the_cmd = ft_lstl_to_str(g_env.cmd);
+	ft_lstl_free(&g_env.cmd);
 	if (!ft_onlyesp(the_cmd))
 	{
-		if ((fd = open(env->path_h, O_WRONLY | O_APPEND)) != -1)
+		if ((fd = open(g_env.path_h, O_WRONLY | O_APPEND)) != -1)
 		{
 			ft_putendl_fd(the_cmd, fd);
 			close(fd);
 		}
-		ft_lstld_add(&env->history, the_cmd);
+		ft_lstld_add(&g_env.history, the_cmd);
 	}
 	return (the_cmd);
 }

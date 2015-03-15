@@ -1,11 +1,11 @@
 #include "ft_minishell.h"
 
-void		ft_key_ctrl_d(t_env *env, int *pos)
+void		ft_key_ctrl_d(int *pos)
 {
-	if (ft_lstl_len(env->cmd) == 0)
+	if (ft_lstl_len(g_env.cmd) == 0)
 	{
 		ft_reset_term();
-		ft_lstl_free(&env->list_env);
+		ft_lstl_free(&g_env.list_env);
 		exit(0);
 	}
 	else
@@ -14,7 +14,7 @@ void		ft_key_ctrl_d(t_env *env, int *pos)
 		if (*pos)
 		{
 			(*pos)--;
-			ft_lstl_delone_by_id(&env->cmd, *pos);
+			ft_lstl_delone_by_id(&g_env.cmd, *pos);
 		}
 	}
 }

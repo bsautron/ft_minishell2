@@ -1,11 +1,11 @@
 #include "ft_minishell.h"
 
-void		ft_key_delete(t_env *env, int *pos)
+void		ft_key_delete(int *pos)
 {
 	ft_make_instruction("dc", NULL);
 	if (*pos)
 	{
 		(*pos)--;
-		ft_lstl_delone_by_id(&env->cmd, *pos);
+		ft_lstl_delone_by_id(&g_env.cmd, *pos);
 	}
 }

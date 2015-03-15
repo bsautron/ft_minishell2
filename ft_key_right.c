@@ -1,8 +1,7 @@
 #include "ft_minishell.h"
 
-void		ft_key_right(t_env *env, int *pos)
+void		ft_key_right(int *pos)
 {
-	env = env;
 	if (*pos != 0)
 	{
 		(*pos)--;

@@ -12,12 +12,12 @@
 
 #include "ft_minishell.h"
 
-char	*ft_get_env(char *var, t_env env)
+char	*ft_get_env(char *var)
 {
-	while (env.list_env
-		&& !ft_strnequ(var, env.list_env->str, ft_strlen(var)))
-		env.list_env = env.list_env->next;
-	if (env.list_env)
-		return (ft_strchr(env.list_env->str, '=') + 1);
+	while (g_env.list_env
+		&& !ft_strnequ(var, g_env.list_env->str, ft_strlen(var)))
+		g_env.list_env = g_env.list_env->next;
+	if (g_env.list_env)
+		return (ft_strchr(g_env.list_env->str, '=') + 1);
 	return (NULL);
 }

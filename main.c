@@ -12,6 +12,8 @@
 
 #include "ft_minishell.h"
 
+t_env		g_env;
+
 static t_lstl	*ft_get_var_env(char **env)
 {
 	t_lstl	*lenv;
@@ -30,19 +32,20 @@ static t_lstl	*ft_get_var_env(char **env)
 static void		ft_attrape_moi_si_tu_peux(void)
 {
 	signal(SIGINT, ft_signal_handler);
+	signal(SIGWINCH, ft_signal_handler);
 }
 
-static void		ft_get_history(t_env *env)
+static void		ft_get_history(void)
 {
 	char	*line;
 	int		fd;
 
 	line = NULL;
-	if ((fd = open(env->path_h, O_CREAT | O_RDONLY, 0600)) != -1)
+	if ((fd = open(g_env.path_h, O_CREAT | O_RDONLY, 0600)) != -1)
 	{
 		while (get_next_line(fd, &line) > 0)
 		{
-			ft_lstld_add(&env->history, line);
+			ft_lstld_add(&g_env.history, line);
 			if (line)
 				free(line);
 		}
@@ -52,27 +55,27 @@ static void		ft_get_history(t_env *env)
 
 int				main(int argc, char **argv, char **env)
 {
-	t_env	tenv;
 	char	*cmd;
 	char	*home;
 
-	ft_bzero(&tenv, sizeof(t_env));
+	
+	ft_bzero(&g_env, sizeof(t_env));
 	ft_attrape_moi_si_tu_peux();
-	tenv.list_env = ft_get_var_env(env);
-	if ((home = ft_get_env("HOME=", tenv)) != NULL)
-		tenv.path_h = ft_strjoin(home, HISTORY_FILE);
+	g_env.list_env = ft_get_var_env(env);
+	if ((home = ft_get_env("HOME=")) != NULL)
+		g_env.path_h = ft_strjoin(home, HISTORY_FILE);
 	else
-		tenv.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
-	ft_get_history(&tenv);
+		g_env.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
+	ft_get_history();
 	while (1)
 	{
-		cmd = ft_prompt(&tenv);
+		cmd = ft_prompt();
 		//cmd = ft_parser(cmd, &tenv);
 		ft_putstr("\ncmd = ");
 		ft_putstr(cmd);
 		ft_putchar('\n');
 		if (ft_strequ(cmd, "env"))
-			ft_lstl_print(tenv.list_env);
+			ft_lstl_print(g_env.list_env);
 		free(cmd);
 	}
 	ft_reset_term();

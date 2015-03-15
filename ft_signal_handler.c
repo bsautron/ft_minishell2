@@ -14,6 +14,13 @@
 
 void	ft_signal_handler(int sig)
 {
+	struct winsize	winsize;
+
+	if (sig == SIGWINCH)
+	{
+		ioctl(0, TIOCGWINSZ, &winsize);
+		g_env.win_col = winsize.ws_col;
+	}
 	if (sig == SIGINT)
 	{
 		ft_reset_term();
