@@ -93,7 +93,7 @@ SRC = ft_memset.c \
 	  ft_lstmap.c \
 	  \
 	  get_next_line.c
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=../.obj/%.o)
 NAME = libft.a
 
 all: $(NAME)
@@ -103,9 +103,9 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[0m"
 
-%.o: %.c ../includes/libft.h ../includes/get_next_line.h
+../.obj/%.o: %.c ../includes/libft.h ../includes/get_next_line.h
 	@echo "\033[36m   $<"
-	@$(CC) $(FLAGS) -I ../includes/ -c $<
+	@$(CC) -o $@ $(FLAGS) -I ../includes/ -c $<
 
 clean:
 	@rm -f $(OBJ)

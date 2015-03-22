@@ -58,8 +58,8 @@ int				main(int argc, char **argv, char **env)
 	char	*cmd;
 	char	*home;
 
-	
 	ft_bzero(&g_env, sizeof(t_env));
+	ft_signal_handler(SIGWINCH);
 	ft_attrape_moi_si_tu_peux();
 	g_env.list_env = ft_get_var_env(env);
 	if ((home = ft_get_env("HOME=")) != NULL)

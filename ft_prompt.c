@@ -46,7 +46,7 @@ char			*ft_prompt(void)
 	int		i;
 	t_key	key;
 
-	ft_putstr("\033[33mDatPrompt>\033[0m ");
+	//ft_putstr("\033[33mDatPrompt>\033[0m ");
 	ft_init_t_key(&key);
 	ft_set_term();
 	pos = 0;

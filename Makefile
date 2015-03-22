@@ -46,29 +46,28 @@ HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libl.h \
 		 $(DIR_H)/libld.h \
 		 $(DIR_H)/get_next_line.h
-OBJ = $(SRC:%.c=%.o)
-	CFLAGS = -Wextra -Wall -Werror
-	LIB = -L./libft -lft
-	LIBL = -L./libl -ll
-	LIBLD = -L./libld -lld
+OBJ = $(SRC:%.c=.obj/%.o)
+CFLAGS = -Wextra -Wall -Werror
+LIB = -L./libft -lft
+LIBL = -L./libl -ll
+LIBLD = -L./libld -lld
 
 .PHONY: all libs clean fclean re
 
 all: libs $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[31m"
 	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) -lncurses -g
-	@echo "\033[37m"
+	@echo "\033[32mReady!\033[0m"
 
 libs:
 	make -C libft/
 	make -C libl/
 	make -C libld/
 
-%.o: %.c $(HEADER)
-	@echo "\033[33m   $<"
-	@$(CC) -o $@ -I includes/ -c $< -g 
+.obj/%.o: %.c $(HEADER)
+	@echo "\033[33m 	$<"
+	@$(CC) -o $@ -I includes/ -c $< -g
 
 clean:
 	rm -f $(OBJ)

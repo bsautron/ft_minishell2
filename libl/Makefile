@@ -20,7 +20,7 @@ SRC = ft_lstl_create.c \
 	  ft_lstl_delone_by_id.c \
 	  ft_lstl_len.c \
 	  ft_lstl_print.c
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=../.obj/%.o)
 NAME = libl.a
 CFLAGS = -Wall -Wextra -Werror
 
@@ -31,9 +31,9 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[37m"
 
-%.o: %.c ../includes/libl.h ../includes/libft.h
+../.obj/%.o: %.c ../includes/libl.h ../includes/libft.h
 	@echo "\033[31m   $<"
-	@$(CC) $(CFLAGS) -I ../includes/ -c $<
+	@$(CC) -o $@ $(CFLAGS) -I ../includes/ -c $<
 
 clean:
 	rm -f $(OBJ)

@@ -50,6 +50,8 @@ struct		s_env
 	t_lstl			*list_env;
 	t_lstl			*cmd;
 	t_lstl			*cmd_saved;
+	int				nb_line;
+	int				nb_line_saved;
 	t_lstld			*history;
 	int				h_pos;
 	char			*path_h;
