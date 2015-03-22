@@ -8,7 +8,7 @@ void		ft_key_back_space(int *pos)
 		ft_make_instruction("dc", NULL);
 		ft_lstl_delone_by_id(&g_env.cmd, *pos);
 	}
-	if (ft_lstl_len(g_env.cmd) % (g_env.win_col - 2) == 0)
+	if ((ft_lstl_len(g_env.cmd) + ft_strlen("DatPrompt> ")) % (g_env.win_col - 2) == 0)
 	{
 		ft_make_instruction("up", NULL);
 		g_env.nb_line--;
