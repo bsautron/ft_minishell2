@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/02/26 03:00:33 by bsautron         ###   ########.fr        #
+#    Updated: 2015/03/23 11:23:57 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libl.h \
 		 $(DIR_H)/libld.h \
 		 $(DIR_H)/get_next_line.h
-OBJ = $(SRC:%.c=.obj/%.o)
+OBJ = $(SRC:%.c=obj/%.o)
 CFLAGS = -Wextra -Wall -Werror
 LIB = -L./libft -lft
 LIBL = -L./libl -ll
@@ -66,7 +66,7 @@ libs:
 	make -C libl/
 	make -C libld/
 
-.obj/%.o: %.c $(HEADER)
+obj/%.o: %.c $(HEADER)
 	@echo "\033[33m 	$<"
 	@$(CC) -o $@ -I includes/ -c $< -g
 

@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 12:21:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/02/25 08:41:23 by bsautron         ###   ########.fr        #
+#    Updated: 2015/03/23 11:24:58 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = ft_lstl_create.c \
 	  ft_lstl_delone_by_id.c \
 	  ft_lstl_len.c \
 	  ft_lstl_print.c
-OBJ = $(SRC:%.c=../.obj/%.o)
+OBJ = $(SRC:%.c=../obj/%.o)
 NAME = libl.a
 CFLAGS = -Wall -Wextra -Werror
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[37m"
 
-../.obj/%.o: %.c ../includes/libl.h ../includes/libft.h
+../obj/%.o: %.c ../includes/libl.h ../includes/libft.h
 	@echo "\033[31m   $<"
 	@$(CC) -o $@ $(CFLAGS) -I ../includes/ -c $<
 
