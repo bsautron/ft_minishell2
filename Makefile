@@ -28,6 +28,7 @@ SRC = main.c \
 	  ft_get_link_by_id.c \
 	  ft_print_list_char.c \
 	  ft_str_to_lstl.c \
+	  ft_putstr_spec.c \
 	  ft_lstl_to_str.c \
 	  ft_set_term.c \
 	  \

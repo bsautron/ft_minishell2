@@ -8,7 +8,7 @@ void		ft_key_down(int *pos)
 		ft_key_home(pos);
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
-		ft_putstr(ft_get_link_by_id(g_env.history, g_env.h_pos - 1)->str);
+		ft_putstr_spec(ft_get_link_by_id(g_env.history, g_env.h_pos - 1)->str);
 		g_env.cmd = ft_str_to_lstl(
 				ft_get_link_by_id(g_env.history, g_env.h_pos - 1)->str);
 		*pos = 0;

@@ -71,6 +71,7 @@ char	*ft_parser(char *cmd);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
 int		ft_outc(int c);
 void	ft_make_instruction(char *id, char *area);
+void	ft_putstr_spec(char *str);
 char	*ft_prompt(void);
 void	ft_signal_handler(int sig);
 t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id);
