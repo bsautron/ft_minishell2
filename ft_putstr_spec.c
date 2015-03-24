@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 02:26:15 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/24 02:26:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/03/24 03:51:44 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_putstr_spec(char *str)
 			ft_make_instruction("do", NULL);
 			g_env.nb_line++;
 		}
+//		usleep(100000);
 		i++;
 	}
 }
