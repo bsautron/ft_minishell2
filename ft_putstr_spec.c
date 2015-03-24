@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_spec.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/03/24 02:26:15 by bsautron          #+#    #+#             */
+/*   Updated: 2015/03/24 02:26:22 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
 void	ft_putstr_spec(char *str)
@@ -8,12 +20,7 @@ void	ft_putstr_spec(char *str)
 	while (str && str[i])
 	{
 		ft_putchar(str[i]);
-		if (g_env.nb_line == 0 && i + 1 + ft_strlen("DatPrompt> ") == g_env.win_col - 1)
-		{
-			ft_make_instruction("do", NULL);
-			g_env.nb_line++;
-		}
-		else if ((i + 1 + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
+		if ((i + 1 + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
 		{
 			ft_make_instruction("do", NULL);
 			g_env.nb_line++;
