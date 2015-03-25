@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/26 06:17:01 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/03/25 21:19:09 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char			*ft_prompt(void)
 	char	buf[8];
 	char	*the_cmd;
 	t_lstl	*tmp;
-	int		pos;
 	int		fd;
 	int		i;
 	t_key	key;
@@ -49,7 +48,7 @@ char			*ft_prompt(void)
 	ft_putstr("\033[33mDatPrompt>\033[0m ");
 	ft_init_t_key(&key);
 	ft_set_term();
-	pos = 0;
+	g_env.pos = 0;
 	g_env.cmd = NULL;
 	while (1)
 	{
@@ -68,9 +67,9 @@ char			*ft_prompt(void)
 			i++;
 		}
 		if (key.tab_key[i])
-			(key.f[i])(&pos);
+			(key.f[i])(&g_env.pos);
 		else if (ft_isprint(buf[0]))
-			ft_key_printable(buf, &pos);
+			ft_key_printable(buf, &g_env.pos);
 	}
 	the_cmd = ft_lstl_to_str(g_env.cmd);
 	ft_lstl_free(&g_env.cmd);

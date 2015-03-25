@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/26 05:13:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/03/25 21:45:26 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ struct		s_env
 	t_lstl			*list_env;
 	t_lstl			*cmd;
 	t_lstl			*cmd_saved;
-	int				nb_line;
-	int				nb_line_saved;
+	int				pos;
 	t_lstld			*history;
 	int				h_pos;
 	char			*path_h;
@@ -67,6 +66,7 @@ void	ft_setenv(t_env *env, char *str);
 char	*ft_pwd(void);
 char	*ft_get_env(char *var);
 int		ft_onlyesp(char *str);
+void	ft_move_cursor(int pos);
 char	*ft_parser(char *cmd);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
 int		ft_outc(int c);
@@ -78,6 +78,7 @@ t_lstld	*ft_get_link_by_id(t_lstld *list, size_t id);
 void	ft_print_list_char(t_lstl *cmd);
 char	*ft_lstl_to_str(t_lstl *list);
 t_lstl	*ft_str_to_lstl(char *str);
+void	ft_refresh(void);
 
 void	ft_key_printable(char *buf, int *pos);
 void	ft_key_ctrl_d(int *pos);

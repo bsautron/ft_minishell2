@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal_handler.c                                :+:      :+:    :+:   */
+/*   ft_refresh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/24 18:02:39 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 22:35:46 by bsautron         ###   ########.fr       */
+/*   Created: 2015/03/25 21:21:41 by bsautron          #+#    #+#             */
+/*   Updated: 2015/03/25 21:38:28 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include <ft_minishell.h>
 
-void	ft_signal_handler(int sig)
+void	ft_refresh(void)
 {
-	struct winsize	winsize;
+	int		no_pos;
 
-	if (sig == SIGWINCH)
+	if (g_env.cmd)
 	{
-		ioctl(0, TIOCGWINSZ, &winsize);
-		g_env.win_col = winsize.ws_col;
-		//ft_refresh();
-	}
-	if (sig == SIGINT)
-	{
-		ft_reset_term();
-		ft_putendl("ctrl + c: on verra");
-		exit(1);
+		no_pos = g_env.pos;
+		ft_key_home(&no_pos);
+		ft_make_instruction("ei", NULL);
+		ft_make_instruction("cd", NULL);
+		ft_putstr_spec(ft_lstl_to_str(g_env.cmd));
+		ft_move_cursor(g_env.pos);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/03/23 11:23:57 by bsautron         ###   ########.fr        #
+#    Updated: 2015/03/25 21:26:59 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRC = main.c \
 	  ft_parser.c \
 	  ft_signal_handler.c \
 	  ft_get_link_by_id.c \
+	  ft_move_cursor.c \
+	  ft_refresh.c \
 	  ft_print_list_char.c \
 	  ft_str_to_lstl.c \
 	  ft_putstr_spec.c \

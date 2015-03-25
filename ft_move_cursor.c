@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal_handler.c                                :+:      :+:    :+:   */
+/*   ft_move_cursor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/24 18:02:39 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 22:35:46 by bsautron         ###   ########.fr       */
+/*   Created: 2015/03/25 21:25:08 by bsautron          #+#    #+#             */
+/*   Updated: 2015/03/25 21:25:23 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include <ft_minishell.h>
 
-void	ft_signal_handler(int sig)
+void	ft_move_cursor(int pos)
 {
-	struct winsize	winsize;
+	int		i;
 
-	if (sig == SIGWINCH)
+	i = 0;
+	while (i < pos)
 	{
-		ioctl(0, TIOCGWINSZ, &winsize);
-		g_env.win_col = winsize.ws_col;
-		//ft_refresh();
-	}
-	if (sig == SIGINT)
-	{
-		ft_reset_term();
-		ft_putendl("ctrl + c: on verra");
-		exit(1);
+		ft_make_instruction("le", NULL);
+		if ((ft_lstl_len(g_env.cmd) - i + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
+		{
+			ft_make_instruction("up", NULL);
+			ft_putstr("\033[");
+			ft_putstr(ft_itoa(g_env.win_col));
+			ft_putstr("C");
+			ft_make_instruction("le", NULL);
+		}
+		i++;
 	}
 }
