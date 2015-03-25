@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 02:58:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/24 02:59:01 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/03/25 15:42:13 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 void		ft_key_up(int *pos)
 {
 	if (g_env.h_pos == 0)
-	{
-		g_env.nb_line = 0;
 		g_env.cmd_saved = g_env.cmd;
-	}
 	if (g_env.h_pos < ft_lstld_len(g_env.history))
 	{
 		ft_key_home(pos);
-		g_env.nb_line = 0;
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
 		ft_putstr_spec(ft_get_link_by_id(g_env.history, g_env.h_pos)->str);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_key_down.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/03/25 15:32:10 by bsautron          #+#    #+#             */
+/*   Updated: 2015/03/25 15:50:45 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
 void		ft_key_down(int *pos)
@@ -19,7 +31,7 @@ void		ft_key_down(int *pos)
 		g_env.cmd = g_env.cmd_saved;
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
-		ft_print_list_char(g_env.cmd);
+		ft_putstr_spec(ft_lstl_to_str(g_env.cmd));
 		*pos = 0;
 	}
 	else
