@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 12:21:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/03/23 11:25:15 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/01 01:32:47 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,25 +16,29 @@ SRC = ft_lstld_create.c \
 	  ft_lstld_free.c \
 	  ft_lstld_len.c \
 	  ft_lstld_print.c
-OBJ = $(SRC:%.c=../obj/%.o)
+OBJ = $(SRC:%.c=../.obj/%.o)
 NAME = libld.a
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME)
+all: dor $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "\033[0m"
 
-../obj/%.o: %.c ../includes/libld.h ../includes/libft.h
+dor:
+	@mkdir ../.obj 2> /dev/null || env -i
+
+../.obj/%.o: %.c ../includes/libld.h ../includes/libft.h
 	@echo "\033[31m   $<"
 	@$(CC) -o $@ $(CFLAGS) -I ../includes/ -c $<
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@rmdir ../.obj 2> /dev/null || env -i
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
