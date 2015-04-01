@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/01 01:34:32 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/01 02:23:46 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC = main.c \
 	  ft_get_env.c \
 	  ft_parser.c \
 	  ft_signal_handler.c \
-	  ft_get_link_by_id.c \
+	  ft_lstl_get_link_by_id.c \
+	  ft_lstld_get_link_by_id.c \
 	  ft_move_cursor.c \
 	  ft_refresh.c \
 	  ft_print_list_char.c \
@@ -42,7 +43,8 @@ SRC = main.c \
 	  ft_key_left.c \
 	  ft_key_printable.c \
 	  ft_key_right.c \
-	  ft_key_up.c
+	  ft_key_up.c \
+	  ft_key_alt_right.c 
 DIR_H = ./includes
 HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libft.h \
@@ -67,16 +69,16 @@ dor:
 	@mkdir .obj 2> /dev/null || env -i
 
 libs:
-	make -C libft/
-	make -C libl/
-	make -C libld/
+	@make -C libft/
+	@make -C libl/
+	@make -C libld/
 
 .obj/%.o: %.c $(HEADER)
 	@echo "\033[33m 	$<"
 	@$(CC) -o $@ -I includes/ -c $< -g
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 	@rmdir .obj 2> /dev/null || env -i
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 02:58:31 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 15:42:13 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/01 02:12:44 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void		ft_key_up(int *pos)
 		ft_key_home(pos);
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
-		ft_putstr_spec(ft_get_link_by_id(g_env.history, g_env.h_pos)->str);
+		ft_putstr_spec(ft_lstld_get_link_by_id(g_env.history, g_env.h_pos)->str);
 		g_env.cmd = ft_str_to_lstl(
-				ft_get_link_by_id(g_env.history, g_env.h_pos)->str);
+				ft_lstld_get_link_by_id(g_env.history, g_env.h_pos)->str);
 		*pos = 0;
 		g_env.h_pos++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 00:33:37 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 22:19:37 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/01 02:14:18 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		ft_key_home(int *pos)
 		}
 		ft_make_instruction("le", NULL);
 		(*pos)++;
-		usleep(100000);
 	}
 	*pos = ft_lstl_len(g_env.cmd);
 //	ft_make_instruction("im", NULL);

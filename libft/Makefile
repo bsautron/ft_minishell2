@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/25 00:45:50 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/01 01:30:47 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/01 01:36:02 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,12 +111,12 @@ dor:
 	@$(CC) -o $@ $(FLAGS) -I ../includes/ -c $<
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 	@rmdir ../.obj 2> /dev/null || env -i
 	@echo "\033[33;31m===> Suppresion des objets"
 
 fclean: clean
-	@rm -f libft.a
+	rm -f libft.a
 	@echo "\033[35;31m===> Suppression de la libft"
 
 re: fclean all
