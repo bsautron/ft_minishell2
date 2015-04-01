@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/01 02:23:46 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/01 02:43:39 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ SRC = main.c \
 	  ft_key_printable.c \
 	  ft_key_right.c \
 	  ft_key_up.c \
-	  ft_key_alt_right.c 
+	  ft_key_alt_right.c \
+	  ft_key_alt_left.c 
 DIR_H = ./includes
 HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libft.h \

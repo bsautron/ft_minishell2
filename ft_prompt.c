@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/01 02:18:42 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/01 02:44:18 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void		ft_init_t_key(t_key *key)
 	key->f[7] = ft_key_end;
 	key->f[8] = ft_key_home;
 	key->f[9] = ft_key_alt_right;
-	key->f[10] = NULL;
+	key->f[10] = ft_key_alt_left;
+	key->f[11] = NULL;
 }
 
 char			*ft_prompt(void)
