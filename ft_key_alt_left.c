@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 02:37:17 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/01 02:57:24 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/03 00:52:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,12 @@ static void	ft_uup(int *pos)
 
 void	ft_key_alt_left(int *pos)
 {
-	if (*pos == 0 && ft_lstl_len(g_env.cmd))
-	{
-		ft_make_instruction("le", NULL);
-		ft_uup(pos);
-		(*pos)++;
-	}
-	while (*pos < ft_lstl_len(g_env.cmd) && ft_lstl_get_link_by_id(g_env.cmd, *pos - 1)->str[0] == ' ')
+	while (*pos < ft_lstl_len(g_env.cmd) && ft_lstl_get_link_by_id(g_env.cmd, *pos)->str[0] == ' ')
 	{
 		ft_uup(pos);
 		(*pos)++;
 	}
-	while (*pos < ft_lstl_len(g_env.cmd) && ft_lstl_get_link_by_id(g_env.cmd, *pos - 1)->str[0] != ' ')
+	while (*pos < ft_lstl_len(g_env.cmd) && ft_lstl_get_link_by_id(g_env.cmd, *pos)->str[0] != ' ')
 	{
 		ft_uup(pos);
 		(*pos)++;
