@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/03 03:54:17 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/03 05:56:56 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char			*ft_prompt(void)
 	{
 		ft_bzero(buf, 8);
 		read(0, &buf, 7);
-//dprintf(1, "\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
+//dprintf(1, "key = \\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
 		if (buf[0] == '\n')
 		{
 			g_env.h_pos = 0;
@@ -77,8 +77,10 @@ char			*ft_prompt(void)
 		}
 		if (key.tab_key[i])
 			(key.f[i])(&g_env.pos);
-		else if (ft_isprint(buf[0]))
+		else if (ft_isprint(buf[0]) && !buf[1])
 			ft_key_printable(buf, &g_env.pos);
+		else if (ft_isprint(buf[0]))
+			ft_putstr(buf);
 	}
 	the_cmd = ft_lstl_to_str(g_env.cmd);
 	ft_lstl_free(&g_env.cmd);
