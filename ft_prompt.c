@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/03 02:56:38 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/03 03:54:17 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void		ft_init_t_key(t_key *key)
 	key->f[9] = ft_key_alt_right;
 	key->f[10] = ft_key_alt_left;
 	key->f[11] = ft_key_alt_up;
-	key->f[12] = NULL;
+	key->f[12] = ft_key_alt_down;
+	key->f[13] = NULL;
 }
 
 char			*ft_prompt(void)
@@ -90,6 +91,7 @@ char			*ft_prompt(void)
 		}
 		ft_lstld_add(&g_env.history, the_cmd);
 	}
+	// A la fin il faut move le cursor a la fin de la commande pour ne pas empieter sur la suite
 	return (the_cmd);
 }
 
