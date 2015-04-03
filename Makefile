@@ -6,14 +6,13 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/01 02:43:39 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/03 02:59:17 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 NAME = ft_minishell2
 SRC = main.c \
-	  ft_key_ctrl_d.c \
 	  ft_prompt.c \
 	  ft_outc.c \
 	  ft_make_instruction.c \
@@ -25,9 +24,9 @@ SRC = main.c \
 	  ft_get_env.c \
 	  ft_parser.c \
 	  ft_signal_handler.c \
+	  ft_move_cursor.c \
 	  ft_lstl_get_link_by_id.c \
 	  ft_lstld_get_link_by_id.c \
-	  ft_move_cursor.c \
 	  ft_refresh.c \
 	  ft_print_list_char.c \
 	  ft_str_to_lstl.c \
@@ -35,6 +34,7 @@ SRC = main.c \
 	  ft_lstl_to_str.c \
 	  ft_set_term.c \
 	  \
+	  ft_key_ctrl_d.c \
 	  ft_key_back_space.c \
 	  ft_key_delete.c \
 	  ft_key_down.c \
@@ -45,7 +45,8 @@ SRC = main.c \
 	  ft_key_right.c \
 	  ft_key_up.c \
 	  ft_key_alt_right.c \
-	  ft_key_alt_left.c 
+	  ft_key_alt_left.c \
+	  ft_key_alt_up.c
 DIR_H = ./includes
 HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libft.h \

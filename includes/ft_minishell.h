@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/01 02:43:11 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/03 02:59:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void	ft_key_right(int *pos);
 void	ft_key_up(int *pos);
 void	ft_key_alt_right(int *pos);
 void	ft_key_alt_left(int *pos);
+void	ft_key_alt_up(int *pos);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 07:37:44 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 21:42:58 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/03 02:42:47 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include <ft_minishell.h>
 
 void		ft_key_right(int *pos)
 {
