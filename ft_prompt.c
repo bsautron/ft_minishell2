@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/03 05:56:56 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/03 06:15:12 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char			*ft_prompt(void)
 		else if (ft_isprint(buf[0]) && !buf[1])
 			ft_key_printable(buf, &g_env.pos);
 		else if (ft_isprint(buf[0]))
-			ft_putstr(buf);
+			ft_key_ctrl_v(buf, &g_env.pos);
 	}
 	the_cmd = ft_lstl_to_str(g_env.cmd);
 	ft_lstl_free(&g_env.cmd);

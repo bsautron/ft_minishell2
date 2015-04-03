@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/03 05:57:42 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/03 06:03:56 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = main.c \
 	  ft_set_term.c \
 	  \
 	  ft_key_ctrl_d.c \
+	  ft_key_ctrl_v.c \
 	  ft_key_back_space.c \
 	  ft_key_delete.c \
 	  ft_key_down.c \
