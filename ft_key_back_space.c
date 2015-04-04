@@ -15,6 +15,7 @@
 void		ft_key_back_space(int *pos)
 {
 	int		no_pos;
+	char	*tmp;
 
 	g_env.h_pos = 0;
 	if (*pos == 0 && ft_lstl_len(g_env.cmd))
@@ -37,7 +38,9 @@ void		ft_key_back_space(int *pos)
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
 		ft_lstl_delone_by_id(&g_env.cmd, *pos);
-		ft_putstr_spec(ft_lstl_to_str(g_env.cmd));
+		tmp = ft_lstl_to_str(g_env.cmd);
+		ft_putstr_spec(tmp);
+		free(tmp);
 		ft_move_cursor(*pos);
 	}
 }

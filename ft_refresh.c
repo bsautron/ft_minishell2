@@ -15,6 +15,7 @@
 void	ft_refresh(void)
 {
 	int		no_pos;
+	char	*tmp;
 
 	if (g_env.cmd)
 	{
@@ -22,7 +23,9 @@ void	ft_refresh(void)
 		ft_key_home(&no_pos);
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
-		ft_putstr_spec(ft_lstl_to_str(g_env.cmd));
+		tmp = ft_lstl_to_str(g_env.cmd);
+		ft_putstr_spec(tmp);
+		free(tmp);
 		ft_move_cursor(g_env.pos);
 	}
 }

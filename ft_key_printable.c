@@ -15,6 +15,7 @@
 void		ft_key_printable(char *buf, int *pos)
 {
 	int		no_pos;
+	char	*tmp;
 
 	g_env.h_pos = 0;
 	ft_lstl_insert(&g_env.cmd, buf, *pos);
@@ -39,7 +40,9 @@ void		ft_key_printable(char *buf, int *pos)
 			ft_make_instruction("nd", NULL);
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
-		ft_putstr_spec(ft_lstl_to_str(g_env.cmd));
+		tmp = ft_lstl_to_str(g_env.cmd);
+		ft_putstr_spec(tmp);
+		free(tmp);
 		ft_move_cursor(*pos);
 	}
 }
