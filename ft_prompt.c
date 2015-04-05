@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/05 06:55:06 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 12:18:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char			*ft_prompt(void)
 	{
 		ft_bzero(buf, 8);
 		read(0, &buf, 7);
-		//dprintf(1, "key = \\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
+		dprintf(1, "key = \\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
 		if (buf[0] == '\n')
 		{
 			g_env.h_pos = 0;

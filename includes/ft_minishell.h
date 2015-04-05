@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/05 06:46:05 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 12:34:59 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 # define KEY_ALT_DOWN	"\x1b\x1b\x5b\x42\0\0\0"
 # define KEY_ALT_RIGHT	"\x1b\x1b\x5b\x43\0\0\0"
 # define KEY_ALT_LEFT	"\x1b\x1b\x5b\x44\0\0\0"
+# define KEY_CTRL_B		"\x2\0\0\0\0\0\0"			//copier avant le curseur
+# define KEY_CTRL_N		"\xe\0\0\0\0\0\0"			//copier apres le curseur
+# define KEY_CTRL_B1	"\x1b\0\0\0\0\0\0"			//couper avant le curseur
+# define KEY_CTRL_B2	"\x1d\0\0\0\0\0\0"			//couper apres le curseur
+# define KEY_CTRL_W		"\x18\0\0\0\0\0\0"			//couper un mot
+
 
 # define HISTORY_FILE	"/.ft_minishell_history"
 # define HISTORY_LIMITS	10000
