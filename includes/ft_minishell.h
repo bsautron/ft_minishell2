@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/05 06:23:42 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:46:05 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_move_cursor(int pos);
 char	*ft_parser(char *cmd);
 char	*ft_replace(char *src, char *str1, char *str2, int pos);
 int		ft_outc(int c);
+char	*ft_get_dirname(void);
 void	ft_make_instruction(char *id, char *area);
 void	ft_putstr_spec(char *str);
 char	*ft_prompt(void);

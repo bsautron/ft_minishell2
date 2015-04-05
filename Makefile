@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/03 06:03:56 by bsautron         ###   ########.fr        #
+#    Updated: 2015/04/05 06:45:13 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = main.c \
 	  ft_lstl_get_link_by_id.c \
 	  ft_lstld_get_link_by_id.c \
 	  ft_refresh.c \
+	  ft_get_dirname.c \
 	  ft_print_list_char.c \
 	  ft_str_to_lstl.c \
 	  ft_putstr_spec.c \

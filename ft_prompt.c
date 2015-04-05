@@ -6,11 +6,29 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/05 06:25:30 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:55:06 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
+
+static void ft_prompt2(void)
+{
+	char	*dirname;
+
+	dirname = ft_get_dirname();
+	g_env.prompt = ft_strjoin(dirname, " ");
+	if (g_env.ret == 0)
+		ft_putstr("\033[1;30;47m");
+	else
+	{
+		ft_putstr("\x1b[31m");
+		ft_putstr("\033[1;31;47m");
+	}
+	ft_putstr(g_env.prompt);
+	ft_putstr("\033[0m\033[1D ");
+	free(dirname);
+}
 
 static void		ft_init_t_key(t_key *key)
 {
@@ -53,10 +71,7 @@ char			*ft_prompt(void)
 	int		i;
 	t_key	key;
 
-	g_env.prompt = ft_strdup("Yow> ");
-	ft_putstr("\033[33m");
-	ft_putstr(g_env.prompt);
-	ft_putstr("\033[0m");
+	ft_prompt2();
 	ft_init_t_key(&key);
 	ft_set_term();
 	g_env.pos = 0;
@@ -65,7 +80,7 @@ char			*ft_prompt(void)
 	{
 		ft_bzero(buf, 8);
 		read(0, &buf, 7);
-//dprintf(1, "key = \\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
+		//dprintf(1, "key = \\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\\%#x\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
 		if (buf[0] == '\n')
 		{
 			g_env.h_pos = 0;
