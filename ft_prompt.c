@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/03 06:37:56 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:25:30 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ char			*ft_prompt(void)
 	int		i;
 	t_key	key;
 
-	ft_putstr("\033[33mDatPrompt>\033[0m ");
+	g_env.prompt = ft_strdup("Yow> ");
+	ft_putstr("\033[33m");
+	ft_putstr(g_env.prompt);
+	ft_putstr("\033[0m");
 	ft_init_t_key(&key);
 	ft_set_term();
 	g_env.pos = 0;

@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 02:37:17 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/03 00:52:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:27:13 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_uup(int *pos)
 {
-	if ((ft_lstl_len(g_env.cmd) - *pos + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
+	if ((ft_lstl_len(g_env.cmd) - *pos + ft_strlen(g_env.prompt)) % (g_env.win_col - 1) == 0)
 	{
 		ft_make_instruction("up", NULL);
 		ft_putstr("\033[");

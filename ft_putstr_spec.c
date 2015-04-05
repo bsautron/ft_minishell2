@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 02:26:15 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 15:51:15 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:31:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_putstr_spec(char *str)
 	while (str && str[i])
 	{
 		ft_putchar(str[i]);
-		if ((i + 1 + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
+		if ((i + 1 + ft_strlen(g_env.prompt)) % (g_env.win_col - 1) == 0)
 			ft_make_instruction("do", NULL);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/24 00:34:54 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 21:28:10 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:28:24 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_key_back_space(int *pos)
 	g_env.h_pos = 0;
 	if (*pos == 0 && ft_lstl_len(g_env.cmd))
 	{
-		if ((ft_lstl_len(g_env.cmd) - *pos + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
+		if ((ft_lstl_len(g_env.cmd) - *pos + ft_strlen(g_env.prompt)) % (g_env.win_col - 1) == 0)
 		{
 			ft_make_instruction("up", NULL);
 			ft_putstr("\033[");

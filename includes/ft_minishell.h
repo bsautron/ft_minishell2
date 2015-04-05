@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/03 06:03:30 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:23:42 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct		s_env
 	t_lstl			*list_env;
 	t_lstl			*cmd;
 	t_lstl			*cmd_saved;
+	char			*prompt;
 	int				pos;
 	t_lstld			*history;
 	int				h_pos;

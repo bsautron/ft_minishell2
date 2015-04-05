@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/25 21:25:08 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 21:25:23 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/04/05 06:31:01 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_move_cursor(int pos)
 	while (i < pos)
 	{
 		ft_make_instruction("le", NULL);
-		if ((ft_lstl_len(g_env.cmd) - i + ft_strlen("DatPrompt> ")) % (g_env.win_col - 1) == 0)
+		if ((ft_lstl_len(g_env.cmd) - i + ft_strlen(g_env.prompt)) % (g_env.win_col - 1) == 0)
 		{
 			ft_make_instruction("up", NULL);
 			ft_putstr("\033[");
