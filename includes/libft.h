@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 17:26:05 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/04 22:35:53 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/09 23:53:38 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim_white_space(char const *s);
 char			**ft_strsplit(char const *s, char c);
+void			ft_putstr_tab(char **tab);
 int				ft_atoi(const char *str);
 char			*ft_itoa(int n);
 size_t			ft_intlen(int n);

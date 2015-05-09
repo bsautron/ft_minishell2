@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/25 00:45:50 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/01 01:36:02 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/09 23:52:54 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC = ft_memset.c \
 	  ft_putstr_fd.c \
 	  ft_putendl_fd.c \
 	  ft_putnbr_fd.c \
+	  ft_putstr_tab.c \
 	  \
 	  ft_strlen.c \
 	  ft_strlen_esp.c \

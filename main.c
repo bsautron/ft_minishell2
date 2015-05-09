@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/26 05:25:44 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/10 00:03:56 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int				main(int argc, char **argv, char **env)
 	char	*cmd;
 	char	*home;
 
+
 	ft_bzero(&g_env, sizeof(t_env));
 	ft_signal_handler(SIGWINCH);
 	ft_attrape_moi_si_tu_peux();
@@ -75,7 +76,10 @@ int				main(int argc, char **argv, char **env)
 		ft_putstr(cmd);
 		ft_putchar('\n');
 		if (ft_strequ(cmd, "env"))
+		{
 			ft_lstl_print(g_env.list_env);
+			ft_putchar('\n');
+		}
 		free(cmd);
 	}
 	ft_reset_term();
