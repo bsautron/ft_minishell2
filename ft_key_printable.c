@@ -19,6 +19,7 @@ void		ft_key_printable(char *buf, int *pos)
 
 	g_env.h_pos = 0;
 	ft_lstl_insert(&g_env.cmd, buf, *pos);
+	ft_lstl_insert(&g_env.cmd_returned, buf, *pos);
 	if (*pos == 0)
 	{
 		ft_putchar(buf[0]);

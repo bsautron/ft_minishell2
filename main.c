@@ -70,7 +70,7 @@ int				main(int argc, char **argv, char **env)
 	ft_get_history();
 	while (1)
 	{
-		cmd = ft_prompt();
+		cmd = ft_get_cmd();
 		//cmd = ft_parser(cmd, &tenv);
 		ft_putstr("\ncmd = ");
 		ft_putstr(cmd);

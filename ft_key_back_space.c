@@ -30,6 +30,7 @@ void		ft_key_back_space(int *pos)
 		ft_make_instruction("le", NULL);
 		ft_make_instruction("dc", NULL);
 		ft_lstl_delone_by_id(&g_env.cmd, *pos);
+		ft_lstl_delone_by_id(&g_env.cmd_returned, *pos);
 	}
 	else if (ft_lstl_len(g_env.cmd) - *pos > 0)
 	{
@@ -38,6 +39,7 @@ void		ft_key_back_space(int *pos)
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
 		ft_lstl_delone_by_id(&g_env.cmd, *pos);
+		ft_lstl_delone_by_id(&g_env.cmd_returned, *pos);
 		tmp = ft_lstl_to_str(g_env.cmd);
 		ft_putstr_spec(tmp);
 		free(tmp);

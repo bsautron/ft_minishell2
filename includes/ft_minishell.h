@@ -59,6 +59,7 @@ struct		s_env
 	char			*name_term;
 	t_lstl			*list_env;
 	t_lstl			*cmd;
+	t_lstl			*cmd_returned;
 	t_lstl			*cmd_saved;
 	char			*prompt;
 	int				pos;
@@ -84,7 +85,7 @@ int		ft_outc(int c);
 char	*ft_get_dirname(void);
 void	ft_make_instruction(char *id, char *area);
 void	ft_putstr_spec(char *str);
-char	*ft_prompt(void);
+char	*ft_get_cmd(void);
 void	ft_signal_handler(int sig);
 t_lstl	*ft_lstl_get_link_by_id(t_lstl *list, size_t id);
 t_lstld	*ft_lstld_get_link_by_id(t_lstld *list, size_t id);

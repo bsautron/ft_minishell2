@@ -25,12 +25,15 @@ void		ft_key_down(int *pos)
 		ft_putstr_spec(ft_lstld_get_link_by_id(g_env.history, g_env.h_pos - 1)->str);
 		g_env.cmd = ft_str_to_lstl(
 				ft_lstld_get_link_by_id(g_env.history, g_env.h_pos - 1)->str);
+		g_env.cmd_returned = ft_str_to_lstl(
+				ft_lstld_get_link_by_id(g_env.history, g_env.h_pos - 1)->str);
 		*pos = 0;
 	}
 	else if (g_env.h_pos == 0)
 	{
 		ft_key_home(pos);
 		g_env.cmd = g_env.cmd_saved;
+		g_env.cmd_returned = g_env.cmd_saved;
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);
 		tmp = ft_lstl_to_str(g_env.cmd);

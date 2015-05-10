@@ -13,7 +13,7 @@
 CC = gcc
 NAME = ft_minishell2
 SRC = main.c \
-	  ft_prompt.c \
+	  ft_get_cmd.c \
 	  ft_outc.c \
 	  ft_make_instruction.c \
 	  ft_onlyesp.c \

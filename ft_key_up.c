@@ -24,6 +24,8 @@ void		ft_key_up(int *pos)
 		ft_putstr_spec(ft_lstld_get_link_by_id(g_env.history, g_env.h_pos)->str);
 		g_env.cmd = ft_str_to_lstl(
 				ft_lstld_get_link_by_id(g_env.history, g_env.h_pos)->str);
+		g_env.cmd_returned = ft_str_to_lstl(
+				ft_lstld_get_link_by_id(g_env.history, g_env.h_pos)->str);
 		*pos = 0;
 		g_env.h_pos++;
 	}

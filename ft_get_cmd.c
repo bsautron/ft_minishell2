@@ -18,7 +18,7 @@ static void ft_prompt2(void)
 
 	dirname = ft_get_dirname();
 	g_env.prompt = ft_strjoin(dirname, " ");
-	if (g_env.ret == 0)
+	/*if (g_env.ret == 0)
 		ft_putstr("\033[1;30;47m");
 	else
 	{
@@ -26,7 +26,7 @@ static void ft_prompt2(void)
 		ft_putstr("\033[1;31;47m");
 	}
 	ft_putstr(g_env.prompt);
-	ft_putstr("\033[0m\033[1D ");
+	ft_putstr("\033[0m\033[1D ");*/
 	free(dirname);
 }
 
@@ -62,20 +62,15 @@ static void		ft_init_t_key(t_key *key)
 	key->f[13] = NULL;
 }
 
-char			*ft_prompt(void)
+static void		ft_prompt(t_key key)
 {
 	char	buf[8];
-	char	*the_cmd;
 	t_lstl	*tmp;
-	int		fd;
 	int		i;
-	t_key	key;
 
-	ft_prompt2();
-	ft_init_t_key(&key);
-	ft_set_term();
 	g_env.pos = 0;
 	g_env.cmd = NULL;
+	ft_set_term();
 	while (1)
 	{
 		ft_bzero(buf, 8);
@@ -100,8 +95,50 @@ char			*ft_prompt(void)
 		else if (ft_isprint(buf[0]))
 			ft_key_ctrl_v(buf, &g_env.pos);
 	}
-	the_cmd = ft_lstl_to_str(g_env.cmd);
-	ft_lstl_free(&g_env.cmd);
+	//ft_lstl_free(&g_env.cmd);
+}
+
+static int	ft_check_scope(void)
+{
+	t_lstl		*tmp;
+	int			scope_dquote;
+
+	scope_dquote = 0;
+	tmp = g_env.cmd_returned;
+	while (tmp)
+	{
+		if (tmp->str[0] == '"')
+			scope_dquote = !scope_dquote;
+		tmp = tmp->next;
+	}
+	if (scope_dquote)
+	{
+		g_env.prompt = ft_strdup("dquote> ");
+		return (1);
+	}
+	ft_prompt2();
+	return (0);
+}
+
+char	*ft_get_cmd(void)
+{
+	char	*the_cmd;
+	int		fd;
+	t_key	key;
+
+	g_env.cmd_returned = NULL;
+	ft_init_t_key(&key);
+	ft_prompt2();
+	ft_putstr(g_env.prompt);
+	ft_prompt(key);
+	while (ft_check_scope())
+	{
+		ft_putchar('\n');
+		ft_putstr(g_env.prompt);
+		ft_prompt(key);
+	}
+	the_cmd = ft_lstl_to_str(g_env.cmd_returned);
+	ft_lstl_free(&g_env.cmd_returned);
 	if (!ft_onlyesp(the_cmd))
 	{
 		if ((fd = open(g_env.path_h, O_WRONLY | O_APPEND)) != -1)
@@ -114,4 +151,3 @@ char			*ft_prompt(void)
 	// A la fin il faut move le cursor a la fin de la commande pour ne pas empieter sur la suite
 	return (the_cmd);
 }
-
