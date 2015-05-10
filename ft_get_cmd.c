@@ -16,11 +16,12 @@ static void ft_prompt2(void)
 {
 	char	*dirname;
 
-	dirname = ft_get_dirname();
-	g_env.prompt = ft_strjoin(dirname, " ");
-	/*if (g_env.ret == 0)
-		ft_putstr("\033[1;30;47m");
-	else
+	if (g_env.ret == 0)
+	{
+		dirname = ft_get_dirname();
+		g_env.prompt = ft_strjoin(ft_strjoin("\033[1;30;47m", dirname), ft_strjoin("\033[0m", " "));
+	}
+	/*else
 	{
 		ft_putstr("\x1b[31m");
 		ft_putstr("\033[1;31;47m");
