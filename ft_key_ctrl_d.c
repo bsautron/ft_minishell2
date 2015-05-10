@@ -6,6 +6,7 @@ void		ft_key_ctrl_d(int *pos)
 	{
 		ft_reset_term();
 		ft_lstl_free(&g_env.list_env);
+		ft_putchar('\n');
 		exit(0);
 	}
 	else

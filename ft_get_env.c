@@ -23,8 +23,8 @@ char	*ft_get_env(char *var)
 		g_env.list_env = g_env.list_env->next;
 	if (g_env.list_env)
 	{
-		g_env.list_env = tmp;
 		dst = ft_strchr(g_env.list_env->str, '=') + 1;
+		g_env.list_env = tmp;
 		return (dst);
 	}
 	return (NULL);
