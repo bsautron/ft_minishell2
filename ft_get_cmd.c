@@ -19,7 +19,7 @@ static void ft_prompt2(void)
 	if (g_env.ret == 0)
 	{
 		dirname = ft_get_dirname();
-		g_env.prompt = ft_strjoin(ft_strjoin("\033[1;30;47m", dirname), ft_strjoin("\033[0m", " "));
+		g_env.prompt = ft_strjoin(dirname, " ");
 	}
 	/*else
 	{

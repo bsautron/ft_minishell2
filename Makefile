@@ -66,7 +66,7 @@ LIBLD = -L./libld -lld
 
 all: dor libs $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) libft/libft.a
 	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) -lncurses -g
 	@echo "\033[32mReady!\033[0m"
 
