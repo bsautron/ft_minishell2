@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 CC = gcc
 NAME = ft_minishell2
 CFLAGS = -Wextra -Wall -Werror
@@ -92,10 +93,10 @@ libs:
 	@$(CC) $(CFLAGS) -o $@ -I includes/ -c $< -g
 
 clean:
-	rm -f $(OBJ)
-	@rmdir .obj 2> /dev/null || env -i
+	@rm -f $(OBJ)
+	@rmdir $(OBJ_DIR) 2> /dev/null || env -i
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
