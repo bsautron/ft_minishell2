@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/04/05 12:34:59 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 18:05:45 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define HISTORY_FILE	"/.ft_minishell_history"
 # define HISTORY_LIMITS	10000
 
+# define NB_KEY_SPEC	15
+
 typedef struct s_env	t_env;
 typedef struct s_key	t_key;
 typedef enum e_escope	t_escope;
@@ -61,8 +63,8 @@ enum		e_escope
 
 struct		s_key
 {
-	char	*tab_key[15];
-	void	(*f[15])(int *);
+	char	*tab_key[NB_KEY_SPEC];
+	void	(*f[NB_KEY_SPEC])(int *);
 };
 
 struct		s_env
