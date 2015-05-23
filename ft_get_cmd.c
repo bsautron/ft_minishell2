@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/09 23:33:52 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 18:25:28 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,8 @@ static int	ft_check_scope(void)
 	tmp = g_env.cmd_returned;
 	while (tmp)
 	{
-		if (tmp->str[0] == '"')
-			scope_dquote = !scope_dquote;
 		tmp = tmp->next;
 	}
-	if (scope_dquote)
-	{
-		g_env.prompt = ft_strdup("dquote> ");
-		return (1);
-	}
-	ft_prompt2();
 	return (0);
 }
 

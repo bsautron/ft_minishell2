@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:16:06 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 08:41:04 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 18:49:05 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBL_H
 
 # include "libft.h"
-
 
 typedef struct		s_lstl
 {

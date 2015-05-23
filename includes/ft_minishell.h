@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/23 18:05:45 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 18:47:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "libl.h"
 # include "libld.h"
+# include <scope.h>
 # include <sys/ioctl.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -81,7 +82,7 @@ struct		s_env
 	char			*path_h;
 	int				ret;
 	int				win_col;
-	t_lstld			*scope;
+	t_scope			*scope;
 };
 
 extern t_env			g_env;

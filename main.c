@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/23 18:06:19 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 18:49:50 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void		ft_init_env(char **env)
 	else
 		g_env.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
 	ft_get_history();
+	ft_scope_push(&g_env.scope, 0);
 }
 
 int				main(int argc, char **argv, char **env)

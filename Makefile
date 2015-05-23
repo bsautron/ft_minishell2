@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/05 06:45:13 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/23 18:51:15 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,19 +57,29 @@ SRC_KEY = ft_key_ctrl_d.c \
 		  ft_key_alt_up.c \
 		  ft_key_alt_down.c
 
-SRC = $(SRC_MAIN) $(addprefix key/, $(SRC_KEY))
+SRC_SCOPE = ft_scope_free.c \
+			ft_scope_len.c \
+			ft_scope_new.c \
+			ft_scope_print.c \
+			ft_scope_push.c
+
+SRC = $(SRC_MAIN) \
+	  $(addprefix key/, $(SRC_KEY)) \
+	  $(addprefix scope/, $(SRC_SCOPE))
 
 DIR_H = ./includes
 HEADER = $(DIR_H)/ft_minishell.h \
 		 $(DIR_H)/libft.h \
 		 $(DIR_H)/libl.h \
 		 $(DIR_H)/libld.h \
+		 $(DIR_H)/scope.h \
 		 $(DIR_H)/get_next_line.h
 
 OBJ = $(SRC:%.c=.obj/%.o)
 
 OBJ_DIR = .obj/ \
-		  .obj/key/
+		  .obj/key/ \
+		  .obj/scope/
 
 
 .PHONY: all libs clean fclean re
