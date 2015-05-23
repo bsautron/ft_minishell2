@@ -53,21 +53,26 @@ static void		ft_get_history(void)
 	}
 }
 
-int				main(int argc, char **argv, char **env)
+static void		ft_init_env(char **env)
 {
-	char	*cmd;
 	char	*home;
 
-
 	ft_bzero(&g_env, sizeof(t_env));
-	ft_signal_handler(SIGWINCH);
-	ft_attrape_moi_si_tu_peux();
 	g_env.list_env = ft_get_var_env(env);
 	if ((home = ft_get_env("HOME=")) != NULL)
 		g_env.path_h = ft_strjoin(home, HISTORY_FILE);
 	else
 		g_env.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
 	ft_get_history();
+}
+
+int				main(int argc, char **argv, char **env)
+{
+	char	*cmd;
+
+	ft_signal_handler(SIGWINCH);
+	ft_attrape_moi_si_tu_peux();
+	ft_init_env(env);
 	while (1)
 	{
 		cmd = ft_get_cmd();

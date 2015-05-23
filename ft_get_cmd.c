@@ -20,6 +20,7 @@ static void ft_prompt2(void)
 	{
 		dirname = ft_get_dirname();
 		g_env.prompt = ft_strjoin(dirname, "> ");
+		free(dirname);
 	}
 	/*else
 	{
@@ -28,7 +29,6 @@ static void ft_prompt2(void)
 	}
 	ft_putstr(g_env.prompt);
 	ft_putstr("\033[0m\033[1D ");*/
-	free(dirname);
 }
 
 static void		ft_init_t_key(t_key *key)
@@ -66,7 +66,6 @@ static void		ft_init_t_key(t_key *key)
 static void		ft_prompt(t_key key)
 {
 	char	buf[8];
-	t_lstl	*tmp;
 	int		i;
 
 	g_env.pos = 0;

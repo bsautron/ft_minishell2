@@ -23,7 +23,7 @@ typedef struct		s_lstl
 }					t_lstl;
 
 t_lstl	*ft_lstl_create(char *str);
-size_t	ft_lstl_len(t_lstl *list);
+int		ft_lstl_len(t_lstl *list);
 void	ft_lstl_add(t_lstl **begin, char *str);
 void	ft_lstl_add_back(t_lstl **begin, char *str);
 void	ft_lstl_insert(t_lstl **begin, char *str, size_t pos);

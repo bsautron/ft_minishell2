@@ -12,9 +12,9 @@
 
 #include "libl.h"
 
-size_t	ft_lstl_len(t_lstl *list)
+int		ft_lstl_len(t_lstl *list)
 {
-	size_t	len;
+	int		len;
 
 	len = 0;
 	while (list)

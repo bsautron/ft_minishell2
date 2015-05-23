@@ -41,12 +41,23 @@
 # define KEY_CTRL_B2	"\x1d\0\0\0\0\0\0"			//couper apres le curseur
 # define KEY_CTRL_W		"\x18\0\0\0\0\0\0"			//couper un mot
 
-
 # define HISTORY_FILE	"/.ft_minishell_history"
 # define HISTORY_LIMITS	10000
 
 typedef struct s_env	t_env;
 typedef struct s_key	t_key;
+typedef enum e_escope	t_escope;
+
+enum		e_escope
+{
+	SCOPE_DEFAULT,
+	SCOPE_QUOTE,
+	SCOPE_BQUOTE,
+	SCOPE_DQUOTE,
+	SCOPE_CURSH,
+	SCOPE_SUBSH,
+	SCOPE_HOOK
+};
 
 struct		s_key
 {
@@ -68,6 +79,7 @@ struct		s_env
 	char			*path_h;
 	int				ret;
 	int				win_col;
+	t_lstld			*scope;
 };
 
 extern t_env			g_env;

@@ -94,7 +94,12 @@ SRC = ft_memset.c \
 	  ft_lstmap.c \
 	  \
 	  get_next_line.c
-OBJ = $(SRC:%.c=../.obj/%.o)
+
+OBJ = $(SRC:%.c=../.obj/libft/%.o)
+
+OBJ_DIR = ../.obj/ \
+		  ../.obj/libft/
+
 NAME = libft.a
 
 all: dor $(NAME)
@@ -105,15 +110,15 @@ $(NAME): $(OBJ)
 	@echo "\033[0m"
 
 dor:
-	@mkdir ../.obj 2> /dev/null || env -i
+	@mkdir $(OBJ_DIR) 2> /dev/null || env -i
 
-../.obj/%.o: %.c ../includes/libft.h ../includes/get_next_line.h
+../.obj/libft/%.o: %.c ../includes/libft.h ../includes/get_next_line.h
 	@echo "\033[36m   $<"
 	@$(CC) -o $@ $(FLAGS) -I ../includes/ -c $<
 
 clean:
 	rm -f $(OBJ)
-	@rmdir ../.obj 2> /dev/null || env -i
+	@rmdir ../.obj/libft 2> /dev/null || env -i
 	@echo "\033[33;31m===> Suppresion des objets"
 
 fclean: clean
