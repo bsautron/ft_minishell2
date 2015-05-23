@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/23 18:47:48 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 19:03:03 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define HISTORY_LIMITS	10000
 
 # define NB_KEY_SPEC	15
+# define NB_SCOPE		7
 
 typedef struct s_env	t_env;
 typedef struct s_key	t_key;
@@ -64,8 +65,8 @@ enum		e_escope
 
 struct		s_key
 {
-	char	*tab_key[NB_KEY_SPEC];
-	void	(*f[NB_KEY_SPEC])(int *);
+	char	*tab_key[NB_KEY_SPEC + 1];
+	void	(*f[NB_KEY_SPEC + 1])(int *);
 };
 
 struct		s_env
@@ -82,6 +83,7 @@ struct		s_env
 	char			*path_h;
 	int				ret;
 	int				win_col;
+	void			(*scope_func[NB_SCOPE + 1])(char);
 	t_scope			*scope;
 };
 

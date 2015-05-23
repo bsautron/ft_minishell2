@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/23 18:25:28 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/23 19:29:08 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,11 @@ static int	ft_check_scope(void)
 	tmp = g_env.cmd_returned;
 	while (tmp)
 	{
+		(g_env.scope_func[g_env.scope->id])(tmp->str[0]);
 		tmp = tmp->next;
 	}
+	dprintf(1, "%s\n", "--");
+	ft_scope_print(g_env.scope);
 	return (0);
 }
 
