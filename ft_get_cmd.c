@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/23 19:29:08 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/24 15:30:32 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,19 @@ static void		ft_prompt(t_key key)
 	//ft_lstl_free(&g_env.cmd);
 }
 
-static int	ft_check_scope(void)
+static int	ft_check_scope(char	*str)
 {
-	t_lstl		*tmp;
+	int			i;
 	int			scope_dquote;
 
 	scope_dquote = 0;
-	tmp = g_env.cmd_returned;
-	while (tmp)
+	i = 0;
+	// il faut que je pop tout avant
+	while (str[i])
 	{
-		(g_env.scope_func[g_env.scope->id])(tmp->str[0]);
-		tmp = tmp->next;
+		(g_env.scope_func[g_env.scope->id])(str[i]);
+		dprintf(1, "%c\n", str[i]);
+		i++;
 	}
 	dprintf(1, "%s\n", "--");
 	ft_scope_print(g_env.scope);
@@ -126,7 +128,7 @@ char	*ft_get_cmd(void)
 	ft_prompt2();
 	ft_putstr(g_env.prompt);
 	ft_prompt(key);
-	while (ft_check_scope())
+	while (ft_check_scope(ft_lstl_to_str(g_env.cmd_returned)))
 	{
 		ft_putchar('\n');
 		ft_putstr(g_env.prompt);
