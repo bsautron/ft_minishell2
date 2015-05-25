@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 18:59:49 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/25 19:41:54 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,15 @@ static int	ft_check_scope(char	*str)
 
 	scope_dquote = 0;
 	i = 0;
-	// il faut que je pop tout avant
+	ft_scope_free(&g_env.scope);
+	ft_scope_push(&g_env.scope, SCOPE_DEFAULT);
+	dprintf(1, "%s\n", "\n-SCOPE-");
 	while (str[i])
 	{
 		(g_env.scope_func[g_env.scope->id])(str[i]);
-		dprintf(1, "%c\n", str[i]);
+		dprintf(1, "%c: ", str[i]);
+		ft_scope_print(g_env.scope);
+		dprintf(1, "%s\n", "");
 		i++;
 	}
 	dprintf(1, "%s\n", "--");

@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/05/25 18:57:01 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/25 19:28:09 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRC_SCOPE = ft_scope_free.c \
 			ft_scope_new.c \
 			ft_scope_print.c \
 			ft_scope_push.c \
+			ft_scope_pop.c \
 			ft_scope_default.c \
 			ft_scope_quote.c \
 			ft_scope_bquote.c \

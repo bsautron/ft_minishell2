@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/25 18:45:29 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 18:48:39 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/25 19:33:10 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	ft_scope_dquote(char c)
 {
-	(void)c;
+	if (c == '"')
+		ft_scope_pop(&g_env.scope);
+	//ft_scope_print(g_env.scope);
 }

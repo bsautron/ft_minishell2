@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 18:56:20 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/25 19:35:37 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef enum e_escope	t_escope;
 
 enum		e_escope
 {
-	SCOPE_DEFAULT,
+	SCOPE_DEFAULT = 0,
 	SCOPE_QUOTE,
 	SCOPE_BQUOTE,
 	SCOPE_DQUOTE,

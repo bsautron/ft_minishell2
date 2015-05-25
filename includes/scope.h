@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/23 18:31:26 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 18:50:30 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/25 19:28:29 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		ft_scope_len(t_scope *list);
 t_scope	*ft_scope_create(int id);
 void	ft_scope_print(t_scope *list);
 void	ft_scope_push(t_scope **begin, int id);
+void	ft_scope_pop(t_scope **begin);
 void	ft_scope_default(char c);
 void	ft_scope_quote(char c);
 void	ft_scope_bquote(char c);

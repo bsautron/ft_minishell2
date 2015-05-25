@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scope_free.c                                     :+:      :+:    :+:   */
+/*   ft_scope_pop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/25 08:38:03 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 19:17:48 by bsautron         ###   ########.fr       */
+/*   Created: 2015/05/25 19:19:44 by bsautron          #+#    #+#             */
+/*   Updated: 2015/05/25 19:26:55 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <scope.h>
+#include <ft_minishell.h>
 
-void	ft_scope_free(t_scope **begin)
+void	ft_scope_pop(t_scope **begin)
 {
-	t_scope	*tmp;
-	t_scope	*save;
+	void	*tmp;
 
-	tmp = *begin;
-	while (tmp)
+	if (begin && *begin)
 	{
-		save = tmp;
-		tmp = tmp->next;
-		free(save);
-		save = NULL;
+		tmp = *begin;
+		*begin = (*begin)->next;
+		free(tmp);
 	}
-	*begin = NULL;
 }
