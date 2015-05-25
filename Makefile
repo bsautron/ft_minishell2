@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/05/25 18:51:51 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/25 18:57:01 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,8 @@ SRC_SCOPE = ft_scope_free.c \
 			ft_scope_bquote.c \
 			ft_scope_cursh.c \
 			ft_scope_dquote.c \
-			ft_scope_subsh.c
+			ft_scope_subsh.c \
+			ft_scope_hook.c
 
 SRC = $(SRC_MAIN) \
 	  $(addprefix key/, $(SRC_KEY)) \

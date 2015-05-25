@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:56:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/23 19:02:59 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/25 18:56:21 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ static void		ft_init_env(char **env)
 	ft_get_history();
 	ft_scope_push(&g_env.scope, 0);
 	g_env.scope_func[0] = ft_scope_default;
+	g_env.scope_func[1] = ft_scope_quote;
+	g_env.scope_func[2] = ft_scope_dquote;
+	g_env.scope_func[3] = ft_scope_bquote;
+	g_env.scope_func[4] = ft_scope_cursh;
+	g_env.scope_func[5] = ft_scope_subsh;
+	g_env.scope_func[6] = ft_scope_hook;
+	g_env.scope_func[7] = 0;
 }
 
 int				main(int argc, char **argv, char **env)
