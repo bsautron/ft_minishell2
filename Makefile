@@ -6,10 +6,9 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/05/23 19:04:36 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/25 18:51:51 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 CC = gcc
 NAME = ft_minishell2
@@ -62,7 +61,12 @@ SRC_SCOPE = ft_scope_free.c \
 			ft_scope_new.c \
 			ft_scope_print.c \
 			ft_scope_push.c \
-			ft_scope_default.c
+			ft_scope_default.c \
+			ft_scope_quote.c \
+			ft_scope_bquote.c \
+			ft_scope_cursh.c \
+			ft_scope_dquote.c \
+			ft_scope_subsh.c
 
 SRC = $(SRC_MAIN) \
 	  $(addprefix key/, $(SRC_KEY)) \
