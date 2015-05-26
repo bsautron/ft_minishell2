@@ -16,5 +16,6 @@ void	ft_scope_dquote(char c)
 {
 	if (c == '"')
 		ft_scope_pop(&g_env.scope);
-	//ft_scope_print(g_env.scope);
+	if (c == '`')
+		ft_scope_push(&g_env.scope, SCOPE_BQUOTE);
 }

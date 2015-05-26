@@ -14,5 +14,16 @@
 
 void	ft_scope_subsh(char c)
 {
-	(void)c;
+	if (c == ')')
+		ft_scope_pop(&g_env.scope);
+	if (c == '(')
+		ft_scope_push(&g_env.scope, SCOPE_SUBSH);
+	if (c == '"')
+		ft_scope_push(&g_env.scope, SCOPE_DQUOTE);
+	if (c == '\'')
+		ft_scope_push(&g_env.scope, SCOPE_QUOTE);
+	if (c == '`')
+		ft_scope_push(&g_env.scope, SCOPE_BQUOTE);
+	if (c == '{')
+		ft_scope_push(&g_env.scope, SCOPE_CURSH);
 }

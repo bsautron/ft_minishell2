@@ -14,5 +14,6 @@
 
 void	ft_scope_bquote(char c)
 {
-	(void)c;
+	if (c == '`')
+		ft_scope_pop(&g_env.scope);
 }
