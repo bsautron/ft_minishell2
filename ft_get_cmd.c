@@ -15,8 +15,34 @@
 static void ft_prompt2(void)
 {
 	char	*dirname;
+	t_scope	*tmp;
 
-	if (g_env.ret == 0)
+	if (ft_scope_len(g_env.scope) > 1)
+	{
+		tmp = g_env.scope;
+		free(g_env.prompt);
+		g_env.prompt = ft_strdup("");
+		while (tmp)
+		{
+			if (tmp->id > 0)
+				g_env.prompt = ft_strjoin(" ", g_env.prompt);
+			if (tmp->id == SCOPE_DQUOTE)
+				g_env.prompt = ft_strjoin("dquote", g_env.prompt);
+			if (tmp->id == SCOPE_BQUOTE)
+				g_env.prompt = ft_strjoin("bquote", g_env.prompt);
+			if (tmp->id == SCOPE_QUOTE)
+				g_env.prompt = ft_strjoin("quote", g_env.prompt);
+			if (tmp->id == SCOPE_CURSH)
+				g_env.prompt = ft_strjoin("cursh", g_env.prompt);
+			if (tmp->id == SCOPE_SUBSH)
+				g_env.prompt = ft_strjoin("subsh", g_env.prompt);
+			tmp = tmp->next;
+		}
+		g_env.prompt[ft_strlen(g_env.prompt) - 1] = 0;
+		g_env.prompt = ft_strjoin(g_env.prompt, "> ");
+		
+	}
+	else if (g_env.ret == 0)
 	{
 		dirname = ft_get_dirname();
 		g_env.prompt = ft_strjoin(dirname, "> ");
@@ -111,13 +137,16 @@ static int	ft_check_scope(char	*str)
 	while (str[i])
 	{
 		(g_env.scope_func[g_env.scope->id])(str[i]);
-		dprintf(1, "%c: ", str[i]);
-		ft_scope_print(g_env.scope);
-		dprintf(1, "%s\n", "");
+//		dprintf(1, "%c: ", str[i]);
+//		ft_scope_print(g_env.scope);
+//		dprintf(1, "%s\n", "");
 		i++;
 	}
+	ft_prompt2();
 	dprintf(1, "%s\n", "--");
 	ft_scope_print(g_env.scope);
+	if (ft_scope_len(g_env.scope) > 1)
+		return (1);
 	return (0);
 }
 
