@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/27 19:07:36 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/27 21:06:54 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,17 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -Ofast
 
 OBJ_DIRS = ../.obj/ \
-		   ../.obj/lexer/ \
-		   ../.obj/lexer/helpers/ \
-		   ../.obj/lexer/state/ \
-		   ../.obj/lexer/state/list/ \
-		   ../.obj/lexer/token/ \
-		   ../.obj/token/ \
-		   ../.obj/lexer/state_flows/ \
-		   ../.obj/lexer/errors/ \
-		   ../.obj/parser/ \
-		   ../.obj/parser/tree/
+		   ../.obj/lexpar/ \
+		   ../.obj/lexpar/lexer/ \
+		   ../.obj/lexpar/lexer/helpers/ \
+		   ../.obj/lexpar/lexer/state/ \
+		   ../.obj/lexpar/lexer/state/list/ \
+		   ../.obj/lexpar/lexer/token/ \
+		   ../.obj/lexpar/token/ \
+		   ../.obj/lexpar/lexer/state_flows/ \
+		   ../.obj/lexpar/lexer/errors/ \
+		   ../.obj/lexpar/parser/ \
+		   ../.obj/lexpar/parser/tree/
 
 EXT_SRC		= 
 
@@ -88,7 +89,7 @@ SRC			= $(SRC_LEX)
 SRC			+= $(SRC_PAR)
 SRC			+= lex_and_parse.c
 
-OBJ			= $(SRC:%.c=../.obj/%.o)
+OBJ			= $(SRC:%.c=../.obj/lexpar/%.o)
 
 LIBFT_DIR	= ../libft/
 LIBFT_NAME	= libft.a
@@ -115,9 +116,9 @@ $(NAME): $(OBJ)
 dor:
 	@mkdir $(OBJ_DIRS) 2> /dev/null || env -i
 
-../.obj/%.o: %.c
+../.obj/lexpar/%.o: %.c
 	@echo $<
-	@$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $<;
+	$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $<;
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

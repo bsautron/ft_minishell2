@@ -6,11 +6,74 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 19:41:54 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/27 21:11:23 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include "includes/ft_minishell.h"
+
+t_env       g_env;
+
+static t_lstl   *ft_get_var_env(char **env)
+{
+    t_lstl  *lenv;
+    int     i;
+
+    i = 0;
+    lenv = NULL;
+    while (env[i])
+    {
+        ft_lstl_add_back(&lenv, env[i]);
+        i++;
+    }
+    return (lenv);
+}
+
+static void     ft_attrape_moi_si_tu_peux(void)
+{
+    signal(SIGINT, ft_signal_handler);
+    signal(SIGWINCH, ft_signal_handler);
+}
+
+static void     ft_get_history(void)
+{
+    char    *line;
+    int     fd;
+
+    line = NULL;
+    if ((fd = open(g_env.path_h, O_CREAT | O_RDONLY, 0600)) != -1)
+    {
+        while (get_next_line(fd, &line) > 0)
+        {
+            ft_lstld_add(&g_env.history, line);
+            if (line)
+                free(line);
+        }
+        close(fd);
+    }
+}
+
+static void     ft_init_env(char **env)
+{
+    char    *home;
+
+    ft_bzero(&g_env, sizeof(t_env));
+    g_env.list_env = ft_get_var_env(env);
+    if ((home = ft_get_env("HOME=")) != NULL)
+        g_env.path_h = ft_strjoin(home, HISTORY_FILE);
+    else
+        g_env.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
+    ft_get_history();
+    ft_scope_push(&g_env.scope, 0);
+    g_env.scope_func[SCOPE_DEFAULT] = ft_scope_default;
+    g_env.scope_func[SCOPE_QUOTE] = ft_scope_quote;
+    g_env.scope_func[SCOPE_DQUOTE] = ft_scope_dquote;
+    g_env.scope_func[SCOPE_BQUOTE] = ft_scope_bquote;
+    g_env.scope_func[SCOPE_CURSH] = ft_scope_cursh;
+    g_env.scope_func[SCOPE_SUBSH] = ft_scope_subsh;
+    g_env.scope_func[SCOPE_HOOK] = ft_scope_hook;
+    g_env.scope_func[NB_SCOPE] = 0;
+}
 
 static void ft_prompt2(void)
 {
@@ -150,11 +213,15 @@ static int	ft_check_scope(char	*str)
 	return (0);
 }
 
-char	*ft_get_cmd(void)
+char	*ft_get_cmd(char **env)
 {
 	char	*the_cmd;
 	int		fd;
 	t_key	key;
+
+	ft_init_env(env);
+    ft_signal_handler(SIGWINCH);
+    ft_attrape_moi_si_tu_peux();
 
 	g_env.cmd_returned = NULL;
 	ft_init_t_key(&key);
@@ -178,6 +245,7 @@ char	*ft_get_cmd(void)
 		}
 		ft_lstld_add(&g_env.history, the_cmd);
 	}
+	ft_reset_term();
 	// A la fin il faut move le cursor a la fin de la commande pour ne pas empieter sur la suite
 	return (the_cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/25 19:35:37 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/27 21:13:36 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FT_MINISHELL_H
 
 # include "libft.h"
-# include "libl.h"
-# include "libld.h"
+# include <libl.h>
+# include <libld.h>
 # include <scope.h>
 # include <sys/ioctl.h>
 # include <stdio.h>
@@ -102,7 +102,6 @@ int		ft_outc(int c);
 char	*ft_get_dirname(void);
 void	ft_make_instruction(char *id, char *area);
 void	ft_putstr_spec(char *str);
-char	*ft_get_cmd(void);
 void	ft_signal_handler(int sig);
 t_lstl	*ft_lstl_get_link_by_id(t_lstl *list, size_t id);
 t_lstld	*ft_lstld_get_link_by_id(t_lstld *list, size_t id);

@@ -6,19 +6,23 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 05:41:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/05/25 19:28:09 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/27 21:14:14 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-NAME = ft_minishell2
+NAME = getcmd.a
 CFLAGS = -Wextra -Wall -Werror
-LIB = -L./libft -lft
-LIBL = -L./libl -ll
-LIBLD = -L./libld -lld
+LIB = -L../libft -lft
+LIBL = -L../libl -ll
+LIBLD = -L../libld -lld
 
-SRC_MAIN = main.c \
-		   ft_get_cmd.c \
+OBJ_DIR = ../.obj/ \
+		  ../.obj/getcmd/ \
+		  ../.obj/getcmd/key/ \
+		  ../.obj/getcmd/scope/
+
+SRC_MAIN = ft_get_cmd.c \
 		   ft_outc.c \
 		   ft_make_instruction.c \
 		   ft_onlyesp.c \
@@ -74,40 +78,38 @@ SRC = $(SRC_MAIN) \
 	  $(addprefix key/, $(SRC_KEY)) \
 	  $(addprefix scope/, $(SRC_SCOPE))
 
-DIR_H = ./includes
-HEADER = $(DIR_H)/ft_minishell.h \
-		 $(DIR_H)/libft.h \
-		 $(DIR_H)/libl.h \
-		 $(DIR_H)/libld.h \
-		 $(DIR_H)/scope.h \
-		 $(DIR_H)/get_next_line.h
+HEADER = includes/getcmd.h \
+		 includes/ft_minishell.h \
+		 includes/scope.h \
+		 ../includes/libft.h \
+		 ../includes/libl.h \
+		 ../includes/libld.h \
+		 ../includes/get_next_line.h
 
-OBJ = $(SRC:%.c=.obj/%.o)
-
-OBJ_DIR = .obj/ \
-		  .obj/key/ \
-		  .obj/scope/
+OBJ = $(SRC:%.c=%.o)
 
 
-.PHONY: all libs clean fclean re
+.PHONY: all dor libs clean fclean re
 
 all: dor libs $(NAME)
 
-$(NAME): $(OBJ) libft/libft.a
-	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) -lncurses -g
+$(NAME): $(OBJ) ../libft/libft.a
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 	@echo "\033[32mReady!\033[0m"
 
 dor:
+	@echo $(OBJ)
 	@mkdir $(OBJ_DIR) 2> /dev/null || env -i
 
 libs:
-	@make -C libft/
-	@make -C libl/
-	@make -C libld/
+	@make -C ../libft/
+	@make -C ../libl/
+	@make -C ../libld/
 
-.obj/%.o: %.c $(HEADER)
+../.obj/getcmd/%.o: %.c $(HEADER)
 	@echo "\033[33m 	$<"
-	@$(CC) $(CFLAGS) -o $@ -I includes/ -c $< -g
+	@$(CC) $(CFLAGS) -I ../includes/ -o $@ -c $< -g
 
 clean:
 	@rm -f $(OBJ)
