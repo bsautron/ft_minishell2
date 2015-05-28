@@ -13,7 +13,7 @@
 #ifndef FT_MINISHELL_H
 # define FT_MINISHELL_H
 
-# include "libft.h"
+# include <libft.h>
 # include <libl.h>
 # include <libld.h>
 # include <scope.h>
