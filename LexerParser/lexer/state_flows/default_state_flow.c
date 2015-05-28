@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 01:17:25 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/16 13:11:27 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/22 23:58:52 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_token			*default_state_flow(char c, t_char_cat cat, t_lexer *lexer)
 		return (ignore_character(lexer));
 	else if (cat == CHAR_END)
 		return (NULL);
-	else if (cat == CHAR_ALPHA || cat == CHAR_NUM || c == '-' || c == '\\')
+	else if (cat == CHAR_ALPHA || cat == CHAR_NUM || c == '-' || c == '\\'
+		|| c == '/' || c == '.' || c == '_')
 		return (push_state_and_chain(STATE_CMD_ARG, lexer));
 	else if (c == ';')
 		return (push_to_token_and_pop(c, TK_CMD_SEPARATOR, lexer));

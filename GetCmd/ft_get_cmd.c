@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/27 21:11:23 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/28 18:55:11 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,8 @@ static int	ft_check_scope(char	*str)
 		i++;
 	}
 	ft_prompt2();
-	dprintf(1, "%s\n", "--");
 	ft_scope_print(g_env.scope);
+	dprintf(1, "%s\n", "\n-------");
 	if (ft_scope_len(g_env.scope) > 1)
 		return (1);
 	return (0);

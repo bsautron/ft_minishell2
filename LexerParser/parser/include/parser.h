@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 12:27:57 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/16 12:33:22 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/19 13:58:45 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 # define SUFIXE		2
 # define POSTFIXE	3
 
-t_btree			*parse(t_token *tk_list);
+t_btree			*parse(t_token *tk_list, int *status);
 
 #endif

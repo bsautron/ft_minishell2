@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 12:57:35 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/16 12:58:20 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/19 13:59:38 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <parser.h>
 #include <token.h>
 
-t_btree			*lex_and_parse(char *str);
-void			print_tree(t_btree *tree, int mode);
+t_btree			*lex_and_parse(char *str, int *status);
 
 #endif

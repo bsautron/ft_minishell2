@@ -32,12 +32,11 @@ OBJ = $(SRC:%.c=.obj/%.o)
 
 all: dor libs $(NAME)
 
-$(NAME): $(OBJ) libft/libft.a
+$(NAME): $(OBJ)
 	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) $(LIBCMD) $(LIBLEXPAR) -lncurses -g
 	@echo "\033[32mReady!\033[0m"
 
 dor:
-	@echo $(OBJ)
 	@mkdir $(OBJ_DIR) 2> /dev/null || env -i
 
 libs:
@@ -45,6 +44,7 @@ libs:
 	@make -C libl/
 	@make -C libld/
 	@make -C GetCmd/
+	@make -C LexerParser/
 
 .obj/%.o: %.c $(HEADER)
 	@echo "\033[33m 	$<"

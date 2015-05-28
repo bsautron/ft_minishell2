@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 00:02:22 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/16 13:14:56 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/05/22 21:48:46 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 # include "libft.h"
 # include "token.h"
+
+# define STATUS_OK 0
+# define STATUS_ERROR 1
 
 # define NB_STATE_FLOWS 7
 
@@ -61,13 +64,15 @@ struct					s_lexer
 	char				token[1024];
 	int					token_length;
 	int					depth;
+	int					status;
 	t_state				*state;
 	t_state_flow		*state_flows;
 };
 
-t_token					*lex(char *str);
+t_token					*lex(char *str, int *status);
 
 t_lexer					*init_lexer();
+void					free_lexer(t_lexer *lexer);
 t_token					*next_token(char *str, t_lexer *lexer);
 
 int						char_to_category(char c);
@@ -101,6 +106,7 @@ t_token					*e_unclosed_quote(t_lexer *lexer);
 t_token					*e_unclosed_parenthesis(t_lexer *lexer);
 
 t_state					*new_state_list(t_estate state);
+void					free_state_list(t_state *state_list);
 void					pop_state_list(t_state **state_list);
 void					push_state_list(t_state *state, t_state **state_list);
 
