@@ -7,10 +7,17 @@ LIBLD = -L./libld -lld
 LIBCMD = -L./GetCmd -lgetcmd
 LIBLEXPAR = -L./LexerParser -llexpar
 
-OBJ_DIR = ../.obj/ \
+OBJ_DIR = ../.obj/
 
 SRC_MAIN = main.c
 SRC = $(SRC_MAIN)
+
+INC_DIR = -I includes/ \
+		  -I GetCmd/ \
+		  -I LexerParser/ \
+		  -I LexerParser/lexer/include/ \
+		  -I LexerParser/parser/include/ \
+		  -I LexerParser/token/include/
 
 HEADER = includes/ft_sh.h \
 		 includes/libft.h \
@@ -38,11 +45,10 @@ libs:
 	@make -C libl/
 	@make -C libld/
 	@make -C GetCmd/
-	@make -C LexerParser/
 
-../.obj/%.o: %.c $(HEADER)
+.obj/%.o: %.c $(HEADER)
 	@echo "\033[33m 	$<"
-	@$(CC) $(CFLAGS) -I includes/ -o $@ -c $< -g
+	@$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $< -g
 
 clean:
 	@rm -f $(OBJ)

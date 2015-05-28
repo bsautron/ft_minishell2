@@ -18,5 +18,6 @@
 #include <token.h>
 
 t_btree			*lex_and_parse(char *str);
+void			print_tree(t_btree *tree, int mode);
 
 #endif
