@@ -120,7 +120,7 @@ dor:
 
 ../.obj/lexpar/%.o: %.c
 	@echo $<
-	$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $<;
+	@$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $<;
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
