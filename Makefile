@@ -1,0 +1,54 @@
+CC = gcc
+NAME = ft_minishell2
+CFLAGS = -Wextra -Wall -Werror
+LIB = -L./libft -lft
+LIBL = -L./libl -ll
+LIBLD = -L./libld -lld
+LIBCMD = -L./GetCmd -lgetcmd
+LIBLEXPAR = -L./LexerParser -llexpar
+
+OBJ_DIR = ../.obj/ \
+
+SRC_MAIN = main.c
+SRC = $(SRC_MAIN)
+
+HEADER = includes/ft_sh.h \
+		 includes/libft.h \
+		 includes/libl.h \
+		 includes/libld.h \
+		 includes/get_next_line.h
+
+OBJ = $(SRC:%.c=.obj/%.o)
+
+
+.PHONY: all dor libs clean fclean re
+
+all: dor libs $(NAME)
+
+$(NAME): $(OBJ) libft/libft.a
+	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) $(LIBCMD) $(LIBLEXPAR) -lncurses -g
+	@echo "\033[32mReady!\033[0m"
+
+dor:
+	@echo $(OBJ)
+	@mkdir $(OBJ_DIR) 2> /dev/null || env -i
+
+libs:
+	@make -C libft/
+	@make -C libl/
+	@make -C libld/
+	@make -C GetCmd/
+	@make -C LexerParser/
+
+../.obj/%.o: %.c $(HEADER)
+	@echo "\033[33m 	$<"
+	@$(CC) $(CFLAGS) -I includes/ -o $@ -c $< -g
+
+clean:
+	@rm -f $(OBJ)
+	@rmdir $(OBJ_DIR) 2> /dev/null || env -i
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all

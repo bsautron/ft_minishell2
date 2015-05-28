@@ -12,7 +12,7 @@
 
 .PHONY: all, clean, fclean, re
 
-NAME		= getcmd.a
+NAME		= libgetcmd.a
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -Ofast
