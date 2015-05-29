@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal_handler.c                                :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/24 18:02:39 by bsautron          #+#    #+#             */
-/*   Updated: 2015/03/25 22:35:46 by bsautron         ###   ########.fr       */
+/*   Created: 2014/12/25 05:51:18 by bsautron          #+#    #+#             */
+/*   Updated: 2015/05/29 12:27:58 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include "ft_sh.h"
 
-void	ft_signal_handler(int sig)
+char	*ft_pwd(void)
 {
-	struct winsize	winsize;
+	char	dir[1024];
 
-	if (sig == SIGWINCH)
-	{
-		ioctl(0, TIOCGWINSZ, &winsize);
-		g_env.win_col = winsize.ws_col;
-		//ft_refresh();
-	}
-	if (sig == SIGINT)
-	{
-		ft_reset_term();
-		ft_putendl("ctrl + c: on verra");
-		exit(1);
-	}
+	if (getcwd(dir, sizeof(dir)) != NULL)
+		return (ft_strdup(dir));
+	return (NULL);
 }

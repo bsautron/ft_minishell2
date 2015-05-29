@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 19:22:49 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/24 19:50:10 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/29 14:22:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_lstl_print(t_lstl *list)
 	{
 		ft_putstr(list->str);
 		list = list->next;
-		if (list)
-			ft_putchar('\n');
+		ft_putchar('\n');
 	}
 }

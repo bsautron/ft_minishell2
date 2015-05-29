@@ -6,11 +6,11 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/25 13:59:57 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 15:04:12 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/29 14:25:45 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include <ft_sh.h>
 
 static char	*ft_get_var(char *str)
 {
@@ -22,13 +22,13 @@ static char	*ft_get_var(char *str)
 	return (ft_strsub(str, 0, i));
 }
 
-void	ft_setenv(t_env *env, char *str)
+void	ft_setenv(t_lstl **env, char *str)
 {
 	t_lstl	*tmp;
 	char	*var;
 	size_t	i;
 
-	tmp = env->list_env;
+	tmp = *env;
 	i = 0;
 	var = ft_strjoin(ft_get_var(str), "=");
 	while (tmp && !ft_strnequ(var, tmp->str, ft_strlen(var)))
@@ -42,5 +42,5 @@ void	ft_setenv(t_env *env, char *str)
 		tmp->str = ft_strdup(str);
 	}
 	else
-		ft_lstl_add_back(&env->list_env, str);
+		ft_lstl_add_back(env, str);
 }

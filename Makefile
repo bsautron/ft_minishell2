@@ -9,7 +9,13 @@ LIBLEXPAR = -L./LexerParser -llexpar
 
 OBJ_DIR = ../.obj/
 
-SRC_MAIN = main.c
+SRC_MAIN = main.c \
+		   ft_get_var_env.c \
+		   ft_attrape_moi_si_tu_peux.c \
+		   ft_signal_handler.c \
+		   ft_setenv.c \
+		   ft_pwd.c
+
 SRC = $(SRC_MAIN)
 
 INC_DIR = -I includes/ \

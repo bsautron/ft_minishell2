@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 15:57:13 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/28 23:07:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/29 13:49:48 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_set_term(void);
 void	ft_reset_term(void);
 void	ft_setenv(t_env *env, char *str);
 char	*ft_pwd(void);
-char	*ft_get_env(char *var);
+char	*ft_get_home(char **env);
 int		ft_onlyesp(char *str);
 void	ft_move_cursor(int pos);
 char	*ft_parser(char *cmd);
