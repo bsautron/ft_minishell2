@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getcmd.h                                           :+:      :+:    :+:   */
+/*   ft_attrape_moi_si_tu_peux.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/27 19:32:35 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/29 14:02:18 by bsautron         ###   ########.fr       */
+/*   Created: 2015/05/29 11:39:29 by bsautron          #+#    #+#             */
+/*   Updated: 2015/05/29 11:41:05 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GETCMD_H
-# define GETCMD_H
+#include <ft_sh.h>
 
-char	*ft_get_cmd(char **env);
-
-#endif
-
+void	ft_attrape_moi_si_tu_peux(void)
+{
+	signal(SIGINT, ft_signal_handler);
+	signal(SIGWINCH, ft_signal_handler);
+}

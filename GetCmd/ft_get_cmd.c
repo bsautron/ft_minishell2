@@ -6,34 +6,13 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/29 11:22:31 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/29 13:50:34 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_minishell.h"
 
 t_env       g_env;
-
-static t_lstl   *ft_get_var_env(char **env)
-{
-    t_lstl  *lenv;
-    int     i;
-
-    i = 0;
-    lenv = NULL;
-    while (env[i])
-    {
-        ft_lstl_add_back(&lenv, env[i]);
-        i++;
-    }
-    return (lenv);
-}
-
-static void     ft_attrape_moi_si_tu_peux(void)
-{
-    signal(SIGINT, ft_signal_handler);
-    signal(SIGWINCH, ft_signal_handler);
-}
 
 static void     ft_get_history(void)
 {
@@ -58,11 +37,10 @@ static void     ft_init_env(char **env)
     char    *home;
 
     ft_bzero(&g_env, sizeof(t_env));
-    g_env.list_env = ft_get_var_env(env);
-    if ((home = ft_get_env("HOME=")) != NULL)
+    if ((home = ft_get_home(env)) != NULL)
         g_env.path_h = ft_strjoin(home, HISTORY_FILE);
     else
-        g_env.path_h = ft_strjoin(ft_pwd(), HISTORY_FILE);
+        g_env.path_h = ft_strjoin(".", HISTORY_FILE);
     ft_get_history();
     ft_scope_push(&g_env.scope, 0);
     g_env.scope_func[SCOPE_DEFAULT] = ft_scope_default;
@@ -213,6 +191,14 @@ static int	ft_check_scope(char	*str)
 	return (0);
 }
 
+static void	ft_get_size(void)
+{
+	struct winsize		winsize;
+
+	ioctl(0, TIOCGWINSZ, &winsize);
+	g_env.win_col = winsize.ws_col;
+}
+
 char	*ft_get_cmd(char **env)
 {
 	char	*the_cmd;
@@ -220,8 +206,7 @@ char	*ft_get_cmd(char **env)
 	t_key	key;
 
 	ft_init_env(env);
-    ft_signal_handler(SIGWINCH);
-    ft_attrape_moi_si_tu_peux();
+ 	ft_get_size();
 
 	g_env.cmd_returned = NULL;
 	ft_init_t_key(&key);

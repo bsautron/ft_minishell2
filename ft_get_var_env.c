@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_get_var_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/25 05:51:18 by bsautron          #+#    #+#             */
-/*   Updated: 2015/02/25 13:36:45 by bsautron         ###   ########.fr       */
+/*   Created: 2015/05/29 11:30:43 by bsautron          #+#    #+#             */
+/*   Updated: 2015/05/29 11:36:04 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minishell.h"
+#include <ft_sh.h>
 
-char	*ft_pwd(void)
+t_lstl   *ft_get_var_env(char **env)
 {
-	char	dir[1024];
+	t_lstl  *lenv;
+	int     i;
 
-	if (getcwd(dir, sizeof(dir)) != NULL)
-		return (ft_strdup(dir));
-	return (NULL);
+	i = 0;
+	lenv = NULL;
+	while (env[i])
+	{
+		ft_lstl_add_back(&lenv, env[i]);
+		i++;
+	}
+	return (lenv);
 }
