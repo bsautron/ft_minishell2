@@ -6,6 +6,7 @@ int		main(int ac, char **av, char **env)
 	t_lstl	*lenv;
 	char	*cmd;
 	t_btree	*tree;
+	int		status;
 
 	lenv = NULL;
 	lenv = ft_get_var_env(env);
