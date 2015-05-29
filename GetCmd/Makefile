@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/29 11:58:30 by bsautron         ###   ########.fr        #
+#    Updated: 2015/05/29 14:14:27 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,12 @@ SRC_NAME_MAIN = ft_get_cmd.c \
 				ft_move_cursor.c \
 				ft_onlyesp.c \
 				ft_outc.c \
-				ft_parser.c \
 				ft_print_list_char.c \
 				ft_putstr_spec.c \
 				ft_refresh.c \
 				ft_replace.c \
 				ft_reset_term.c \
 				ft_set_term.c \
-				ft_setenv.c \
 				ft_str_to_lstl.c
 
 SRC_NAME_KEY = ft_key_alt_down.c \

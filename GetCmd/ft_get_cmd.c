@@ -6,11 +6,11 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/29 13:50:34 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/29 14:09:38 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_minishell.h"
+#include "ft_minishell.h"
 
 t_env       g_env;
 
