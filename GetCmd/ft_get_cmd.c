@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/28 18:55:11 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/05/29 11:22:31 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ char	*ft_get_cmd(char **env)
 	}
 	the_cmd = ft_lstl_to_str(g_env.cmd_returned);
 	ft_lstl_free(&g_env.cmd_returned);
-	if (!ft_onlyesp(the_cmd))
+	if (!ft_onlyesp(the_cmd) && !ft_strequ(ft_lstld_get_link_by_id(g_env.history, 0)->str, the_cmd))
 	{
 		if ((fd = open(g_env.path_h, O_WRONLY | O_APPEND)) != -1)
 		{
