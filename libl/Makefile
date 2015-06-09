@@ -6,7 +6,7 @@
 #    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/18 12:21:35 by bsautron          #+#    #+#              #
-#    Updated: 2015/04/01 01:31:45 by bsautron         ###   ########.fr        #
+#    Updated: 2015/06/09 22:52:13 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,9 @@ $(NAME): $(OBJ)
 dor:
 	@mkdir ../.obj 2> /dev/null || env -i
 
-../.obj/%.o: %.c ../includes/libl.h ../includes/libft.h
+../.obj/%.o: %.c includes/libl.h ../libft/includes/libft.h
 	@echo "\033[31m   $<"
-	@$(CC) -o $@ $(CFLAGS) -I ../includes/ -c $<
+	@$(CC) -o $@ $(CFLAGS) -I includes/ -I ../libft/includes/ -c $<
 
 clean:
 	@rm -f $(OBJ)

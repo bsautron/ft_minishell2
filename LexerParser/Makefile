@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/28 23:03:06 by bsautron         ###   ########.fr        #
+#    Updated: 2015/06/09 23:01:09 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ EXT_SRC     =
 
 SRC_DIR_LEX = lexer/
 SRC_DIR_PAR = parser/
+SRC_DIR_TOK = token/
 
 SRC_NAME_LEX = lexer.c \
                init_lexer.c \
@@ -59,13 +60,6 @@ SRC_NAME_LEX = lexer.c \
                token/pop_token.c \
                token/push_to_token.c \
                token/clear_token.c \
-               ../token/new_token_list.c \
-               ../token/push_token_list.c \
-               ../token/push_back_token_list.c \
-               ../token/token_to_priority.c \
-               ../token/max_priority_token.c \
-               ../token/head_token_list.c \
-               ../token/free_token_list.c \
                \
                state_flows/default_state_flow.c \
                state_flows/cmd_arg_state_flow.c \
@@ -79,16 +73,25 @@ SRC_NAME_LEX = lexer.c \
                errors/e_unclosed_quote.c \
                errors/e_unclosed_parenthesis.c
 
-
+SRC_NAME_TOK = 	new_token_list.c \
+               push_token_list.c \
+               push_back_token_list.c \
+               token_to_priority.c \
+               max_priority_token.c \
+               head_token_list.c \
+               free_token_list.c \
+			   
 SRC_NAME_PAR = parser.c \
                tree/new_btree.c \
                tree/print_tree.c
 
 SRC_LEX     = $(addprefix $(SRC_DIR_LEX),$(SRC_NAME_LEX))
 SRC_PAR     = $(addprefix $(SRC_DIR_PAR), $(SRC_NAME_PAR))
+SRC_TOK     = $(addprefix $(SRC_DIR_TOK), $(SRC_NAME_TOK))
 
 SRC         = $(SRC_LEX)
 SRC         += $(SRC_PAR)
+SRC         += $(SRC_TOK)
 SRC         += lex_and_parse.c
 
 OBJ         = $(SRC:%.c=../.obj/lexpar/%.o)
@@ -98,10 +101,12 @@ LIBFT_NAME  = libft.a
 LIBFT       = $(addprefix $(LIBFT_DIR), $(LIBFT_NAME))
 
 INC_DIR     = -I . \
-              -I $(addprefix ../, includes/) \
+              -I $(addprefix ../libft/, includes/) \
               -I $(addprefix lexer/, include/) \
               -I $(addprefix lexer/, ../token/include/) \
-              -I $(addprefix parser/, include/)
+              -I $(addprefix parser/, include/) \
+              -I $(addprefix token/, include/) \
+
 
 LIBRARIES   = -L $(LIBFT_DIR) -lft
 

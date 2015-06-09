@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bsautron <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/06/09 22:38:06 by bsautron          #+#    #+#              #
+#    Updated: 2015/06/09 23:04:47 by bsautron         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 NAME = ft_minishell2
 CFLAGS = -Wextra -Wall -Werror
@@ -7,18 +19,24 @@ LIBLD = -L./libld -lld
 LIBCMD = -L./GetCmd -lgetcmd
 LIBLEXPAR = -L./LexerParser -llexpar
 
-OBJ_DIR = ../.obj/
+OBJ_DIR = .obj/ \
+		  .obj/Bultins/
 
 SRC_MAIN = main.c \
 		   ft_get_var_env.c \
 		   ft_attrape_moi_si_tu_peux.c \
 		   ft_signal_handler.c \
-		   ft_setenv.c \
-		   ft_pwd.c
 
-SRC = $(SRC_MAIN)
+SRC_BULTINS = ft_pwd.c \
+			  ft_setenv.c
+
+SRC = $(SRC_MAIN) \
+	  $(addprefix Bultins/, $(SRC_BULTINS))
 
 INC_DIR = -I includes/ \
+		  -I libft/includes \
+		  -I libl/includes \
+		  -I libld/includes \
 		  -I GetCmd/ \
 		  -I LexerParser/ \
 		  -I LexerParser/lexer/include/ \
@@ -26,13 +44,12 @@ INC_DIR = -I includes/ \
 		  -I LexerParser/token/include/
 
 HEADER = includes/ft_sh.h \
-		 includes/libft.h \
-		 includes/libl.h \
-		 includes/libld.h \
-		 includes/get_next_line.h
+		 libft/includes/libft.h \
+		 libft/includes/get_next_line.h \
+		 libl/includes/libl.h \
+		 libld/includes/libld.h
 
 OBJ = $(SRC:%.c=.obj/%.o)
-
 
 .PHONY: all dor libs clean fclean re
 

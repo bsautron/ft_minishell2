@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/05/29 14:14:27 by bsautron         ###   ########.fr        #
+#    Updated: 2015/06/09 22:49:14 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,9 @@ LIBFT		= $(addprefix $(LIBFT_DIR), $(LIBFT_NAME))
 
 INC_DIR		= -I . \
 			  -I includes/ \
-			  -I ../includes/
+			  -I ../libft/includes/ \
+			  -I ../libl/includes/ \
+			  -I ../libld/includes/
 
 LIBRARIES	= -L $(LIBFT_DIR) -lft
 

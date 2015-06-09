@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 00:02:22 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/22 21:48:46 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/06/09 22:56:44 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <stdio.h>
 # include <stdlib.h>
 
-# include "libft.h"
-# include "token.h"
+# include <libft.h>
+# include <token.h>
 
 # define STATUS_OK 0
 # define STATUS_ERROR 1
