@@ -29,7 +29,8 @@ SRC_MAIN = main.c \
 		   ft_signal_handler.c \
 		   ft_exec.c \
 		   ft_tk_to_tab.c \
-		   ft_lstl_to_tab.c
+		   ft_lstl_to_tab.c \
+		   ft_exec_tree.c
 
 SRC_BULTINS = ft_pwd.c \
 			  ft_setenv.c

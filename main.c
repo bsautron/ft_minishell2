@@ -7,7 +7,7 @@ int		main(int ac, char **av, char **env)
 	char	*cmd;
 	t_btree	*tree;
 	int		status;
-	char	**tab;
+	//char	**tab;
 
 	lenv = NULL;
 	lenv = ft_get_var_env(env);
@@ -16,7 +16,7 @@ int		main(int ac, char **av, char **env)
 		cmd = ft_get_cmd(env);
 		tree = lex_and_parse(cmd, &status);
 		ft_exec_tree(tree, lenv);
-		tab = ft_tk_to_tab(tree->tk);
+		//tab = ft_tk_to_tab(tree->tk);
 		//print_tree(tree, 3);
 		//faire des free plz
 	}
