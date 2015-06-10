@@ -14,11 +14,7 @@
 
 static int	ft_child(char *bin, char **tab, char **env)
 {
-	(void)bin;
-	(void)tab;
-	(void)env;
-	dprintf(1, "%s\n", "dans CHILD");
-	exit(0);
+	execve(bin, tab, env);
 	return (0);
 }
 

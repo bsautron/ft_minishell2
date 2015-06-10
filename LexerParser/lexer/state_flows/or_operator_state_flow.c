@@ -17,7 +17,7 @@ t_token			*or_operator_state_flow(char c, t_char_cat cat, t_lexer *lexer)
 	if (c == '|' && lexer->token_length < 2)
 		return (push_to_token(c, lexer));
 	if (lexer->token_length < 2)
-		return (e_syntax_error(lexer));
+		return (pop_state_pop_token(TK_PIPE, lexer));
 	(void)cat;
 	return (pop_state_pop_token(TK_OR_OPERATOR, lexer));
 }

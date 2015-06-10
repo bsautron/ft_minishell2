@@ -13,6 +13,7 @@
 CC = gcc
 NAME = ft_minishell2
 CFLAGS = -Wextra -Wall -Werror
+
 LIB = -L./libft -lft
 LIBL = -L./libl -ll
 LIBLD = -L./libld -lld
@@ -54,6 +55,13 @@ HEADER = includes/ft_sh.h \
 
 OBJ = $(SRC:%.c=.obj/%.o)
 
+LIBS = ./GetCmd/getcmd.a \
+	   ./GetCmd/libgetcmd.a \
+	   ./LexerParser/liblexpar.a \
+	   ./libft/libft.a \
+	   ./libl/libl.a \
+	   ./libld/libld.a
+
 .PHONY: all dor libs clean fclean re
 
 all: dor libs $(NAME)
@@ -72,7 +80,7 @@ libs:
 	@make -C GetCmd/
 	@make -C LexerParser/
 
-.obj/%.o: %.c $(HEADER)
+.obj/%.o: %.c $(HEADER) $(LIBS)
 	@echo "\033[33m 	$<"
 	@$(CC) $(CFLAGS) $(INC_DIR) -o $@ -c $< -g
 

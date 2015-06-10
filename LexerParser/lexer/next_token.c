@@ -22,6 +22,7 @@ t_token			*next_token(char *str, t_lexer *lexer)
 	while (42)
 	{
 		c = str[lexer->pos];
+		dprintf(1, "c = %c pos = %d id = %d\n", c, lexer->pos, lexer->state->id);
 		token = (*lexer->state_flows[lexer->state->id])(c, char_to_category(c),
 			lexer);
 		if (token)

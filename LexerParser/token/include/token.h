@@ -23,7 +23,8 @@ typedef enum			e_tk_type
 	TK_CMD_SEPARATOR,
 	TK_AND_OPERATOR,
 	TK_OR_OPERATOR,
-	TK_SUBCOMMAND
+	TK_SUBCOMMAND,
+	TK_PIPE
 }						t_tk_type;
 
 typedef struct			s_token
