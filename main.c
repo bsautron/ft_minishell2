@@ -15,9 +15,9 @@ int		main(int ac, char **av, char **env)
 	{
 		cmd = ft_get_cmd(env);
 		tree = lex_and_parse(cmd, &status);
+		ft_exec_tree(tree, lenv);
 		tab = ft_tk_to_tab(tree->tk);
-		print_tree(tree, 2);
-		//ft_exec(ft_strjoin("/bin/", tab[0]), tab, ft_lstl_to_tab(lenv));
+		//print_tree(tree, 3);
 		//faire des free plz
 	}
 	(void)av;
