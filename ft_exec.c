@@ -12,16 +12,25 @@
 
 #include <ft_sh.h>
 
-#define CHILD		0
-#define PARENT		!CHILD
-
+static int	ft_child(char *bin, char **tab, char **env)
+{
+	(void)bin;
+	(void)tab;
+	(void)env;
+	dprintf(1, "%s\n", "dans CHILD");
+	exit(0);
+	return (0);
+}
 
 int		ft_exec(char *bin, char **tab, char **env)
 {
 	pid_t	child;
+	int		status;
 
 	child = fork();
-	(void)bin;
-	(void)tab;
-	(void)env;
+	if (child == 0)
+		ft_child(bin, tab, env);
+	else
+		waitpid(child, &status, 0);
+	return (0);
 }
