@@ -24,9 +24,11 @@ int		ft_exec(char *bin, char **tab, char **env)
 	int		status;
 
 	child = fork();
+	if (child < 0)
+		return (-1);
 	if (child == 0)
 		ft_child(bin, tab, env);
 	else
 		waitpid(child, &status, 0);
-	return (0);
+	return (WEXITSTATUS(status));
 }

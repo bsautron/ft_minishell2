@@ -183,7 +183,6 @@ static int	ft_check_scope(char	*str)
 		i++;
 	}
 	ft_prompt2();
-	ft_scope_print(g_env.scope);
 	if (ft_scope_len(g_env.scope) > 1)
 		return (1);
 	return (0);
