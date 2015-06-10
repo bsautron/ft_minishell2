@@ -14,6 +14,7 @@ int		main(int ac, char **av, char **env)
 	while (1)
 	{
 		cmd = ft_get_cmd(env);
+		write(1, "\n", 1);
 		tree = lex_and_parse(cmd, &status);
 		ft_exec_tree(tree, lenv);
 		//tab = ft_tk_to_tab(tree->tk);

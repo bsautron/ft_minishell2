@@ -174,7 +174,6 @@ static int	ft_check_scope(char	*str)
 	i = 0;
 	ft_scope_free(&g_env.scope);
 	ft_scope_push(&g_env.scope, SCOPE_DEFAULT);
-	dprintf(1, "%s\n", "\n-SCOPE-");
 	while (str[i])
 	{
 		(g_env.scope_func[g_env.scope->id])(str[i]);
@@ -185,7 +184,6 @@ static int	ft_check_scope(char	*str)
 	}
 	ft_prompt2();
 	ft_scope_print(g_env.scope);
-	dprintf(1, "%s\n", "\n-------");
 	if (ft_scope_len(g_env.scope) > 1)
 		return (1);
 	return (0);
