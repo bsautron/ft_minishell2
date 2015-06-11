@@ -17,7 +17,9 @@ int		ft_exec_tree(t_btree *tree, t_lstl *lenv)
 		}
 		if ((ret != 0 && tree->tk->type == TK_OR_OPERATOR)
 			|| (ret == 0 && tree->tk->type == TK_AND_OPERATOR))
-			ft_exec_tree(tree->right, lenv);
+			return (ft_exec_tree(tree->right, lenv));
+		else
+			return (ret);
 	}
 	return (0);
 }
