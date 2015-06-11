@@ -56,7 +56,7 @@ void		ft_key_down(int *pos)
 	else if (g_env.h_pos == 0)
 	{
 		ft_key_home(pos);
-		g_env.cmd = g_env.cmd_saved;
+		g_env.cmd = ft_lstl_clone(g_env.cmd_saved);
 		g_env.cmd_returned = g_env.cmd_saved;
 		ft_make_instruction("ei", NULL);
 		ft_make_instruction("cd", NULL);

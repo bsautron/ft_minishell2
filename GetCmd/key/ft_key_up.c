@@ -39,7 +39,7 @@ static t_lstl	*ft_str_to_lstl_spec(char *str)
 void		ft_key_up(int *pos)
 {
 	if (g_env.h_pos == 0)
-		g_env.cmd_saved = g_env.cmd;
+		g_env.cmd_saved = ft_lstl_clone(g_env.cmd);
 	if (g_env.h_pos < ft_lstld_len(g_env.history))
 	{
 		ft_key_home(pos);

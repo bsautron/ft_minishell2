@@ -26,6 +26,7 @@ int		ft_lstl_len(t_lstl *list);
 void	ft_lstl_add(t_lstl **begin, char *str);
 void	ft_lstl_add_back(t_lstl **begin, char *str);
 void	ft_lstl_insert(t_lstl **begin, char *str, size_t pos);
+t_lstl	*ft_lstl_clone(t_lstl *list);
 void	ft_lstl_delone(t_lstl **begin, char *str, int (*f)(char const *, char const *));
 void	ft_lstl_delone_by_id(t_lstl **begin, size_t id);
 void	ft_lstl_print(t_lstl *list);

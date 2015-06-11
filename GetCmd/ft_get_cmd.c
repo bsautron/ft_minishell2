@@ -208,7 +208,9 @@ char	*ft_get_cmd(char **env)
 	g_env.cmd_returned = NULL;
 	ft_init_t_key(&key);
 	ft_prompt2();
+	ft_putstr("\033[33m");
 	ft_putstr(g_env.prompt);
+	ft_putstr("\033[0m");
 	ft_prompt(key);
 	while (ft_check_scope(ft_lstl_to_str(g_env.cmd_returned)))
 	{
