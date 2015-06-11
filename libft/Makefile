@@ -63,6 +63,7 @@ SRC = ft_memset.c \
 	  ft_strtrim_white_space.c \
 	  ft_strtrim.c \
 	  ft_strsplit.c \
+	  ft_strsplit_white_space.c \
 	  ft_atoi.c \
 	  ft_itoa.c \
 	  ft_swap.c \

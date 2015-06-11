@@ -72,6 +72,7 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim_white_space(char const *s);
 char			**ft_strsplit(char const *s, char c);
+char			**ft_strsplit_white_space(char *str);
 void			ft_putstr_tab(char **tab);
 int				ft_atoi(const char *str);
 char			*ft_itoa(int n);
