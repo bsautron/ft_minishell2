@@ -196,11 +196,21 @@ static void	ft_get_size(void)
 	g_env.win_col = winsize.ws_col;
 }
 
+static void	ft_boucle_scope(t_key key)
+{
+	while (ft_check_scope(ft_lstl_to_str(g_env.cmd_returned)))
+	{
+		ft_putchar('\n');
+		ft_putstr(g_env.prompt);
+		ft_prompt(key);
+	}
+}
+
 char	*ft_get_cmd(char **env)
 {
+	t_key	key;
 	char	*the_cmd;
 	int		fd;
-	t_key	key;
 
 	ft_init_env(env);
  	ft_get_size();
@@ -212,14 +222,8 @@ char	*ft_get_cmd(char **env)
 	ft_putstr(g_env.prompt);
 	ft_putstr("\033[0m");
 	ft_prompt(key);
-	while (ft_check_scope(ft_lstl_to_str(g_env.cmd_returned)))
-	{
-		ft_putchar('\n');
-		ft_putstr(g_env.prompt);
-		ft_prompt(key);
-	}
+	ft_boucle_scope(key);
 	the_cmd = ft_lstl_to_str(g_env.cmd_returned);
-	ft_lstl_free(&g_env.cmd_returned);
 	if (!ft_onlyesp(the_cmd) && !ft_strequ(ft_lstld_get_link_by_id(g_env.history, 0)->str, the_cmd))
 	{
 		if ((fd = open(g_env.path_h, O_WRONLY | O_APPEND)) != -1)
@@ -230,6 +234,11 @@ char	*ft_get_cmd(char **env)
 		ft_lstld_add(&g_env.history, the_cmd);
 	}
 	ft_reset_term();
+	ft_lstld_free(&g_env.history);
+	ft_lstl_free(&g_env.cmd);
+	ft_lstl_free(&g_env.cmd_saved);
+	ft_lstl_free(&g_env.cmd_returned);
+	free(g_env.prompt);
 	// A la fin il faut move le cursor a la fin de la commande pour ne pas empieter sur la suite
 	return (the_cmd);
 }

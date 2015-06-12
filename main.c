@@ -17,8 +17,9 @@ int		main(int ac, char **av, char **env)
 		write(1, "\n", 1);
 		tree = lex_and_parse(cmd, &status);
 		ft_exec_tree(tree, lenv);
-		//print_tree(tree, 3);
+		//print_tree(tree, POSTFIXE);
 		//faire des free plz
+		free(cmd);
 	}
 	(void)av;
 	(void)ac;
