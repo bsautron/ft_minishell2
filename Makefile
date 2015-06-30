@@ -56,8 +56,7 @@ HEADER = includes/ft_sh.h \
 
 OBJ = $(SRC:%.c=.obj/%.o)
 
-LIBS = ./GetCmd/getcmd.a \
-	   ./GetCmd/libgetcmd.a \
+LIBS = ./GetCmd/libgetcmd.a \
 	   ./LexerParser/liblexpar.a \
 	   ./libft/libft.a \
 	   ./libl/libl.a \
