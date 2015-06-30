@@ -6,7 +6,7 @@
 #    By: bsautron <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/09 22:38:06 by bsautron          #+#    #+#              #
-#    Updated: 2015/06/09 23:04:47 by bsautron         ###   ########.fr        #
+#    Updated: 2015/06/30 17:42:25 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,7 @@ HEADER = includes/ft_sh.h \
 
 OBJ = $(SRC:%.c=.obj/%.o)
 
-LIBS = ./GetCmd/getcmd.a \
-	   ./GetCmd/libgetcmd.a \
+LIBS = ./GetCmd/libgetcmd.a \
 	   ./LexerParser/liblexpar.a \
 	   ./libft/libft.a \
 	   ./libl/libl.a \
