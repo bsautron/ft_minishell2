@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 17:36:20 by bsautron          #+#    #+#             */
-/*   Updated: 2015/05/29 14:09:38 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/02 15:26:29 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,43 @@ t_env       g_env;
 
 static void     ft_get_history(void)
 {
-    char    *line;
-    int     fd;
+	char    *line;
+	int     fd;
 
-    line = NULL;
-    if ((fd = open(g_env.path_h, O_CREAT | O_RDONLY, 0600)) != -1)
-    {
-        while (get_next_line(fd, &line) > 0)
-        {
-            ft_lstld_add(&g_env.history, line);
-            if (line)
-                free(line);
-        }
-        close(fd);
-    }
+	line = NULL;
+	if ((fd = open(g_env.path_h, O_CREAT | O_RDONLY, 0600)) != -1)
+	{
+		while (get_next_line(fd, &line) > 0)
+		{
+			ft_lstld_add(&g_env.history, line);
+			if (line)
+				free(line);
+		}
+		if (g_env.history == 0)
+			ft_lstld_add(&g_env.history, "WELCOME TO HISTORY =D\n");
+		close(fd);
+	}
 }
 
 static void     ft_init_env(char **env)
 {
-    char    *home;
+	char    *home;
 
-    ft_bzero(&g_env, sizeof(t_env));
-    if ((home = ft_get_home(env)) != NULL)
-        g_env.path_h = ft_strjoin(home, HISTORY_FILE);
-    else
-        g_env.path_h = ft_strjoin(".", HISTORY_FILE);
-    ft_get_history();
-    ft_scope_push(&g_env.scope, 0);
-    g_env.scope_func[SCOPE_DEFAULT] = ft_scope_default;
-    g_env.scope_func[SCOPE_QUOTE] = ft_scope_quote;
-    g_env.scope_func[SCOPE_DQUOTE] = ft_scope_dquote;
-    g_env.scope_func[SCOPE_BQUOTE] = ft_scope_bquote;
-    g_env.scope_func[SCOPE_CURSH] = ft_scope_cursh;
-    g_env.scope_func[SCOPE_SUBSH] = ft_scope_subsh;
-    g_env.scope_func[SCOPE_HOOK] = ft_scope_hook;
-    g_env.scope_func[NB_SCOPE] = 0;
+	ft_bzero(&g_env, sizeof(t_env));
+	if ((home = ft_get_home(env)) != NULL)
+		g_env.path_h = ft_strjoin(home, HISTORY_FILE);
+	else
+		g_env.path_h = ft_strjoin(".", HISTORY_FILE);
+	ft_get_history();
+	ft_scope_push(&g_env.scope, 0);
+	g_env.scope_func[SCOPE_DEFAULT] = ft_scope_default;
+	g_env.scope_func[SCOPE_QUOTE] = ft_scope_quote;
+	g_env.scope_func[SCOPE_DQUOTE] = ft_scope_dquote;
+	g_env.scope_func[SCOPE_BQUOTE] = ft_scope_bquote;
+	g_env.scope_func[SCOPE_CURSH] = ft_scope_cursh;
+	g_env.scope_func[SCOPE_SUBSH] = ft_scope_subsh;
+	g_env.scope_func[SCOPE_HOOK] = ft_scope_hook;
+	g_env.scope_func[NB_SCOPE] = 0;
 }
 
 static void ft_prompt2(void)
@@ -81,7 +83,7 @@ static void ft_prompt2(void)
 		}
 		g_env.prompt[ft_strlen(g_env.prompt) - 1] = 0;
 		g_env.prompt = ft_strjoin(g_env.prompt, "> ");
-		
+
 	}
 	else if (g_env.ret == 0)
 	{
@@ -90,12 +92,12 @@ static void ft_prompt2(void)
 		free(dirname);
 	}
 	/*else
-	{
-		ft_putstr("\x1b[31m");
-		ft_putstr("\033[1;31;47m");
-	}
-	ft_putstr(g_env.prompt);
-	ft_putstr("\033[0m\033[1D ");*/
+	  {
+	  ft_putstr("\x1b[31m");
+	  ft_putstr("\033[1;31;47m");
+	  }
+	  ft_putstr(g_env.prompt);
+	  ft_putstr("\033[0m\033[1D ");*/
 }
 
 static void		ft_init_t_key(t_key *key)
@@ -177,9 +179,9 @@ static int	ft_check_scope(char	*str)
 	while (str[i])
 	{
 		(g_env.scope_func[g_env.scope->id])(str[i]);
-//		dprintf(1, "%c: ", str[i]);
-//		ft_scope_print(g_env.scope);
-//		dprintf(1, "%s\n", "");
+		//		dprintf(1, "%c: ", str[i]);
+		//		ft_scope_print(g_env.scope);
+		//		dprintf(1, "%s\n", "");
 		i++;
 	}
 	ft_prompt2();
@@ -213,7 +215,7 @@ char	*ft_get_cmd(char **env)
 	int		fd;
 
 	ft_init_env(env);
- 	ft_get_size();
+	ft_get_size();
 
 	g_env.cmd_returned = NULL;
 	ft_init_t_key(&key);
