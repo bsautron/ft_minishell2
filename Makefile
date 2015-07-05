@@ -12,7 +12,7 @@
 
 CC = gcc
 NAME = ft_minishell2
-CFLAGS = -Wextra -Wall -Werror
+#CFLAGS = -Wextra -Wall -Werror
 
 LIB = -L./libft -lft
 LIBL = -L./libl -ll
@@ -68,7 +68,7 @@ all: dor libs $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) -o $@ $^ $(LIB) $(LIBL) $(LIBLD) $(LIBCMD) $(LIBLEXPAR) -lncurses -g
-	@echo "\033[32mReady!\033[0m"
+	@echo "\033[32mReady! but no Flags\033[0m"
 
 dor:
 	@mkdir $(OBJ_DIR) 2> /dev/null || env -i

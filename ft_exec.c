@@ -56,25 +56,44 @@ int		ft_exec(t_token *tk, char **env)
 	int		i;
 	int		j;
 	int		*pipesfd;
-	char	**all_cmd;
+	t_lstl	**all_cmd;
 	char	**cmd;
 
+
 	nb_pipes = ft_count_pipe(tk);
-	pipesfd = (int *)malloc(sizeof(int) * (2 * nb_pipes + 1));
-	pipesfd[2 * nb_pipes] = 0;
+	all_cmd = (t_lstl **)malloc(sizeof(t_lstl *) * (nb_pipes + 2));
+	for (int k = 0; k < nb_pipes + 1; k++)
+	{
+		all_cmd[k] = 0;
+		for (int l = 0; tk && !ft_strequ(tk->value, "|"); l++)
+		{
+			ft_lstl_add_back(&all_cmd[k], tk->value);
+			tk = tk->next;
+		}
+		ft_lstl_print(all_cmd[k]);
+		dprintf(1, "%s\n", "--");
+		if (tk)
+			tk = tk->next;
+	}
+	all_cmd[nb_pipes + 1] = 0;
 	i_pipe = 0;
-	while (i_pipe < 2 * nb_pipes)
+	pipesfd = (int *)malloc(sizeof(int) * (2 * nb_pipes + 1));
+	while (i_pipe < nb_pipes)
 	{
 		pipe(pipesfd + 2 * i_pipe);
+		dprintf(1, "%d\n", pipesfd[2 * i_pipe]);
+		dprintf(1, "%d\n", pipesfd[2 * i_pipe + 1]);
 		i_pipe++;
 	}
-	all_cmd = ft_tk_to_tab(tk);
 	i = 0;
 	while (i < nb_pipes + 1)
 	{
 		child = fork();
 		if (child < 0)
+		{
+			dprintf(2, "%s\n", "FAIIIL");
 			return (-1);
+		}
 		if (child == 0)
 		{
 			if (i != nb_pipes)
@@ -83,21 +102,21 @@ int		ft_exec(t_token *tk, char **env)
 				dup2(pipesfd[2 * i - 2], 0);
 			j = 0;
 			while (j < nb_pipes)
-				close(pipesfd[2 * j++]);
-			cmd = ft_getcmd_pipe(all_cmd);
+				close(pipesfd[2 * j++ + 1]);
+			cmd = ft_lstl_to_tab(all_cmd[i]);
 			execve(ft_strjoin("/bin/", cmd[0]), cmd, env);
+			exit(0);
 		}
-		while (all_cmd && *all_cmd && !ft_strequ(*all_cmd, "|"))
-			all_cmd++;
-		if (all_cmd)
-			all_cmd++;
 		i++;
 	}
 	j = 0;
-	while (j < nb_pipes)
-		close(pipesfd[2 * j++]);
+	while (j < 2 * nb_pipes)
+		close(pipesfd[j++]);
 	j = 0;
-	while (j++ < nb_pipes)
+	while (j < nb_pipes + 1)
+	{
 		wait(&status);
+		j++;
+	}
 	return (WEXITSTATUS(status));
 }

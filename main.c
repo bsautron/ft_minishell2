@@ -27,6 +27,7 @@ int		main(int ac, char **av, char **env)
 	{
 		cmd = ft_get_cmd(env);
 		write(1, "\n", 1);
+		tree = 0;
 		tree = lex_and_parse(cmd, &status);
 		ft_exec_tree(tree, lenv);
 		//print_tree(tree, POSTFIXE);
