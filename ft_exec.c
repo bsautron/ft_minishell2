@@ -105,7 +105,6 @@ int		ft_exec(t_token *tk, char **env)
 				close(pipesfd[2 * j++ + 1]);
 			cmd = ft_lstl_to_tab(all_cmd[i]);
 			execve(ft_strjoin("/bin/", cmd[0]), cmd, env);
-			exit(0);
 		}
 		i++;
 	}
