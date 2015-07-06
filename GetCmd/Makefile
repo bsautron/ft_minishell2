@@ -29,7 +29,7 @@ SRC_DIR_SCOPE = scope/
 
 SRC_NAME_MAIN = ft_get_cmd.c \
 				ft_get_dirname.c \
-				ft_get_env.c \
+				ft_get_home.c \
 				ft_lstl_get_link_by_id.c \
 				ft_lstl_to_str.c \
 				ft_lstld_get_link_by_id.c \

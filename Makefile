@@ -28,6 +28,7 @@ SRC_MAIN = main.c \
 		   ft_attrape_moi_si_tu_peux.c \
 		   ft_signal_handler.c \
 		   ft_exec.c \
+		   ft_get_env.c \
 		   ft_tk_to_tab.c \
 		   ft_lstl_to_tab.c \
 		   ft_exec_tree.c

@@ -47,6 +47,29 @@ static char		**ft_getcmd_pipe(char **all_cmd)
 	return (tab);
 }
 
+static char	*ft_get_where_bin(t_lstl **cmd, char **env)
+{
+	char	**path;
+	int		i;
+	char	*tmp;
+	char	*tmp2;
+
+	path = ft_strsplit(ft_get_env(env, "PATH="), ':');
+	i = 0;
+	while (path[i])
+	{
+
+		tmp = ft_strjoin(path[i], "/");
+		tmp2 = ft_strjoin(tmp, (*cmd)->str);
+		free(tmp);
+		if (access(tmp2, X_OK) == 0)
+			return (tmp2);
+		free(tmp2);
+		i++;
+	}
+	return (0);
+}
+
 int		ft_exec(t_token *tk, char **env)
 {
 	pid_t	child = 0;
@@ -59,7 +82,6 @@ int		ft_exec(t_token *tk, char **env)
 	t_lstl	**all_cmd;
 	char	**cmd;
 
-
 	nb_pipes = ft_count_pipe(tk);
 	all_cmd = (t_lstl **)malloc(sizeof(t_lstl *) * (nb_pipes + 2));
 	for (int k = 0; k < nb_pipes + 1; k++)
@@ -68,10 +90,10 @@ int		ft_exec(t_token *tk, char **env)
 		for (int l = 0; tk && !ft_strequ(tk->value, "|"); l++)
 		{
 			ft_lstl_add_back(&all_cmd[k], tk->value);
+			if (l == 0)
+				all_cmd[k]->str = ft_get_where_bin(&all_cmd[k], env);
 			tk = tk->next;
 		}
-		ft_lstl_print(all_cmd[k]);
-		dprintf(1, "%s\n", "--");
 		if (tk)
 			tk = tk->next;
 	}
@@ -81,8 +103,6 @@ int		ft_exec(t_token *tk, char **env)
 	while (i_pipe < nb_pipes)
 	{
 		pipe(pipesfd + 2 * i_pipe);
-		dprintf(1, "%d\n", pipesfd[2 * i_pipe]);
-		dprintf(1, "%d\n", pipesfd[2 * i_pipe + 1]);
 		i_pipe++;
 	}
 	i = 0;
@@ -104,7 +124,8 @@ int		ft_exec(t_token *tk, char **env)
 			while (j < nb_pipes)
 				close(pipesfd[2 * j++ + 1]);
 			cmd = ft_lstl_to_tab(all_cmd[i]);
-			execve(ft_strjoin("/bin/", cmd[0]), cmd, env);
+			//pas avec all_cmd[0], regarde dans ps le nom
+			execve(cmd[0], cmd, env);
 		}
 		i++;
 	}
@@ -117,5 +138,6 @@ int		ft_exec(t_token *tk, char **env)
 		wait(&status);
 		j++;
 	}
+	// free all_cmd
 	return (WEXITSTATUS(status));
 }

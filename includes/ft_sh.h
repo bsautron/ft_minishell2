@@ -9,6 +9,7 @@
 # include <lexer_parser.h>
 
 t_lstl	*ft_get_var_env(char **env);
+char	*ft_get_env(char **env, char const *var);
 void	ft_attrape_moi_si_tu_peux(void);
 void	ft_signal_handler(int sig);
 char	**ft_tk_to_tab(t_token *list);
