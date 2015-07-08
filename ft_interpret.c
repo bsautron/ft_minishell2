@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/02 17:13:07 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/08 06:10:01 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char		**ft_getcmd_pipe(char **all_cmd)
 	return (tab);
 }
 
-static char	*ft_get_where_bin(t_lstl **cmd, char **env)
+static char	*ft_get_where_bin(char *cmd, char **env)
 {
 	char	**path;
 	int		i;
@@ -59,7 +59,7 @@ static char	*ft_get_where_bin(t_lstl **cmd, char **env)
 	{
 
 		tmp = ft_strjoin(path[i], "/");
-		tmp2 = ft_strjoin(tmp, (*cmd)->str);
+		tmp2 = ft_strjoin(tmp, cmd);
 		free(tmp);
 		if (access(tmp2, X_OK) == 0)
 			return (tmp2);
@@ -69,9 +69,28 @@ static char	*ft_get_where_bin(t_lstl **cmd, char **env)
 	return (0);
 }
 
+
 int		ft_interpret(t_token *tk, char **env)
 {
-	pid_t	child = 0;
+	int		l;
+	char	**cmd;
+	char	*bin;
+	t_lstl	*tmp;
+	t_cmd	*lall_cmd;
+
+	tmp = NULL;
+	lall_cmd = NULL;
+	while (tk)
+	{
+		ft_lstl_add_back(&tmp, tk->value);
+		l++;
+		tk = tk->next;
+	}
+	cmd = ft_lstl_to_tab(tmp); 
+	bin = ft_get_where_bin(cmd[0], env);
+	ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, 0));
+
+	pid_t	child;
 	int		status;
 	int		nb_pipes;
 	int		i_pipe;
@@ -79,9 +98,10 @@ int		ft_interpret(t_token *tk, char **env)
 	int		j;
 	int		*pipesfd;
 	t_lstl	**all_cmd;
-	char	**cmd;
+//	char	**cmd;
 
 	nb_pipes = ft_count_pipe(tk);
+	/*
 	all_cmd = (t_lstl **)malloc(sizeof(t_lstl *) * (nb_pipes + 2));
 	for (int k = 0; k < nb_pipes + 1; k++)
 	{
@@ -97,6 +117,7 @@ int		ft_interpret(t_token *tk, char **env)
 			tk = tk->next;
 	}
 	all_cmd[nb_pipes + 1] = 0;
+	*/
 	i_pipe = 0;
 	pipesfd = (int *)malloc(sizeof(int) * (2 * nb_pipes + 1));
 	while (i_pipe < nb_pipes)
@@ -122,10 +143,10 @@ int		ft_interpret(t_token *tk, char **env)
 			j = 0;
 			while (j < nb_pipes)
 				close(pipesfd[2 * j++ + 1]);
-			cmd = ft_lstl_to_tab(all_cmd[i]);
 			//pas avec all_cmd[0], regarde dans ps le nom
-			execve(cmd[0], cmd, env);
+			execve(lall_cmd->bin, lall_cmd->cmd, env);
 		}
+		lall_cmd = lall_cmd->next;
 		i++;
 	}
 	j = 0;
@@ -138,5 +159,6 @@ int		ft_interpret(t_token *tk, char **env)
 		j++;
 	}
 	// free all_cmd
+	// */
 	return (WEXITSTATUS(status));
 }

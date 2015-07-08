@@ -6,7 +6,7 @@
 #    By: bsautron <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/09 22:38:06 by bsautron          #+#    #+#              #
-#    Updated: 2015/06/30 17:42:25 by bsautron         ###   ########.fr        #
+#    Updated: 2015/07/08 05:56:05 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIBCMD = -L./GetCmd -lgetcmd
 LIBLEXPAR = -L./LexerParser -llexpar
 
 OBJ_DIR = .obj/ \
-		  .obj/Bultins/
+		  .obj/Bultins/ \
+		  .obj/Interpret
 
 SRC_MAIN = main.c \
 		   ft_get_var_env.c \
@@ -36,7 +37,9 @@ SRC_MAIN = main.c \
 SRC_BULTINS = ft_pwd.c \
 			  ft_setenv.c
 
-SRC_INTERPRET = \
+SRC_INTERPRET = ft_cmd_create.c \
+				ft_cmd_add.c \
+				ft_cmd_add_back.c
 
 SRC = $(SRC_MAIN) \
 	  $(addprefix Bultins/, $(SRC_BULTINS)) \
@@ -85,7 +88,6 @@ libs:
 	@make -C libld/
 	@make -C GetCmd/
 	@make -C LexerParser/
-	@make -C Interpret/
 
 .obj/%.o: %.c $(HEADER) $(LIBS)
 	@echo "\033[33m 	$<"

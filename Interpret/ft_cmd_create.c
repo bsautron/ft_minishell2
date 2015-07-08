@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmd_add.c                                       :+:      :+:    :+:   */
+/*   ft_lstl_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/08 05:07:27 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/08 06:08:06 by bsautron         ###   ########.fr       */
+/*   Created: 2015/02/25 09:04:11 by bsautron          #+#    #+#             */
+/*   Updated: 2015/07/08 06:10:24 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <interpret.h>
 
-void    ft_cmd_add(t_cmd **begin, t_cmd *cmd)
+t_cmd	*ft_cmd_create(char ***cmd, char **bin, int type)
 {
-	t_cmd  *new;
+	t_cmd	*new;
 
-	new = cmd;
-	if (!(*begin))
-		*begin = new;
-	else
-	{
-		new->next = *begin;
-		*begin = new;
-	}
+	new = (t_cmd *)malloc(sizeof(t_cmd));
+	new->cmd = *cmd;
+	new->bin = *bin;
+	new->type = type;
+	return (new);
 }
