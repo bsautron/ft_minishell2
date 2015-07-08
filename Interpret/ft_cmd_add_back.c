@@ -23,8 +23,9 @@ void	ft_cmd_add_back(t_cmd **begin, t_cmd *cmd)
 	else
 	{
 		tmp = *begin;
-		while (tmp->next)
+		while (tmp && tmp->next)
 			tmp = tmp->next;
-		tmp->next = new;
+		if (tmp)
+			tmp->next = new;
 	}
 }

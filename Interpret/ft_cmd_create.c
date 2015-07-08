@@ -20,5 +20,6 @@ t_cmd	*ft_cmd_create(char ***cmd, char **bin, int type)
 	new->cmd = *cmd;
 	new->bin = *bin;
 	new->type = type;
+	new->next = NULL;
 	return (new);
 }

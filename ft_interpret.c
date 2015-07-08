@@ -77,47 +77,53 @@ int		ft_interpret(t_token *tk, char **env)
 	char	*bin;
 	t_lstl	*tmp;
 	t_cmd	*lall_cmd;
+	int		nb_pipes;
 
-	tmp = NULL;
+	nb_pipes = ft_count_pipe(tk);
 	lall_cmd = NULL;
 	while (tk)
 	{
-		ft_lstl_add_back(&tmp, tk->value);
-		l++;
-		tk = tk->next;
+		l = 0;
+		tmp = NULL;
+		while (tk && tk->type == TK_CMD_ARG)
+		{
+			ft_lstl_add_back(&tmp, tk->value);
+			tk = tk->next;
+			l++;
+		}
+		cmd = ft_lstl_to_tab(tmp); 
+		bin = ft_get_where_bin(cmd[0], env);
+		ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, 0));
+		if (tk)
+			tk = tk->next;
 	}
-	cmd = ft_lstl_to_tab(tmp); 
-	bin = ft_get_where_bin(cmd[0], env);
-	ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, 0));
 
 	pid_t	child;
 	int		status;
-	int		nb_pipes;
 	int		i_pipe;
 	int		i;
 	int		j;
 	int		*pipesfd;
 	t_lstl	**all_cmd;
-//	char	**cmd;
+	//	char	**cmd;
 
-	nb_pipes = ft_count_pipe(tk);
 	/*
-	all_cmd = (t_lstl **)malloc(sizeof(t_lstl *) * (nb_pipes + 2));
-	for (int k = 0; k < nb_pipes + 1; k++)
-	{
-		all_cmd[k] = 0;
-		for (int l = 0; tk && !ft_strequ(tk->value, "|"); l++)
-		{
-			ft_lstl_add_back(&all_cmd[k], tk->value);
-			if (l == 0)
-				all_cmd[k]->str = ft_get_where_bin(&all_cmd[k], env);
-			tk = tk->next;
-		}
-		if (tk)
-			tk = tk->next;
-	}
-	all_cmd[nb_pipes + 1] = 0;
-	*/
+	   all_cmd = (t_lstl **)malloc(sizeof(t_lstl *) * (nb_pipes + 2));
+	   for (int k = 0; k < nb_pipes + 1; k++)
+	   {
+	   all_cmd[k] = 0;
+	   for (int l = 0; tk && !ft_strequ(tk->value, "|"); l++)
+	   {
+	   ft_lstl_add_back(&all_cmd[k], tk->value);
+	   if (l == 0)
+	   all_cmd[k]->str = ft_get_where_bin(&all_cmd[k], env);
+	   tk = tk->next;
+	   }
+	   if (tk)
+	   tk = tk->next;
+	   }
+	   all_cmd[nb_pipes + 1] = 0;
+	   */
 	i_pipe = 0;
 	pipesfd = (int *)malloc(sizeof(int) * (2 * nb_pipes + 1));
 	while (i_pipe < nb_pipes)

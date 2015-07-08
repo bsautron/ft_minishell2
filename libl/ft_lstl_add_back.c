@@ -11,7 +11,7 @@ void	ft_lstl_add_back(t_lstl **begin, char *str)
 	else
 	{
 		tmp = *begin;
-		while (tmp->next)
+		while (tmp && tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
