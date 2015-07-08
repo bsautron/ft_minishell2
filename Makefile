@@ -27,7 +27,7 @@ SRC_MAIN = main.c \
 		   ft_get_var_env.c \
 		   ft_attrape_moi_si_tu_peux.c \
 		   ft_signal_handler.c \
-		   ft_exec.c \
+		   ft_interpret.c \
 		   ft_get_env.c \
 		   ft_tk_to_tab.c \
 		   ft_lstl_to_tab.c \
@@ -36,8 +36,11 @@ SRC_MAIN = main.c \
 SRC_BULTINS = ft_pwd.c \
 			  ft_setenv.c
 
+SRC_INTERPRET = \
+
 SRC = $(SRC_MAIN) \
-	  $(addprefix Bultins/, $(SRC_BULTINS))
+	  $(addprefix Bultins/, $(SRC_BULTINS)) \
+	  $(addprefix Interpret/, $(SRC_INTERPRET))
 
 INC_DIR = -I includes/ \
 		  -I libft/includes \
@@ -47,13 +50,15 @@ INC_DIR = -I includes/ \
 		  -I LexerParser/ \
 		  -I LexerParser/lexer/include/ \
 		  -I LexerParser/parser/include/ \
-		  -I LexerParser/token/include/
+		  -I LexerParser/token/include/ \
+		  -I Interpret/includes/
 
 HEADER = includes/ft_sh.h \
 		 libft/includes/libft.h \
 		 libft/includes/get_next_line.h \
 		 libl/includes/libl.h \
-		 libld/includes/libld.h
+		 libld/includes/libld.h \
+		 Interpret/includes/interpret.h
 
 OBJ = $(SRC:%.c=.obj/%.o)
 
@@ -80,6 +85,7 @@ libs:
 	@make -C libld/
 	@make -C GetCmd/
 	@make -C LexerParser/
+	@make -C Interpret/
 
 .obj/%.o: %.c $(HEADER) $(LIBS)
 	@echo "\033[33m 	$<"

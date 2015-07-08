@@ -12,7 +12,6 @@
 
 #include <ft_sh.h>
 
-
 static int	ft_count_pipe(t_token *tk)
 {
 	int		i;
@@ -70,7 +69,7 @@ static char	*ft_get_where_bin(t_lstl **cmd, char **env)
 	return (0);
 }
 
-int		ft_exec(t_token *tk, char **env)
+int		ft_interpret(t_token *tk, char **env)
 {
 	pid_t	child = 0;
 	int		status;
