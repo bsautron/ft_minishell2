@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 12:27:10 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/16 13:18:26 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/07/09 08:49:13 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		print_token_list(t_token *tk_list)
 {
 	while (tk_list)
 	{
-		dprintf(1, "tk %d/ %s\n", tk_list->type, tk_list->value);
+		dprintf(1, "tk %d: %s\n", tk_list->type, tk_list->value);
 		tk_list = tk_list->next;
 	}
 }

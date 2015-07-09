@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 16:58:42 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/09 07:19:57 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/09 08:56:49 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		main(int ac, char **av, char **env)
 		tree = 0;
 		tree = lex_and_parse(cmd, &status);
 		ft_exec_tree(tree, &lenv);
-		//print_tree(tree, POSTFIXE);
 
 		//faire des free plz
 		free(cmd);
