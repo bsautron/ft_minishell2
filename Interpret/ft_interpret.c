@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/09 07:29:14 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/09 07:35:51 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,10 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 				if (lall_cmd->type == TB_DEFAULT)
 					execve(lall_cmd->bin, lall_cmd->cmd, env);
 				else if (lall_cmd->type == -1)
-					dprintf(2, "%s\n", "CMD NOT FOUND");
+				{
+					ft_putstr_fd("ft_minishell: command not found: ", 2);
+					ft_putendl_fd(lall_cmd->cmd[0], 2);
+				}
 				else
 					ft_exec_bultin(lall_cmd, lenv);
 				exit(0);

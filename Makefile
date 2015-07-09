@@ -6,7 +6,7 @@
 #    By: bsautron <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/09 22:38:06 by bsautron          #+#    #+#              #
-#    Updated: 2015/07/09 06:28:42 by bsautron         ###   ########.fr        #
+#    Updated: 2015/07/09 07:33:26 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC_MAIN = main.c \
 		   ft_get_var_env.c \
 		   ft_attrape_moi_si_tu_peux.c \
 		   ft_signal_handler.c \
-		   ft_interpret.c \
 		   ft_get_env.c \
 		   ft_get_lenv.c \
 		   ft_tk_to_tab.c \
@@ -42,6 +41,7 @@ SRC_BULTINS = ft_pwd.c \
 SRC_INTERPRET = ft_cmd_create.c \
 				ft_cmd_add.c \
 				ft_cmd_add_back.c \
+		   		ft_interpret.c \
 				ft_exec_bulting.c
 
 SRC = $(SRC_MAIN) \
