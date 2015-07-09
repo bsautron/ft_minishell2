@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/08 06:10:01 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/09 07:20:29 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static char		**ft_getcmd_pipe(char **all_cmd)
 	return (tab);
 }
 
-static char	*ft_get_where_bin(char *cmd, char **env)
+static char	*ft_get_where_bin(char *cmd, t_lstl *lenv)
 {
 	char	**path;
 	int		i;
 	char	*tmp;
 	char	*tmp2;
 
-	path = ft_strsplit(ft_get_env(env, "PATH="), ':');
+	path = ft_strsplit(ft_get_lenv(lenv, "PATH="), ':');
 	i = 0;
 	while (path[i])
 	{
@@ -69,8 +69,27 @@ static char	*ft_get_where_bin(char *cmd, char **env)
 	return (0);
 }
 
+static int	ft_get_type_bultin(char *bin)
+{
+	char	*tab[NB_BULTINS + 2];
+	int		i;
 
-int		ft_interpret(t_token *tk, char **env)
+	tab[-1 + TB_PWD] = PWD;
+	tab[-1 + TB_SETENV] = SETENV;
+	tab[-1 + TB_ENV] = ENV;
+	tab[-1 + TB_NOFORK] = "";
+	tab[NB_BULTINS + 1] = NULL;
+	i = 0;
+	while (tab[i])
+	{
+		if (ft_strequ(tab[i], bin))
+			return (i + 1);
+		i++;
+	}
+	return (0);
+}
+
+int		ft_interpret(t_token *tk, t_lstl **lenv)
 {
 	int		l;
 	char	**cmd;
@@ -92,8 +111,8 @@ int		ft_interpret(t_token *tk, char **env)
 			l++;
 		}
 		cmd = ft_lstl_to_tab(tmp); 
-		bin = ft_get_where_bin(cmd[0], env);
-		ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, 0));
+		bin = ft_get_where_bin(cmd[0], *lenv);
+		ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, ft_get_type_bultin(cmd[0])));
 		if (tk)
 			tk = tk->next;
 	}
@@ -105,6 +124,7 @@ int		ft_interpret(t_token *tk, char **env)
 	int		j;
 	int		*pipesfd;
 	t_lstl	**all_cmd;
+	char	**env;
 	//	char	**cmd;
 
 	/*
@@ -132,26 +152,36 @@ int		ft_interpret(t_token *tk, char **env)
 		i_pipe++;
 	}
 	i = 0;
+	env = ft_lstl_to_tab(*lenv);
 	while (i < nb_pipes + 1)
 	{
-		child = fork();
-		if (child < 0)
+		if (lall_cmd->type < TB_NOFORK)
 		{
-			dprintf(2, "%s\n", "FAIIIL");
-			return (-1);
+			child = fork();
+			if (child < 0)
+			{
+				dprintf(2, "%s\n", "FAIIIL");
+				return (-1);
+			}
+			if (child == 0)
+			{
+				if (i != nb_pipes)
+					dup2(pipesfd[2 * i + 1], 1);
+				if (i != 0)
+					dup2(pipesfd[2 * i - 2], 0);
+				j = 0;
+				while (j < nb_pipes)
+					close(pipesfd[2 * j++ + 1]);
+				//pas avec all_cmd[0], regarde dans ps le nom
+				if (lall_cmd->type == TB_DEFAULT)
+					execve(lall_cmd->bin, lall_cmd->cmd, env);
+				else
+					ft_exec_bultin(lall_cmd, lenv);
+				exit(0);
+			}
 		}
-		if (child == 0)
-		{
-			if (i != nb_pipes)
-				dup2(pipesfd[2 * i + 1], 1);
-			if (i != 0)
-				dup2(pipesfd[2 * i - 2], 0);
-			j = 0;
-			while (j < nb_pipes)
-				close(pipesfd[2 * j++ + 1]);
-			//pas avec all_cmd[0], regarde dans ps le nom
-			execve(lall_cmd->bin, lall_cmd->cmd, env);
-		}
+		else
+			ft_exec_bultin(lall_cmd, lenv);
 		lall_cmd = lall_cmd->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 #    By: bsautron <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/09 22:38:06 by bsautron          #+#    #+#              #
-#    Updated: 2015/07/08 05:56:05 by bsautron         ###   ########.fr        #
+#    Updated: 2015/07/09 06:28:42 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,16 +30,19 @@ SRC_MAIN = main.c \
 		   ft_signal_handler.c \
 		   ft_interpret.c \
 		   ft_get_env.c \
+		   ft_get_lenv.c \
 		   ft_tk_to_tab.c \
 		   ft_lstl_to_tab.c \
 		   ft_exec_tree.c
 
 SRC_BULTINS = ft_pwd.c \
-			  ft_setenv.c
+			  ft_setenv.c \
+			  ft_env.c
 
 SRC_INTERPRET = ft_cmd_create.c \
 				ft_cmd_add.c \
-				ft_cmd_add_back.c
+				ft_cmd_add_back.c \
+				ft_exec_bulting.c
 
 SRC = $(SRC_MAIN) \
 	  $(addprefix Bultins/, $(SRC_BULTINS)) \
@@ -54,6 +57,7 @@ INC_DIR = -I includes/ \
 		  -I LexerParser/lexer/include/ \
 		  -I LexerParser/parser/include/ \
 		  -I LexerParser/token/include/ \
+		  -I Bultins/includes/ \
 		  -I Interpret/includes/
 
 HEADER = includes/ft_sh.h \
@@ -61,6 +65,7 @@ HEADER = includes/ft_sh.h \
 		 libft/includes/get_next_line.h \
 		 libl/includes/libl.h \
 		 libld/includes/libld.h \
+		 Bultins/includes/bultins.h \
 		 Interpret/includes/interpret.h
 
 OBJ = $(SRC:%.c=.obj/%.o)
