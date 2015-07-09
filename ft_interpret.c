@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/09 07:20:29 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/09 07:29:14 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static char	*ft_get_where_bin(char *cmd, t_lstl *lenv)
 	i = 0;
 	while (path[i])
 	{
-
 		tmp = ft_strjoin(path[i], "/");
 		tmp2 = ft_strjoin(tmp, cmd);
 		free(tmp);
@@ -97,6 +96,7 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 	t_lstl	*tmp;
 	t_cmd	*lall_cmd;
 	int		nb_pipes;
+	int		type;
 
 	nb_pipes = ft_count_pipe(tk);
 	lall_cmd = NULL;
@@ -112,7 +112,10 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 		}
 		cmd = ft_lstl_to_tab(tmp); 
 		bin = ft_get_where_bin(cmd[0], *lenv);
-		ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, ft_get_type_bultin(cmd[0])));
+		type = ft_get_type_bultin(cmd[0]);
+		if (bin == NULL && type == 0)
+			type = -1;
+		ft_cmd_add_back(&lall_cmd, ft_cmd_create(&cmd, &bin, type));
 		if (tk)
 			tk = tk->next;
 	}
@@ -175,6 +178,8 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 				//pas avec all_cmd[0], regarde dans ps le nom
 				if (lall_cmd->type == TB_DEFAULT)
 					execve(lall_cmd->bin, lall_cmd->cmd, env);
+				else if (lall_cmd->type == -1)
+					dprintf(2, "%s\n", "CMD NOT FOUND");
 				else
 					ft_exec_bultin(lall_cmd, lenv);
 				exit(0);
