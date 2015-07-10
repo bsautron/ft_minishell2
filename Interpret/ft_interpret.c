@@ -6,21 +6,54 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/09 09:03:51 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/10 09:51:28 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_sh.h>
 
-static int	ft_count_pipe(t_token *tk)
+#define RW_WRITE		0
+#define RW_READ			1
+
+static int	ft_count_pipe(t_token *tk, int *fd, int *rw)
 {
 	int		i;
+	int		file;
+	int		mode;
+	int		chmod;
 
 	i = 0;
+	file = 0;
 	while (tk)
 	{
 		if (tk->type == TK_PIPE)
 			i++;
+		if (file == 1)
+		{
+			*fd = open(tk->value, mode, chmod);
+			file = 0;
+		}
+		if (tk->type == TK_LEFT_REDIRECTION)
+		{
+			file = 1;
+			mode = O_WRONLY | O_CREAT | O_TRUNC;
+			chmod = 0644;
+			*rw = RW_WRITE;
+		}
+		else if (tk->type == TK_DLEFT_REDIRECTION)
+		{
+			file = 1;
+			mode = O_WRONLY | O_CREAT | O_APPEND;
+			chmod = 0644;
+			*rw = RW_WRITE;
+		}
+		else if (tk->type == TK_RIGHT_REDIRECTION)
+		{
+			file = 1;
+			mode = O_RDONLY;
+			chmod = 0644;
+			*rw = RW_READ;
+		}
 		tk = tk->next;
 	}
 	return (i);
@@ -97,8 +130,10 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 	t_cmd	*lall_cmd;
 	int		nb_pipes;
 	int		type;
+	int		fd;
+	int		rw;
 
-	nb_pipes = ft_count_pipe(tk);
+	nb_pipes = ft_count_pipe(tk, &fd, &rw);
 	lall_cmd = NULL;
 	while (tk)
 	{
@@ -170,6 +205,10 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 			{
 				if (i != nb_pipes)
 					dup2(pipesfd[2 * i + 1], 1);
+				else if (rw == RW_WRITE)
+					dup2(fd, 1);
+				else if (rw == RW_READ)
+					dup2(fd, 0);
 				if (i != 0)
 					dup2(pipesfd[2 * i - 2], 0);
 				j = 0;
@@ -202,6 +241,7 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 		wait(&status);
 		j++;
 	}
+	close(fd);
 	// free all_cmd
 	// */
 	return (WEXITSTATUS(status));

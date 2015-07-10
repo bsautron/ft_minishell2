@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/09 05:10:04 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/09 05:50:12 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/10 09:27:12 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <libft.h>
 # include <libl.h>
 # include <libld.h>
+# include <fcntl.h>
 # include <sys/ioctl.h>
 # include <getcmd.h>
 # include <lexer_parser.h>
