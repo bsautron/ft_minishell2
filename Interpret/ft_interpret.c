@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/10 09:58:22 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/10 10:20:58 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,8 @@ int		ft_interpret(t_token *tk, t_lstl **lenv)
 		wait(&status);
 		j++;
 	}
-	close(fd);
+	if (fd >= 3)
+		close(fd);
 	// free all_cmd
 	// */
 	return (WEXITSTATUS(status));
