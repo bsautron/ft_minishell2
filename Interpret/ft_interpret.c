@@ -6,7 +6,7 @@
 /*   By: bsautron <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 22:45:19 by bsautron          #+#    #+#             */
-/*   Updated: 2015/07/10 09:51:28 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/10 09:58:22 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	ft_count_pipe(t_token *tk, int *fd, int *rw)
 	int		i;
 	int		file;
 	int		mode;
-	int		chmod;
 
 	i = 0;
 	file = 0;
@@ -30,28 +29,25 @@ static int	ft_count_pipe(t_token *tk, int *fd, int *rw)
 			i++;
 		if (file == 1)
 		{
-			*fd = open(tk->value, mode, chmod);
+			*fd = open(tk->value, mode, 0644);
 			file = 0;
 		}
 		if (tk->type == TK_LEFT_REDIRECTION)
 		{
 			file = 1;
 			mode = O_WRONLY | O_CREAT | O_TRUNC;
-			chmod = 0644;
 			*rw = RW_WRITE;
 		}
 		else if (tk->type == TK_DLEFT_REDIRECTION)
 		{
 			file = 1;
 			mode = O_WRONLY | O_CREAT | O_APPEND;
-			chmod = 0644;
 			*rw = RW_WRITE;
 		}
 		else if (tk->type == TK_RIGHT_REDIRECTION)
 		{
 			file = 1;
 			mode = O_RDONLY;
-			chmod = 0644;
 			*rw = RW_READ;
 		}
 		tk = tk->next;
