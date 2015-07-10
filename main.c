@@ -28,7 +28,8 @@ int		main(int ac, char **av, char **env)
 		write(1, "\n", 1);
 		tree = 0;
 		tree = lex_and_parse(cmd, &status);
-		ft_exec_tree(tree, &lenv);
+	//	ft_exec_tree(tree, &lenv);
+		print_tree(tree, 2);
 
 		//faire des free plz
 		free(cmd);
