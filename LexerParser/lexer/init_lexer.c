@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 00:08:46 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/22 21:44:30 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/07/10 08:12:16 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void		init_state_flow(t_lexer *lexer)
 	lexer->state_flows[STATE_OR_OPERATOR] = or_operator_state_flow;
 	lexer->state_flows[STATE_SUBCOMMAND] = subcommand_state_flow;
 	lexer->state_flows[STATE_BACKSLASH] = backslash_state_flow;
+	lexer->state_flows[STATE_LEFT_REDIRECTION] = left_redirection_state_flow;
+	lexer->state_flows[STATE_RIGHT_REDIRECTION] = right_redirection_state_flow;
+//	lexer->state_flows[STATE_FILE] = file_state_flow;
 }
 
 t_lexer			*init_lexer(char *str)

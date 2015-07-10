@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/12 22:24:14 by ihermell          #+#    #+#             */
-/*   Updated: 2015/05/18 20:02:21 by ihermell         ###   ########.fr       */
+/*   Updated: 2015/07/10 08:11:12 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ typedef enum			e_tk_type
 	TK_AND_OPERATOR,
 	TK_OR_OPERATOR,
 	TK_SUBCOMMAND,
-	TK_PIPE
+	TK_PIPE,
+	//TK_FILE_ARG,
+	TK_LEFT_REDIRECTION,
+	TK_DLEFT_REDIRECTION,
+	TK_RIGHT_REDIRECTION,
+	TK_DRIGHT_REDIRECTION
 }						t_tk_type;
 
 typedef struct			s_token

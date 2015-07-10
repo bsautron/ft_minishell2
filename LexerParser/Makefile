@@ -6,7 +6,7 @@
 #    By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/03 22:55:20 by ihermell          #+#    #+#              #
-#    Updated: 2015/06/09 23:01:09 by bsautron         ###   ########.fr        #
+#    Updated: 2015/07/10 08:10:38 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,8 @@ SRC_NAME_LEX = lexer.c \
                state_flows/and_operator_state_flow.c \
                state_flows/or_operator_state_flow.c \
                state_flows/subcommand_state_flow.c \
+			   state_flows/left_redirection_state_flow.c \
+			   state_flows/right_redirection_state_flow.c \
                \
                errors/e_syntax_error.c \
                errors/e_unclosed_quote.c \

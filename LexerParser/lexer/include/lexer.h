@@ -6,7 +6,7 @@
 /*   By: ihermell <ihermell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 00:02:22 by ihermell          #+#    #+#             */
-/*   Updated: 2015/06/09 22:56:44 by bsautron         ###   ########.fr       */
+/*   Updated: 2015/07/10 08:10:47 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define STATUS_OK 0
 # define STATUS_ERROR 1
 
-# define NB_STATE_FLOWS 7
+# define NB_STATE_FLOWS 9
 
 struct					s_lexer;
 typedef struct			s_lexer t_lexer;
@@ -36,7 +36,10 @@ typedef enum			e_estate
 	STATE_AND_OPERATOR,
 	STATE_OR_OPERATOR,
 	STATE_SUBCOMMAND,
-	STATE_BACKSLASH
+	STATE_BACKSLASH,
+	STATE_LEFT_REDIRECTION,
+	STATE_RIGHT_REDIRECTION
+//	STATE_FILE_ARG
 }						t_estate;
 
 typedef enum			e_char_cat
@@ -100,6 +103,8 @@ t_token					*backslash_state_flow(char c, t_char_cat cat, t_lexer *lexer);
 t_token					*and_operator_state_flow(char c, t_char_cat cat, t_lexer *lexer);
 t_token					*or_operator_state_flow(char c, t_char_cat cat, t_lexer *lexer);
 t_token					*subcommand_state_flow(char c, t_char_cat cat, t_lexer *lexer);
+t_token					*left_redirection_state_flow(char c, t_char_cat cat, t_lexer *lexer);
+t_token					*right_redirection_state_flow(char c, t_char_cat cat, t_lexer *lexer);
 
 t_token					*e_syntax_error(t_lexer *lexer);
 t_token					*e_unclosed_quote(t_lexer *lexer);
